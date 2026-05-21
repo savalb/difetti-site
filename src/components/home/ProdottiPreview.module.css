@@ -1,0 +1,113 @@
+.section { background: var(--cream); }
+
+.header {
+  max-width: 640px;
+  margin-bottom: var(--space-lg);
+}
+.title {
+  color: var(--earth);
+  margin: var(--space-xs) 0 var(--space-sm);
+}
+.subtitle {
+  color: var(--earth-light);
+  font-size: 1.05rem;
+}
+
+/* Card grid */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-md);
+  margin-bottom: var(--space-lg);
+}
+
+.card {
+  display: block;
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  background: #fff;
+  border: 1px solid var(--cream-dark);
+  transition: transform var(--duration) var(--ease-out),
+              box-shadow var(--duration) var(--ease-out);
+  cursor: pointer;
+}
+.card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 20px 60px rgba(90, 62, 54, 0.18);
+}
+
+/* Image */
+.imgWrapper {
+  position: relative;
+  aspect-ratio: 4/3;
+  overflow: hidden;
+}
+.img {
+  object-fit: cover;
+  transition: transform 0.8s var(--ease-out);
+}
+.card:hover .img { transform: scale(1.05); }
+
+.imgOverlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(26,18,16,0.5) 0%, transparent 50%);
+}
+.badge {
+  position: absolute;
+  top: 14px;
+  left: 14px;
+  background: var(--amaranto);
+  color: var(--cream);
+  font-family: var(--font-title);
+  font-size: 0.7rem;
+  letter-spacing: 0.15em;
+  padding: 4px 12px;
+  border-radius: var(--radius-sm);
+}
+
+/* Card body */
+.cardBody {
+  padding: var(--space-md);
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.cardTitle {
+  font-family: var(--font-title);
+  font-size: 1.6rem;
+  color: var(--earth);
+  letter-spacing: 0.05em;
+}
+.cardClaim {
+  font-family: var(--font-body);
+  font-style: italic;
+  font-size: 0.95rem;
+  color: var(--amaranto);
+  line-height: 1.5;
+}
+.cardDesc {
+  font-size: 0.9rem;
+  color: var(--earth-light);
+  line-height: 1.6;
+}
+.cardCta {
+  font-family: var(--font-title);
+  font-size: 0.85rem;
+  letter-spacing: 0.12em;
+  color: var(--amaranto);
+  margin-top: var(--space-xs);
+  transition: letter-spacing var(--duration);
+}
+.card:hover .cardCta { letter-spacing: 0.2em; }
+
+/* Bottom CTA */
+.cta { text-align: center; }
+
+/* Responsive */
+@media (max-width: 900px) {
+  .grid { grid-template-columns: 1fr; }
+}
+@media (min-width: 600px) and (max-width: 900px) {
+  .grid { grid-template-columns: 1fr 1fr; }
+}

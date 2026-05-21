@@ -1,0 +1,108 @@
+.section { background: var(--cream-dark); }
+
+.header {
+  max-width: 600px;
+  margin-bottom: var(--space-lg);
+}
+.title { color: var(--earth); margin: var(--space-xs) 0 var(--space-sm); }
+.sub { color: var(--earth-light); font-size: 1.05rem; }
+
+/* Partner grid */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--space-sm);
+  margin-bottom: var(--space-lg);
+}
+
+.card {
+  background: var(--cream);
+  border: 1px solid rgba(90, 62, 54, 0.12);
+  border-radius: var(--radius-md);
+  padding: var(--space-md);
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  cursor: pointer;
+  transition: transform var(--duration) var(--ease-out),
+              box-shadow var(--duration) var(--ease-out),
+              border-color var(--duration);
+  position: relative;
+  overflow: hidden;
+}
+.card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: var(--amaranto);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform var(--duration) var(--ease-out);
+}
+.card:hover::before { transform: scaleX(1); }
+.card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 40px rgba(90, 62, 54, 0.14);
+  border-color: rgba(163, 62, 73, 0.2);
+}
+
+.zona {
+  font-family: var(--font-title);
+  font-size: 0.7rem;
+  letter-spacing: 0.2em;
+  color: var(--amaranto);
+  text-transform: uppercase;
+}
+.nome {
+  font-family: var(--font-title);
+  font-size: 1.4rem;
+  color: var(--earth);
+  letter-spacing: 0.04em;
+}
+.prodotto {
+  font-family: var(--font-body);
+  font-size: 0.85rem;
+  color: var(--earth-light);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+.claim {
+  font-family: var(--font-body);
+  font-style: italic;
+  font-size: 0.9rem;
+  color: var(--earth);
+  line-height: 1.5;
+  flex: 1;
+  border-top: 1px solid var(--cream-dark);
+  padding-top: 8px;
+  margin-top: 4px;
+}
+.link {
+  font-family: var(--font-title);
+  font-size: 0.8rem;
+  letter-spacing: 0.12em;
+  color: var(--amaranto);
+  transition: letter-spacing var(--duration);
+}
+.card:hover .link { letter-spacing: 0.2em; }
+
+/* CTA row */
+.cta {
+  display: flex;
+  gap: var(--space-sm);
+  flex-wrap: wrap;
+}
+
+/* Responsive */
+@media (max-width: 1100px) {
+  .grid { grid-template-columns: repeat(3, 1fr); }
+}
+@media (max-width: 768px) {
+  .grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 480px) {
+  .grid { grid-template-columns: 1fr; }
+}

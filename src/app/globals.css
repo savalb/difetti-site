@@ -1,0 +1,270 @@
+/* ═══════════════════════════════════════════════════════════════
+   DIFETTI — Design System / Global CSS
+   Eccellenze Campane | difetti.it
+   ═══════════════════════════════════════════════════════════════ */
+
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&display=swap');
+
+/* ─── CSS Tokens ─────────────────────────────────────────────── */
+:root {
+  /* Brand Colors */
+  --cream:          #F2EFEA;
+  --cream-dark:     #E8E3DC;
+  --amaranto:       #A33E49;
+  --amaranto-light: #C05060;
+  --amaranto-dark:  #7A2D37;
+  --earth:          #5A3E36;
+  --earth-light:    #7A5A50;
+  --black:          #1A1210;
+  --black-soft:     #221816;
+
+  /* Semantic */
+  --bg-primary:     var(--cream);
+  --bg-dark:        var(--black);
+  --text-primary:   var(--earth);
+  --text-on-dark:   var(--cream);
+  --accent:         var(--amaranto);
+
+  /* Typography */
+  --font-title: 'Bebas Neue', 'HoratioEF', Impact, sans-serif;
+  --font-body:  'Cormorant Garamond', 'Perpetua', Georgia, serif;
+  --font-ui:    system-ui, -apple-system, sans-serif;
+
+  /* Spacing */
+  --space-xs:  0.5rem;
+  --space-sm:  1rem;
+  --space-md:  2rem;
+  --space-lg:  4rem;
+  --space-xl:  8rem;
+
+  /* Layout */
+  --max-width:       1280px;
+  --max-width-text:  720px;
+  --nav-height:      72px;
+
+  /* Borders & Radius */
+  --radius-sm: 3px;
+  --radius-md: 6px;
+  --radius-lg: 12px;
+
+  /* Transitions */
+  --ease-out:    cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in-out: cubic-bezier(0.45, 0, 0.55, 1);
+  --duration:    0.4s;
+}
+
+/* ─── Reset & Base ───────────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html {
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  font-family: var(--font-body);
+  font-size: 18px;
+  line-height: 1.7;
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  overflow-x: hidden;
+}
+
+img { display: block; max-width: 100%; height: auto; }
+
+a { color: inherit; text-decoration: none; }
+
+button { cursor: pointer; border: none; background: none; font: inherit; }
+
+/* ─── Typography Scale ───────────────────────────────────────── */
+h1, h2, h3, h4 {
+  font-family: var(--font-title);
+  line-height: 1.0;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+}
+
+h1 { font-size: clamp(2.8rem, 7vw, 7rem); }
+h2 { font-size: clamp(2rem, 5vw, 4.5rem); }
+h3 { font-size: clamp(1.5rem, 3vw, 2.5rem); }
+h4 { font-size: clamp(1.2rem, 2vw, 1.8rem); }
+
+p {
+  font-family: var(--font-body);
+  font-size: clamp(1rem, 1.5vw, 1.2rem);
+  line-height: 1.75;
+  color: var(--earth);
+}
+
+.text-italic { font-style: italic; }
+
+/* ─── Utility Classes ────────────────────────────────────────── */
+.container {
+  width: 100%;
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 0 var(--space-md);
+}
+
+.section-pad {
+  padding: var(--space-xl) 0;
+}
+
+.section-pad-sm {
+  padding: var(--space-lg) 0;
+}
+
+/* Grain texture overlay (filo conduttore del brand) */
+.grain {
+  position: relative;
+}
+.grain::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size: 200px 200px;
+  opacity: 0.035;
+  pointer-events: none;
+  z-index: 1;
+  mix-blend-mode: multiply;
+}
+
+/* Amaranto accent line */
+.accent-line {
+  display: block;
+  width: 60px;
+  height: 3px;
+  background: var(--amaranto);
+  border-radius: 2px;
+  margin-bottom: var(--space-sm);
+}
+
+/* Section label */
+.section-tag {
+  font-family: var(--font-title);
+  font-size: 0.85rem;
+  letter-spacing: 0.18em;
+  color: var(--amaranto);
+  text-transform: uppercase;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: var(--space-xs);
+}
+.section-tag::before {
+  content: '';
+  display: block;
+  width: 28px;
+  height: 2px;
+  background: var(--amaranto);
+  border-radius: 1px;
+}
+
+/* ─── Buttons ────────────────────────────────────────────────── */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--font-title);
+  font-size: 1rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 14px 32px;
+  border-radius: var(--radius-sm);
+  transition: transform var(--duration) var(--ease-out),
+              box-shadow var(--duration) var(--ease-out),
+              background var(--duration) var(--ease-out);
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-primary {
+  background: var(--amaranto);
+  color: var(--cream);
+}
+.btn-primary:hover {
+  background: var(--amaranto-dark);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 32px rgba(163, 62, 73, 0.35);
+}
+
+.btn-whatsapp {
+  background: #25D366;
+  color: #fff;
+}
+.btn-whatsapp:hover {
+  background: #1da851;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 32px rgba(37, 211, 102, 0.35);
+}
+
+.btn-outline {
+  border: 2px solid var(--amaranto);
+  color: var(--amaranto);
+  background: transparent;
+}
+.btn-outline:hover {
+  background: var(--amaranto);
+  color: var(--cream);
+  transform: translateY(-2px);
+}
+
+.btn-outline-light {
+  border: 2px solid var(--cream);
+  color: var(--cream);
+  background: transparent;
+}
+.btn-outline-light:hover {
+  background: var(--cream);
+  color: var(--earth);
+  transform: translateY(-2px);
+}
+
+/* ─── Scroll Reveal Animation ────────────────────────────────── */
+.reveal {
+  opacity: 0;
+  transform: translateY(32px);
+  transition: opacity 0.7s var(--ease-out), transform 0.7s var(--ease-out);
+}
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+.reveal-delay-1 { transition-delay: 0.1s; }
+.reveal-delay-2 { transition-delay: 0.2s; }
+.reveal-delay-3 { transition-delay: 0.3s; }
+.reveal-delay-4 { transition-delay: 0.4s; }
+
+/* ─── KM Vero Badge ──────────────────────────────────────────── */
+.badge-km {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--amaranto);
+  color: var(--cream);
+  font-family: var(--font-title);
+  font-size: 0.8rem;
+  letter-spacing: 0.15em;
+  padding: 5px 14px;
+  border-radius: var(--radius-sm);
+}
+
+.badge-artigianale {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  border: 1.5px solid var(--earth);
+  color: var(--earth);
+  font-family: var(--font-title);
+  font-size: 0.8rem;
+  letter-spacing: 0.12em;
+  padding: 5px 14px;
+  border-radius: var(--radius-sm);
+}
+
+/* ─── Responsive ─────────────────────────────────────────────── */
+@media (max-width: 768px) {
+  .container { padding: 0 var(--space-sm); }
+  .section-pad { padding: var(--space-lg) 0; }
+}

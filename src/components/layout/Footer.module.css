@@ -1,0 +1,101 @@
+.footer {
+  background: var(--black);
+  color: var(--cream);
+  padding-top: var(--space-xl);
+}
+
+.inner {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1.5fr;
+  gap: var(--space-xl);
+  padding-bottom: var(--space-lg);
+  border-bottom: 1px solid rgba(242, 239, 234, 0.12);
+}
+
+/* Brand column */
+.brand {}
+.logo { filter: brightness(0) invert(1); opacity: 0.9; }
+.payoff {
+  font-family: var(--font-body);
+  font-style: italic;
+  font-size: 1rem;
+  color: rgba(242, 239, 234, 0.65);
+  margin-top: var(--space-sm);
+  line-height: 1.5;
+}
+.socials {
+  display: flex;
+  gap: 16px;
+  margin-top: var(--space-md);
+}
+.socials a {
+  color: rgba(242, 239, 234, 0.5);
+  transition: color var(--duration);
+}
+.socials a:hover { color: var(--amaranto); }
+
+/* Nav column */
+.colTitle {
+  font-family: var(--font-title);
+  font-size: 0.8rem;
+  letter-spacing: 0.2em;
+  color: var(--amaranto);
+  margin-bottom: var(--space-sm);
+  font-weight: normal;
+}
+.nav ul { list-style: none; }
+.nav ul li { margin-bottom: 10px; }
+.nav ul li a {
+  font-family: var(--font-body);
+  font-size: 1rem;
+  color: rgba(242, 239, 234, 0.7);
+  transition: color var(--duration), padding-left var(--duration);
+  display: inline-block;
+}
+.nav ul li a:hover {
+  color: var(--cream);
+  padding-left: 6px;
+}
+
+/* Contact column */
+.contact address { font-style: normal; }
+.contact p {
+  font-family: var(--font-body);
+  font-size: 1rem;
+  color: rgba(242, 239, 234, 0.7);
+  margin-bottom: 8px;
+}
+.contact a[href^="mailto"] {
+  color: rgba(242, 239, 234, 0.7);
+  transition: color var(--duration);
+}
+.contact a[href^="mailto"]:hover { color: var(--cream); }
+
+/* Bottom bar */
+.bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: var(--space-sm) 0;
+  flex-wrap: wrap;
+  gap: var(--space-xs);
+}
+.bottom p {
+  font-family: var(--font-body);
+  font-size: 0.85rem;
+  color: rgba(242, 239, 234, 0.4);
+}
+.credit { font-style: italic; }
+
+/* Responsive */
+@media (max-width: 900px) {
+  .inner {
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-md);
+  }
+  .brand { grid-column: 1 / -1; }
+}
+@media (max-width: 600px) {
+  .inner { grid-template-columns: 1fr; }
+  .bottom { flex-direction: column; text-align: center; }
+}
