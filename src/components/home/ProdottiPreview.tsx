@@ -83,7 +83,6 @@ export function ProdottiPreview() {
                   sizes="(max-width: 768px) 100vw, 33vw"
                   className={styles.img}
                 />
-                <div className={styles.imgOverlay} />
                 <span className={styles.badge}>{p.badge}</span>
               </div>
               <div className={styles.cardBody}>

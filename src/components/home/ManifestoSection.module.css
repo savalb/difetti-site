@@ -23,19 +23,23 @@
 
 .quoteLine {
   font-family: var(--font-title);
-  font-size: clamp(3rem, 6vw, 5.5rem);
+  font-size: clamp(3rem, 7vw, 6rem);
   color: var(--cream);
-  line-height: 1.0;
-  letter-spacing: 0.02em;
-  text-transform: uppercase;
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+}
+.quoteLine:nth-child(3) {
+  font-style: italic;
+  color: var(--amaranto-light);
 }
 .quoteLine:last-child {
-  color: var(--amaranto);
+  color: rgba(242, 239, 234, 0.4);
+  font-family: var(--font-body);
 }
 
 /* Right column */
 .textCol {
-  padding-top: var(--space-sm);
+  padding-top: var(--space-md);
   display: flex;
   flex-direction: column;
   gap: var(--space-sm);
@@ -43,9 +47,9 @@
 
 .body {
   font-family: var(--font-body);
-  font-size: clamp(1rem, 1.5vw, 1.15rem);
-  color: rgba(242, 239, 234, 0.75);
-  line-height: 1.8;
+  font-size: clamp(1.1rem, 1.5vw, 1.35rem);
+  color: rgba(242, 239, 234, 0.8);
+  line-height: 1.7;
 }
 .body strong { color: var(--cream); font-weight: 500; }
 .body em { color: var(--amaranto-light); font-style: italic; }
@@ -55,24 +59,25 @@
   list-style: none;
   display: flex;
   flex-wrap: wrap;
-  gap: 12px;
+  gap: 16px;
   margin-top: var(--space-sm);
-  padding-top: var(--space-sm);
+  padding-top: var(--space-md);
   border-top: 1px solid rgba(242, 239, 234, 0.1);
 }
 .valori li {
   display: flex;
   align-items: center;
   gap: 8px;
-  font-family: var(--font-title);
-  font-size: 0.9rem;
-  letter-spacing: 0.12em;
+  font-family: var(--font-ui);
+  font-size: 0.85rem;
+  font-weight: 500;
+  letter-spacing: 0.1em;
   color: rgba(242, 239, 234, 0.6);
   text-transform: uppercase;
 }
 .dot {
-  width: 6px;
-  height: 6px;
+  width: 4px;
+  height: 4px;
   border-radius: 50%;
   background: var(--amaranto);
   flex-shrink: 0;

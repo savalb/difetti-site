@@ -17,9 +17,9 @@
   position: absolute;
   inset: 0;
   background: linear-gradient(
-    135deg,
-    rgba(26, 18, 16, 0.88) 0%,
-    rgba(163, 62, 73, 0.6) 100%
+    to top,
+    rgba(20, 14, 12, 0.95) 0%,
+    rgba(163, 62, 73, 0.5) 100%
   );
 }
 
@@ -33,13 +33,20 @@
 }
 
 .tag { color: var(--amaranto-light); justify-content: center; }
-.tag::before { background: var(--amaranto-light); }
+.tag::before { display: none; }
 
 .title {
   color: var(--cream);
-  font-size: clamp(2.5rem, 6vw, 5.5rem);
+  font-size: clamp(3rem, 7vw, 6rem);
   margin: var(--space-sm) 0;
-  line-height: 0.95;
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+}
+.title i {
+  font-style: italic;
+  font-family: var(--font-title);
+  color: var(--amaranto-light);
+  font-weight: 400;
 }
 
 .sub {

@@ -42,7 +42,8 @@ export function CTASection() {
       <div className={`container ${styles.content}`}>
         <span className={`reveal section-tag ${styles.tag}`}>Per ristoratori e HoReCa</span>
         <h2 className={`reveal reveal-delay-1 ${styles.title}`}>
-          Vuoi differenziarti<br />davvero?
+          Migliora il tuo menù.<br />
+          Inizia dai <i>Difetti</i>.
         </h2>
         <p className={`reveal reveal-delay-2 ${styles.sub}`}>
           Antonio analizza il tuo menù, identifica le opportunità e ti propone

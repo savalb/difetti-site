@@ -3,7 +3,7 @@
    Eccellenze Campane | difetti.it
    ═══════════════════════════════════════════════════════════════ */
 
-@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&family=Outfit:wght@300;400;500;600&display=swap');
 
 /* ─── CSS Tokens ─────────────────────────────────────────────── */
 :root {
@@ -13,10 +13,10 @@
   --amaranto:       #A33E49;
   --amaranto-light: #C05060;
   --amaranto-dark:  #7A2D37;
-  --earth:          #5A3E36;
-  --earth-light:    #7A5A50;
-  --black:          #1A1210;
-  --black-soft:     #221816;
+  --earth:          #3D2721; /* Scurito per maggiore contrasto */
+  --earth-light:    #694A41;
+  --black:          #140E0C; /* Scurito */
+  --black-soft:     #1E1513;
 
   /* Semantic */
   --bg-primary:     var(--cream);
@@ -26,9 +26,9 @@
   --accent:         var(--amaranto);
 
   /* Typography */
-  --font-title: 'Bebas Neue', 'HoratioEF', Impact, sans-serif;
-  --font-body:  'Cormorant Garamond', 'Perpetua', Georgia, serif;
-  --font-ui:    system-ui, -apple-system, sans-serif;
+  --font-title: 'Playfair Display', serif;
+  --font-body:  'Cormorant Garamond', Georgia, serif;
+  --font-ui:    'Outfit', system-ui, sans-serif;
 
   /* Spacing */
   --space-xs:  0.5rem;
@@ -79,15 +79,15 @@ button { cursor: pointer; border: none; background: none; font: inherit; }
 /* ─── Typography Scale ───────────────────────────────────────── */
 h1, h2, h3, h4 {
   font-family: var(--font-title);
-  line-height: 1.0;
-  letter-spacing: 0.03em;
-  text-transform: uppercase;
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+  font-weight: 500;
 }
 
-h1 { font-size: clamp(2.8rem, 7vw, 7rem); }
-h2 { font-size: clamp(2rem, 5vw, 4.5rem); }
-h3 { font-size: clamp(1.5rem, 3vw, 2.5rem); }
-h4 { font-size: clamp(1.2rem, 2vw, 1.8rem); }
+h1 { font-size: clamp(3.5rem, 8vw, 7.5rem); }
+h2 { font-size: clamp(2.5rem, 5vw, 5rem); }
+h3 { font-size: clamp(1.8rem, 3vw, 3rem); }
+h4 { font-size: clamp(1.4rem, 2vw, 2rem); }
 
 p {
   font-family: var(--font-body);
@@ -142,23 +142,23 @@ p {
 
 /* Section label */
 .section-tag {
-  font-family: var(--font-title);
-  font-size: 0.85rem;
-  letter-spacing: 0.18em;
+  font-family: var(--font-ui);
+  font-weight: 500;
+  font-size: 0.75rem;
+  letter-spacing: 0.2em;
   color: var(--amaranto);
   text-transform: uppercase;
   display: flex;
   align-items: center;
-  gap: 10px;
-  margin-bottom: var(--space-xs);
+  gap: 12px;
+  margin-bottom: var(--space-sm);
 }
 .section-tag::before {
   content: '';
   display: block;
-  width: 28px;
-  height: 2px;
+  width: 32px;
+  height: 1px;
   background: var(--amaranto);
-  border-radius: 1px;
 }
 
 /* ─── Buttons ────────────────────────────────────────────────── */
@@ -166,12 +166,13 @@ p {
   display: inline-flex;
   align-items: center;
   gap: 10px;
-  font-family: var(--font-title);
-  font-size: 1rem;
-  letter-spacing: 0.1em;
+  font-family: var(--font-ui);
+  font-weight: 500;
+  font-size: 0.85rem;
+  letter-spacing: 0.15em;
   text-transform: uppercase;
-  padding: 14px 32px;
-  border-radius: var(--radius-sm);
+  padding: 16px 36px;
+  border-radius: 0; /* Brutalist/editorial edge */
   transition: transform var(--duration) var(--ease-out),
               box-shadow var(--duration) var(--ease-out),
               background var(--duration) var(--ease-out);

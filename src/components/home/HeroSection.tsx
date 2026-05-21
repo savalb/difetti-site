@@ -41,14 +41,12 @@ export function HeroSection() {
         </div>
 
         <h1 ref={headlineRef} className={styles.headline}>
-          Smetti di servire la perfezione industriale
+          Smetti di servire la <i>perfezione</i> industriale
         </h1>
 
         <p className={styles.subtext}>
-          <em>
-            I tuoi clienti non vogliono il pomodoro perfettamente rotondo.<br />
-            Vogliono il sapore di una terra vera.
-          </em>
+          I tuoi clienti non vogliono il pomodoro perfettamente rotondo.<br />
+          Vogliono il <i>sapore di una terra vera</i>.
         </p>
 
         <div className={styles.ctas}>
