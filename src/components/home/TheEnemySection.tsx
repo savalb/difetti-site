@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useRef } from 'react';
+import Link from 'next/link';
 import styles from './TheEnemySection.module.css';
 
 const BUGIE = [
@@ -19,7 +20,7 @@ const BUGIE = [
   {
     id: 'sapore',
     titolo: 'Sapore Piatto',
-    mito: 'Gusto costante e riconoscibile.',
+    mito: 'Gusto costante e recognizable.',
     verita: 'Aromi di sintesi (es. vanillina) per coprire l\'assenza di materie prime nobili.',
   },
 ];
@@ -54,7 +55,7 @@ export function TheEnemySection() {
             è un falso d'autore.
           </h2>
           <p className={styles.subtitle}>
-            Ti hanno convinto che la perfezione visiva sia sinonimo di qualità. Ma dietro un prodotto "impeccabile" da scaffale si nasconde la plastica del sapore.
+            Ti hanno convinto che la perfezione visiva sia sinonimo di qualità. Dietro un prodotto perfetto si nasconde la standardizzazione chimica. <Link href="/chi-siamo" className={styles.inlineLink}>Scopri la nostra filosofia</Link> o metti alla prova la verità dei nostri <Link href="/difetti" className={styles.inlineLink}>prodotti artigianali</Link>.
           </p>
         </div>
 

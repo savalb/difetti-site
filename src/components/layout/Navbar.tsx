@@ -67,7 +67,7 @@ export function Navbar() {
 
       {/* Mobile Menu */}
       <div className={`${styles.mobileMenu} ${menuOpen ? styles.mobileOpen : ''}`}>
-        <nav>
+        <nav className={styles.mobileNav}>
           {NAV_LINKS.map((link) => (
             <Link
               key={link.href}

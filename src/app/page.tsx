@@ -5,6 +5,7 @@ import { ManifestoSection } from '@/components/home/ManifestoSection';
 import { ProdottiPreview } from '@/components/home/ProdottiPreview';
 import { MetodoOperativoSection } from '@/components/home/MetodoOperativoSection';
 import { PartnerStrip } from '@/components/home/PartnerStrip';
+import { MapSection } from '@/components/home/MapSection';
 import { SocialProofSection } from '@/components/home/SocialProofSection';
 import { CTASection } from '@/components/home/CTASection';
 
@@ -23,6 +24,7 @@ export default function HomePage() {
       <ProdottiPreview />
       <MetodoOperativoSection />
       <PartnerStrip />
+      <MapSection />
       <SocialProofSection />
       <CTASection />
     </>

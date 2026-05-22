@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useRef } from 'react';
+import Link from 'next/link';
 import styles from './ManifestoSection.module.css';
 
 const MANIFESTO_LINES = [
@@ -51,11 +52,11 @@ export function ManifestoSection() {
             Il Manifesto
           </span>
           <p className={`reveal reveal-delay-1 ${styles.body}`}>
-            Antonio De Matteis non è un distributore. È un <strong>Ricercatore del Gusto</strong>.
+            Antonio De Matteis non è un distributore. È un <Link href="/chi-siamo" className={styles.inlineLink}>Ricercatore del Gusto</Link>.
           </p>
           <p className={`reveal reveal-delay-2 ${styles.body}`}>
             Seleziona solo ciò che la distribuzione di massa scarta perché "esteticamente non conforme". 
-            <em>Non ti ruba tempo</em> con cataloghi infiniti di prodotti fotocopia: ti porta in cucina solo le vere eccellenze irpine.
+            Non ti fa perdere tempo con cataloghi fotocopia: ti offre una <Link href="/servizi" className={styles.inlineLink}>consulenza su misura</Link> e porta in cucina la verità campana.
           </p>
           <p className={`reveal reveal-delay-3 ${styles.body}`}>
             Perché non hai bisogno di un nuovo fornitore.<br />

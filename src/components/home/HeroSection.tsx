@@ -2,6 +2,7 @@
 
 import { useEffect, useRef } from 'react';
 import Image from 'next/image';
+import Link from 'next/link';
 import { BRAND } from '@/lib/constants';
 import styles from './HeroSection.module.css';
 
@@ -23,8 +24,8 @@ export function HeroSection() {
       {/* Background image */}
       <div className={styles.bgWrapper} aria-hidden="true">
         <Image
-          src="/images/prodotti/prodotti-hero.jpg"
-          alt=""
+          src="/images/prodotti/pasta-close.jpg"
+          alt="Pasta artigianale Difetti trafilata al bronzo reale"
           fill
           priority
           quality={85}
@@ -63,9 +64,9 @@ export function HeroSection() {
             </svg>
             Richiedi l'Analisi del Menù
           </a>
-          <a href="#difetto-certificato" className="btn btn-outline-light" id="hero-cta-prodotti">
+          <Link href="/difetti" className="btn btn-outline-light" id="hero-cta-prodotti">
             Scopri il Difetto
-          </a>
+          </Link>
         </div>
 
         {/* Stats strip */}

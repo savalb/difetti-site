@@ -83,7 +83,18 @@
   flex-shrink: 0;
 }
 
-/* Responsive */
 @media (max-width: 900px) {
   .inner { grid-template-columns: 1fr; gap: var(--space-lg); }
+}
+
+.inlineLink {
+  color: var(--amaranto-light);
+  text-decoration: underline;
+  text-underline-offset: 4px;
+  font-weight: 500;
+  transition: opacity var(--duration);
+}
+
+.inlineLink:hover {
+  opacity: 0.8;
 }

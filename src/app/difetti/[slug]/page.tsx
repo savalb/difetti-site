@@ -65,7 +65,7 @@ const DIFETTI_PRODUCTS: ProdottoDettaglio[] = [
       { etichetta: 'Lavorazione', valore: 'Artigianale con trafila in bronzo' },
       { etichetta: 'Uso consigliato', valore: 'Ristorazione HoReCa d’eccellenza' }
     ],
-    formati: ['Candele spezzate', 'Paccheri', 'Spaghetti', 'Fusilli lunghi', 'Mezzi Paccheri']
+    formati: ['Candele spezzate', 'Paccheri', 'Spaghetti ruvidi', 'Fusilli lunghi', 'Mezzi Paccheri', 'Penne Rigate']
   },
   {
     slug: 'conserve',
@@ -102,7 +102,7 @@ const DIFETTI_PRODUCTS: ProdottoDettaglio[] = [
       { etichetta: 'Confezionamento', valore: 'Vaso di vetro con foglia di basilico fresco' },
       { etichetta: 'Stagionalità', valore: 'Lavorato esclusivamente ad agosto' }
     ],
-    formati: ['Passata Arancione', 'Passata Gialla', 'Pomodorini Interi al naturale', 'Polpa Rustica', 'Datterini in succo']
+    formati: ['Passata arancione', 'Passata gialla', 'Pomodorini interi al naturale']
   },
   {
     slug: 'crostate',
@@ -139,7 +139,7 @@ const DIFETTI_PRODUCTS: ProdottoDettaglio[] = [
       { etichetta: 'Lavorazione', valore: 'Interamente stesa e intrecciata a mano' },
       { etichetta: 'Conservabilità', valore: 'Consigliata entro 4-5 giorni dall’arrivo' }
     ],
-    formati: ['Albicocca', 'Mirtilli', 'Frutti di Bosco', 'Limone candito', 'Visciole selvatiche']
+    formati: ['Albicocca irpina', 'Mirtilli selvatici', 'Frutti di bosco biologici']
   }
 ];
 

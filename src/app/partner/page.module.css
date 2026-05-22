@@ -66,8 +66,8 @@
 }
 .grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 1.5rem;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.15rem;
 }
 
 .card {
@@ -86,10 +86,10 @@
 }
 .cardTop {
   background: var(--black);
-  padding: 1.25rem;
+  padding: 1rem 1rem 0.85rem;
   display: flex;
   flex-direction: column;
-  gap: 6px;
+  gap: 4px;
 }
 .zona {
   font-family: var(--font-title);
@@ -100,47 +100,47 @@
 }
 .nome {
   font-family: var(--font-title);
-  font-size: 1.4rem;
+  font-size: 1.25rem;
   color: var(--cream);
   letter-spacing: 0.02em;
   line-height: 1.2;
 }
 .prodottoTag {
   font-family: var(--font-body);
-  font-size: 0.8rem;
+  font-size: 0.75rem;
   color: rgba(242,239,234,0.5);
   text-transform: uppercase;
   letter-spacing: 0.08em;
 }
 .cardBody {
-  padding: 1.25rem;
+  padding: 1rem;
   flex: 1;
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 8px;
 }
 .desc {
   font-family: var(--font-body);
-  font-size: 0.95rem;
+  font-size: 0.88rem;
   color: var(--earth-light);
-  line-height: 1.6;
+  line-height: 1.55;
 }
 .claim {
   font-family: var(--font-body);
   font-style: italic;
-  font-size: 0.95rem;
+  font-size: 0.88rem;
   color: var(--amaranto);
   border-top: 1px solid var(--cream-dark);
-  padding-top: 8px;
+  padding-top: 6px;
   margin-top: auto;
 }
 .cardFoot {
-  padding: 0.85rem 1.25rem;
+  padding: 0.75rem 1rem;
   border-top: 1px solid var(--cream-dark);
 }
 .cardCta {
   font-family: var(--font-title);
-  font-size: 0.85rem;
+  font-size: 0.8rem;
   letter-spacing: 0.1em;
   color: var(--amaranto);
   text-transform: uppercase;
@@ -170,15 +170,14 @@
 }
 
 /* Responsive */
-@media (max-width: 1024px) {
-  .grid { grid-template-columns: repeat(2, 1fr); }
+@media (max-width: 1200px) {
+  .grid { grid-template-columns: repeat(3, 1fr); }
 }
 @media (max-width: 900px) {
+  .grid { grid-template-columns: repeat(2, 1fr); }
   .processoGrid { grid-template-columns: 1fr 1fr; }
 }
-@media (max-width: 768px) {
-  .grid { grid-template-columns: 1fr; }
-}
 @media (max-width: 600px) {
+  .grid { grid-template-columns: 1fr; }
   .processoGrid { grid-template-columns: 1fr; }
 }
