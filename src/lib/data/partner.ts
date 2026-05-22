@@ -1,4 +1,4 @@
-// ─── Dati Partner (dal preventivo strategico e storytelling reali) ─────────────────
+// ─── Dati Partner (dal preventivo strategico e storytelling reali) ────
 export type Partner = {
   slug: string;
   nome: string;
@@ -8,6 +8,7 @@ export type Partner = {
   claim: string;
   storiaParagrafi: string[];
   dettagli: { etichetta: string; valore: string }[];
+  immagineUrl?: string;
 };
 
 export const PARTNER: Partner[] = [
@@ -20,15 +21,16 @@ export const PARTNER: Partner[] = [
     claim: 'Ogni tarallo porta il segno delle sue mani.',
     storiaParagrafi: [
       '“Queste non sono trecce di pasta. È la biografia di un uomo che ho deciso di proteggere.” Quando ho assaggiato per la prima volta i taralli di Giuseppe, ho capito che non potevo metterci sopra una mia etichetta standard. Sarei stato un ladro di storie. Quei taralli non sono un semplice “prodotto”. Sono Giuseppe. Sono le sue rughe, il suo sudore, la sua sapienza che non si può insegnare in un corso di cucina, ma che si impara solo passando cinquant’anni davanti a un forno.',
-      'Mi ricordo ancora il primo giorno. Giuseppe stava intrecciando la pasta con una velocità che mi ha lasciato a bocca aperta. Le sue dita si muovevano come quelle di un pianista. Mi ha dato un tarallo ancora caldo e mi ha detto: “Assaggia, Antonio. Se trovi un aroma chimico, ti regalo tutto il forno”. Non c’erano aromi chimici. C’era solo il sapore vero del vino bianco irpino e dell’olio extravergine di oliva. C’era la croccantezza di chi bolle ancora i taralli prima di infornarli. Un passaggio che l’industria ha cancellato perché “costa troppo tempo e troppo gas”. Giuseppe no. Lui non risparmia sul tempo. Lui rispetta la tradizione.',
+      'Mi ricordo ancora il primo giorno. Giuseppe stava intrecciando la pasta con una velocità che mi ha lasciato a bocca aperta. Le sue dita se muovevano come quelle di un pianista. Mi ha dato un tarallo ancora caldo e mi ha detto: “Assaggia, Antonio. Se trovi un aroma chimico, ti regalo tutto il forno”. Non c’erano aromi chimici. C’era solo il sapore vero del vino bianco irpino e dell’olio extravergine di oliva. C’era la croccantezza di chi bolle ancora i taralli prima di infornarli. Un passaggio che l’industria ha cancellato perché “costa troppo tempo e troppo gas”. Giuseppe no. Lui non risparmia sul tempo. Lui rispetta la tradizione.',
       'Quelli di Giuseppe sono trecce irregolari, cotte a legna. Alcuni sono più bruniti perché il calore del forno a legna non è un algoritmo costante, ma un elemento vivo che Giuseppe sa domare con l’istinto. Quando spezzi uno di questi taralli, il rumore deve essere un “crack” secco. Se fa “puff” o si sbriciola come polistirolo, non è un tarallo di Giuseppe. La resistenza che oppone al morso è la prova della bollitura, del riposo, della qualità della farina che ho selezionato personalmente insieme a lui.'
     ],
     dettagli: [
-      { etichetta: 'Lavorazione', valore: 'Bollitura tradizionale e intreccio a mano' },
+      { etichetta: 'Lavorazione', valore: 'Bollitura tradizional­e e intreccio a mano' },
       { etichetta: 'Cottura', valore: 'Forno a legna (calore disomogeneo)' },
       { etichetta: 'Ingredienti chiave', valore: 'Farina selezionata, vino bianco irpino, olio extravergine' },
       { etichetta: 'Il Difetto Certificato', valore: 'Trecce asimmetriche con sfumature cromatiche di bruciatura' }
-    ]
+    ],
+    immagineUrl: '/images/partner/nonno-giuseppe.png'
   },
   {
     slug: 'noccioro',
@@ -47,7 +49,8 @@ export const PARTNER: Partner[] = [
       { etichetta: 'Tostatura', valore: 'Lenta a bassa temperatura' },
       { etichetta: 'Percentuale nelle creme', valore: 'Fino al 55% di nocciole' },
       { etichetta: 'Il Difetto Certificato', valore: 'Naturale affioramento d’olio in superficie (assenza di emulsionanti)' }
-    ]
+    ],
+    immagineUrl: '/images/partner/noccioro.png'
   },
   {
     slug: 'poma-moris',
@@ -66,7 +69,8 @@ export const PARTNER: Partner[] = [
       { etichetta: 'Acidità', valore: 'Naturale del frutto (senza acido citrico aggiunto)' },
       { etichetta: 'Varietà principali', valore: 'San Marzano DOP, Pomodorino del Piennolo' },
       { etichetta: 'Il Difetto Certificato', valore: 'Lievi variazioni di densità e colore tra lotti di produzione' }
-    ]
+    ],
+    immagineUrl: '/images/partner/poma-moris.png'
   },
   {
     slug: 'alici-nettuno',
@@ -85,7 +89,8 @@ export const PARTNER: Partner[] = [
       { etichetta: 'Maturazione', valore: 'Da 6 a 9 mesi in terzigni di legno sotto sale' },
       { etichetta: 'Liquido di governo', valore: 'Olio extravergine di oliva locale' },
       { etichetta: 'Il Difetto Certificato', valore: 'Filetti dal colore rosa scuro naturale non decolorati' }
-    ]
+    ],
+    immagineUrl: '/images/partner/alici-nettuno.jpg'
   },
   {
     slug: 'tralci-hirpini',
@@ -104,7 +109,8 @@ export const PARTNER: Partner[] = [
       { etichetta: 'Fermentazione', valore: 'Spontanea con lieviti autoctoni' },
       { etichetta: 'Stabilizzazione', valore: 'Fisica naturale in cantina (non filtrato)' },
       { etichetta: 'Il Difetto Certificato', valore: 'Presenza di sedimenti naturali sul fondo della bottiglia' }
-    ]
+    ],
+    immagineUrl: '/images/partner/tralci-hirpini.png'
   },
   {
     slug: 'fattorie-cilentane',
@@ -123,7 +129,8 @@ export const PARTNER: Partner[] = [
       { etichetta: 'Contenuto di frutta', valore: 'Minimo 75% di fichi freschi' },
       { etichetta: 'Dolcificanti', valore: 'Solo zucchero di canna biologico in minima quantità' },
       { etichetta: 'Il Difetto Certificato', valore: 'Consistenza disomogenea con polpa a pezzi e semi interi' }
-    ]
+    ],
+    immagineUrl: '/images/partner/fattorie-cilentane.png'
   },
   {
     slug: 'salumi-irpini',
@@ -142,7 +149,8 @@ export const PARTNER: Partner[] = [
       { etichetta: 'Legatura', valore: 'Manuale con spago alimentare naturale' },
       { etichetta: 'Additivi e allergeni', valore: 'Senza lattosio, glutine o zuccheri aggiunti' },
       { etichetta: 'Il Difetto Certificato', valore: 'Muffa nobile superficiale e asimmetria della legatura a mano' }
-    ]
+    ],
+    immagineUrl: '/images/partner/salumi-irpini.png'
   },
   {
     slug: 'verdure-e-dintorni',
@@ -161,6 +169,7 @@ export const PARTNER: Partner[] = [
       { etichetta: 'Liquido di governo', valore: 'Olio extravergine o girasole spremuto a freddo' },
       { etichetta: 'Trattamento termico', valore: 'Scottatura veloce in aceto (croccantezza viva)' },
       { etichetta: 'Il Difetto Certificato', valore: 'Dimensione e taglio asimmetrico delle verdure fatte a mano' }
-    ]
+    ],
+    immagineUrl: '/images/partner/verdure-e-dintorni.png'
   }
 ];

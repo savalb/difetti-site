@@ -44,8 +44,8 @@ export default async function PartnerDetailPage({ params }: Props) {
   );
 
   // Verifichiamo se abbiamo un'immagine dedicata per il partner
-  const haImmagine = partner.slug === 'alici-nettuno';
-  const immagineUrl = haImmagine ? `/images/partner/${partner.slug}.jpg` : null;
+  const haImmagine = !!partner.immagineUrl;
+  const immagineUrl = partner.immagineUrl || null;
 
   const whatsappMessage = `Ciao Antonio, ho letto la storia di ${partner.nome} sul sito di Difetti. Vorrei avere più informazioni sui loro prodotti (specialità: ${partner.prodotto}) per il mio ristorante.`;
 
