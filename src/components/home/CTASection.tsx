@@ -42,28 +42,33 @@ export function CTASection() {
       <div className={`container ${styles.content}`}>
         <span className={`reveal section-tag ${styles.tag}`}>Per ristoratori e HoReCa</span>
         <h2 className={`reveal reveal-delay-1 ${styles.title}`}>
-          Migliora il tuo menù.<br />
-          Inizia dai <i>Difetti</i>.
+          Richiedi l'Analisi<br />
+          del Menù <i>Anti-Industriale</i>.
         </h2>
         <p className={`reveal reveal-delay-2 ${styles.sub}`}>
-          Antonio analizza il tuo menù, identifica le opportunità e ti propone
-          una selezione personalizzata di eccellenze campane.
-          <br /><strong>Senza costi fissi. Solo partnership vera.</strong>
+          Compila il modulo qui sotto. Antonio analizzerà la tua offerta attuale e ti mostrerà dove i prodotti industriali ti stanno facendo perdere autenticità e margini.
         </p>
-        <div className={`reveal reveal-delay-3 ${styles.ctas}`}>
-          <a
-            href={BRAND.whatsapp}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="btn btn-whatsapp"
-            id="cta-finale-whatsapp"
-          >
-            Richiedi l&apos;analisi del tuo menù
-          </a>
-          <Link href="/servizi" className="btn btn-outline-light" id="cta-finale-servizi">
-            Scopri i servizi
-          </Link>
-        </div>
+
+        <form 
+          action="https://formspree.io/f/xyyqzzzz" 
+          method="POST" 
+          className={`reveal reveal-delay-3 ${styles.form}`}
+        >
+          <div className={styles.inputGroup}>
+            <input type="text" name="locale" placeholder="Nome del Locale" required className={styles.input} />
+            <input type="text" name="ruolo" placeholder="Il tuo Ruolo (es. Titolare, Chef)" required className={styles.input} />
+          </div>
+          <textarea 
+            name="problema" 
+            placeholder="Qual è il problema principale con i tuoi attuali fornitori di materie prime?" 
+            required 
+            className={styles.textarea}
+            rows={4}
+          ></textarea>
+          <button type="submit" className="btn btn-whatsapp" style={{ width: '100%' }}>
+            Invia Richiesta
+          </button>
+        </form>
       </div>
     </section>
   );

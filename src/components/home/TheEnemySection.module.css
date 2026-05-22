@@ -1,0 +1,93 @@
+.section {
+  background: var(--cream-dark);
+}
+
+.header {
+  max-width: 720px;
+  margin-bottom: var(--space-xl);
+}
+
+.title {
+  color: var(--earth);
+  margin: var(--space-sm) 0;
+  font-size: clamp(2.5rem, 6vw, 4.5rem);
+  line-height: 1.1;
+  letter-spacing: -0.01em;
+}
+
+.subtitle {
+  color: var(--earth-light);
+  font-size: 1.15rem;
+  line-height: 1.7;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-md);
+}
+
+.card {
+  background: var(--cream);
+  padding: var(--space-lg);
+  border-top: 3px solid var(--amaranto);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+  transition: transform var(--duration) var(--ease-out);
+}
+
+.card:hover {
+  transform: translateY(-5px);
+}
+
+.cardTitle {
+  font-family: var(--font-title);
+  font-size: 1.8rem;
+  color: var(--earth);
+  margin-bottom: var(--space-xs);
+}
+
+.cardMito {
+  font-family: var(--font-body);
+  font-size: 1.05rem;
+  color: rgba(90, 62, 54, 0.7);
+}
+
+.cardMito strong {
+  font-weight: 500;
+  color: var(--earth);
+  text-transform: uppercase;
+  font-family: var(--font-ui);
+  font-size: 0.8rem;
+  letter-spacing: 0.1em;
+  display: block;
+  margin-bottom: 4px;
+}
+
+.divider {
+  height: 1px;
+  background: rgba(90, 62, 54, 0.1);
+  margin: var(--space-xs) 0;
+}
+
+.cardVerita {
+  font-family: var(--font-body);
+  font-size: 1.05rem;
+  color: var(--earth);
+  font-weight: 500;
+}
+
+.cardVerita strong {
+  color: var(--amaranto);
+  text-transform: uppercase;
+  font-family: var(--font-ui);
+  font-size: 0.8rem;
+  letter-spacing: 0.1em;
+  display: block;
+  margin-bottom: 4px;
+}
+
+@media (max-width: 900px) {
+  .grid { grid-template-columns: 1fr; }
+}

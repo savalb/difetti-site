@@ -51,16 +51,15 @@ export function ManifestoSection() {
             Il Manifesto
           </span>
           <p className={`reveal reveal-delay-1 ${styles.body}`}>
-            Antonio De Matteis non cerca prodotti perfetti. Li cerca <strong>veri</strong>.
+            Antonio De Matteis non è un distributore. È un <strong>Ricercatore del Gusto</strong>.
           </p>
           <p className={`reveal reveal-delay-2 ${styles.body}`}>
-            Una nocciola di Giffoni con la buccia opaca ha più sapore di mille nocciole
-            lucide industriali. Un pomodorino di collina con le macchie del sole
-            vale più di un barattolo uguale a tutti gli altri.
+            Seleziona solo ciò che la distribuzione di massa scarta perché "esteticamente non conforme". 
+            <em>Non ti ruba tempo</em> con cataloghi infiniti di prodotti fotocopia: ti porta in cucina solo le vere eccellenze irpine.
           </p>
           <p className={`reveal reveal-delay-3 ${styles.body}`}>
-            Difetti non è il nome di un problema.<br />
-            <em>È il nome di una scelta.</em>
+            Perché non hai bisogno di un nuovo fornitore.<br />
+            <strong>Hai bisogno di smettere di tradire i tuoi clienti.</strong>
           </p>
 
           {/* I 5 valori - compact */}

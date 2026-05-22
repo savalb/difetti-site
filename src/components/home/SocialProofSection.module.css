@@ -1,0 +1,84 @@
+.section {
+  background: var(--cream);
+}
+
+.header {
+  text-align: center;
+  margin-bottom: var(--space-xl);
+}
+
+.title {
+  color: var(--earth);
+  margin-top: var(--space-xs);
+  font-size: clamp(2.5rem, 5vw, 4rem);
+  letter-spacing: -0.01em;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--space-lg);
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.card {
+  background: transparent;
+  border-left: 2px solid rgba(90, 62, 54, 0.1);
+  padding: var(--space-md) 0 var(--space-md) var(--space-md);
+  position: relative;
+  transition: border-color var(--duration);
+}
+
+.card:hover {
+  border-left-color: var(--amaranto);
+}
+
+.quoteIcon {
+  font-family: var(--font-title);
+  font-size: 4rem;
+  color: var(--amaranto-light);
+  line-height: 0.5;
+  margin-bottom: var(--space-xs);
+  opacity: 0.5;
+}
+
+.quoteText {
+  font-family: var(--font-body);
+  font-style: italic;
+  font-size: 1.25rem;
+  color: var(--earth);
+  line-height: 1.6;
+  margin-bottom: var(--space-md);
+}
+
+.autoreBox {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.autoreLine {
+  width: 30px;
+  height: 1px;
+  background: var(--amaranto);
+}
+
+.autoreName {
+  font-family: var(--font-ui);
+  font-size: 0.9rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--earth);
+}
+
+.autoreRuolo {
+  font-family: var(--font-body);
+  font-size: 0.9rem;
+  color: var(--earth-light);
+}
+
+@media (max-width: 768px) {
+  .grid { grid-template-columns: 1fr; }
+}

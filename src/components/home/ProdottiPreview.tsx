@@ -7,31 +7,31 @@ import styles from './ProdottiPreview.module.css';
 
 const PRODOTTI = [
   {
-    id: 'pasta',
-    titolo: 'Pasta Difetti',
-    claim: 'Trafilata al bronzo. Rugosa per vocazione.',
-    desc: 'Grano duro irpino, essiccazione lenta, superficie ruvida che cattura il condimento. La candela che non assomiglia a nessun\'altra.',
-    href: '/difetti/pasta',
+    id: 'pasta-pomodoro',
+    titolo: 'Pasta e Pomodoro',
+    claim: 'Il Difetto del KM Vero',
+    desc: 'Pasta trafilata al bronzo (davvero), bianca, ruvida, essiccata a bassa temperatura per 48 ore. Passata di pomodoro dai colori veri, non fluo. Non scivola via.',
+    href: '/difetti#pasta',
     img: '/images/prodotti/pasta-candele.jpg',
-    badge: 'KM VERO',
-  },
-  {
-    id: 'conserve',
-    titolo: 'Conserve Difetti',
-    claim: 'Il rosso del pomodoro. Quello vero.',
-    desc: 'Passate di pomodoro arancione, giallo, verde. Niente addensanti. Solo frutto, succo di limone e tempo.',
-    href: '/difetti/conserve',
-    img: '/images/prodotti/passata-pomodoro.jpg',
-    badge: 'ARTIGIANALE',
+    badge: 'VERITÀ',
   },
   {
     id: 'crostate',
-    titolo: 'Crostate Difetti',
-    claim: 'Non perfettamente rotonde. Perfettamente buone.',
-    desc: 'Frolla corta, marmellata artigianale a bassa cottura, reticolo fatto a mano. Il difetto è nella forma, non nel sapore.',
-    href: '/difetti/crostate',
+    titolo: 'Crostate Artigianali',
+    claim: 'Il Difetto dell\'Estetica',
+    desc: 'Bordi irregolari, frolla stesa a mano, marmellata vera. Se vedi una griglia perfetta, stai mangiando un algoritmo. La nostra crostata ha "sincerità olfattiva".',
+    href: '/difetti#crostate',
     img: '/images/prodotti/crostate.jpg',
-    badge: 'FATTO A MANO',
+    badge: 'ARTIGIANALE',
+  },
+  {
+    id: 'taralli',
+    titolo: 'I Taralli di Giuseppe',
+    claim: 'Il Difetto dell\'Intreccio',
+    desc: 'Trecce irregolari, coloriture diverse per via del forno a legna. Senti il "crack" secco al morso. Non li chiamo "Difetti", li chiamo col nome di chi li fa da 50 anni.',
+    href: '/difetti#taralli', /* We can map this to a specific page or section later */
+    img: '/images/prodotti/prodotto-1.jpg', /* We don't have a specific tarallo AI image yet, using placeholder */
+    badge: 'NONNO GIUSEPPE',
   },
 ];
 

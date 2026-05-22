@@ -1,8 +1,11 @@
 import type { Metadata } from 'next';
 import { HeroSection } from '@/components/home/HeroSection';
+import { TheEnemySection } from '@/components/home/TheEnemySection';
 import { ManifestoSection } from '@/components/home/ManifestoSection';
 import { ProdottiPreview } from '@/components/home/ProdottiPreview';
+import { MetodoOperativoSection } from '@/components/home/MetodoOperativoSection';
 import { PartnerStrip } from '@/components/home/PartnerStrip';
+import { SocialProofSection } from '@/components/home/SocialProofSection';
 import { CTASection } from '@/components/home/CTASection';
 
 export const metadata: Metadata = {
@@ -15,9 +18,12 @@ export default function HomePage() {
   return (
     <>
       <HeroSection />
+      <TheEnemySection />
       <ManifestoSection />
       <ProdottiPreview />
+      <MetodoOperativoSection />
       <PartnerStrip />
+      <SocialProofSection />
       <CTASection />
     </>
   );
