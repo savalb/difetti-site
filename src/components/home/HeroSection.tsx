@@ -24,7 +24,7 @@ export function HeroSection() {
       {/* Background image */}
       <div className={styles.bgWrapper} aria-hidden="true">
         <Image
-          src="/images/prodotti/pasta-close.jpg"
+          src="/images/prodotti/pasta-close.png"
           alt="Pasta artigianale Difetti trafilata al bronzo reale"
           fill
           priority
