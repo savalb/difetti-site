@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useMemo } from 'react';
+import { useState, useMemo, useEffect, useRef } from 'react';
 import dynamic from 'next/dynamic';
 import { PUNTI_VENDITA, PuntoVendita } from '@/lib/puntiVendita';
 import styles from './MapSection.module.css';
@@ -22,6 +22,29 @@ type TipologiaFiltro = 'Tutte' | 'ristorante' | 'enoteca' | 'pizzeria' | 'bistro
 export function MapSection() {
   const [selectedProvincia, setSelectedProvincia] = useState<ProvinciaFiltro>('Tutte');
   const [selectedTipologia, setSelectedTipologia] = useState<TipologiaFiltro>('Tutte');
+  const [hasIntersected, setHasIntersected] = useState(false);
+  const mapWrapperRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (entries[0].isIntersecting) {
+          setHasIntersected(true);
+          observer.disconnect();
+        }
+      },
+      { rootMargin: '200px' } // Carica la mappa 200px prima che entri nella schermata
+    );
+
+    const currentRef = mapWrapperRef.current;
+    if (currentRef) {
+      observer.observe(currentRef);
+    }
+
+    return () => {
+      observer.disconnect();
+    };
+  }, []);
 
   // Filtra i punti vendita in base alle selezioni dell'utente
   const filteredPunti = useMemo(() => {
@@ -130,8 +153,15 @@ export function MapSection() {
           </div>
 
           {/* Mappa Destra */}
-          <div className={styles.mapWrapper}>
-            <MapComponent punti={filteredPunti} />
+          <div className={styles.mapWrapper} ref={mapWrapperRef}>
+            {hasIntersected ? (
+              <MapComponent punti={filteredPunti} />
+            ) : (
+              <div className={styles.mapLoading}>
+                <div className={styles.spinner}></div>
+                <p className={styles.loadingText}>Scorri per caricare la mappa dei punti vendita...</p>
+              </div>
+            )}
           </div>
         </div>
       </div>

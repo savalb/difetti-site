@@ -49,8 +49,33 @@ export default async function PartnerDetailPage({ params }: Props) {
 
   const whatsappMessage = `Ciao Antonio, ho letto la storia di ${partner.nome} sul sito di Difetti. Vorrei avere più informazioni sui loro prodotti (specialità: ${partner.prodotto}) per il mio ristorante.`;
 
+  const jsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'Organization',
+    name: partner.nome,
+    description: partner.descrizione,
+    image: partner.immagineUrl ? `https://difetti-site3.vercel.app${partner.immagineUrl}` : undefined,
+    slogan: partner.claim,
+    knowsAbout: partner.prodotto,
+    brand: {
+      '@type': 'Brand',
+      name: 'Difetti',
+    },
+    award: difettoCertificato || undefined,
+    address: {
+      '@type': 'PostalAddress',
+      addressLocality: partner.zona,
+      addressRegion: 'Campania',
+      addressCountry: 'IT',
+    },
+  };
+
   return (
     <main className={styles.main}>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
       {/* Hero Section */}
       <section className={`grain ${styles.hero}`}>
         <div className={`container ${styles.heroInner}`}>

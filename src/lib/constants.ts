@@ -4,7 +4,7 @@ export const BRAND = {
   tagline: 'Eccellenze Campane',
   payoff: 'Quando difetti non è mancanza, ma unicità',
   subPayoff: 'Il sapore della verità',
-  whatsapp: 'https://wa.me/39NUMERODIANTONIO', // ← sostituire con numero reale
+  whatsapp: 'https://wa.me/393509684544',
   email: 'info@difetti.it',
   instagram: 'https://instagram.com/difetti_eccellenze',
   facebook: 'https://facebook.com/difetti',

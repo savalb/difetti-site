@@ -171,8 +171,32 @@ export default async function DifettiDetailPage({ params }: Props) {
     notFound();
   }
 
+  const jsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'Product',
+    name: prodotto.nome,
+    image: `https://difetti-site3.vercel.app${prodotto.immagine}`,
+    description: prodotto.introduzione,
+    brand: {
+      '@type': 'Brand',
+      name: 'Difetti',
+    },
+    offers: {
+      '@type': 'Offer',
+      priceCurrency: 'EUR',
+      price: '0.00',
+      description: 'Riservato a ristorazione e HoReCa, listino su richiesta via WhatsApp',
+      url: `https://difetti-site3.vercel.app/difetti/${prodotto.slug}`,
+      availability: 'https://schema.org/InStock',
+    },
+  };
+
   return (
     <main className={styles.main}>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
       {/* Hero Section */}
       <section className={`grain ${styles.hero}`}>
         <div className={`container ${styles.heroInner}`}>
