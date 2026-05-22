@@ -66,8 +66,8 @@
 }
 .grid {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: var(--space-md);
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
 }
 
 .card {
@@ -82,69 +82,71 @@
 }
 .card:hover {
   transform: translateY(-4px);
-  box-shadow: 0 16px 48px rgba(90,62,54,0.14);
+  box-shadow: 0 12px 32px rgba(90,62,54,0.1);
 }
 .cardTop {
   background: var(--black);
-  padding: var(--space-md);
+  padding: 1.25rem;
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 6px;
 }
 .zona {
   font-family: var(--font-title);
-  font-size: 0.7rem;
-  letter-spacing: 0.2em;
+  font-size: 0.65rem;
+  letter-spacing: 0.15em;
   color: var(--amaranto-light);
   text-transform: uppercase;
 }
 .nome {
   font-family: var(--font-title);
-  font-size: 2rem;
+  font-size: 1.4rem;
   color: var(--cream);
-  letter-spacing: 0.03em;
+  letter-spacing: 0.02em;
+  line-height: 1.2;
 }
 .prodottoTag {
   font-family: var(--font-body);
-  font-size: 0.85rem;
+  font-size: 0.8rem;
   color: rgba(242,239,234,0.5);
   text-transform: uppercase;
-  letter-spacing: 0.1em;
+  letter-spacing: 0.08em;
 }
 .cardBody {
-  padding: var(--space-md);
+  padding: 1.25rem;
   flex: 1;
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 10px;
 }
 .desc {
   font-family: var(--font-body);
-  font-size: 1rem;
+  font-size: 0.95rem;
   color: var(--earth-light);
-  line-height: 1.75;
+  line-height: 1.6;
 }
 .claim {
   font-family: var(--font-body);
   font-style: italic;
-  font-size: 1rem;
+  font-size: 0.95rem;
   color: var(--amaranto);
   border-top: 1px solid var(--cream-dark);
-  padding-top: 12px;
+  padding-top: 8px;
+  margin-top: auto;
 }
 .cardFoot {
-  padding: var(--space-sm) var(--space-md);
+  padding: 0.85rem 1.25rem;
   border-top: 1px solid var(--cream-dark);
 }
 .cardCta {
   font-family: var(--font-title);
   font-size: 0.85rem;
-  letter-spacing: 0.12em;
+  letter-spacing: 0.1em;
   color: var(--amaranto);
   text-transform: uppercase;
   transition: letter-spacing var(--duration);
 }
-.card:hover .cardCta { letter-spacing: 0.2em; }
+.card:hover .cardCta { letter-spacing: 0.15em; }
 
 /* Diventa */
 .diventa {
@@ -168,8 +170,13 @@
 }
 
 /* Responsive */
+@media (max-width: 1024px) {
+  .grid { grid-template-columns: repeat(2, 1fr); }
+}
 @media (max-width: 900px) {
   .processoGrid { grid-template-columns: 1fr 1fr; }
+}
+@media (max-width: 768px) {
   .grid { grid-template-columns: 1fr; }
 }
 @media (max-width: 600px) {

@@ -50,7 +50,7 @@ export default function PartnerPage() {
       {/* Partner grid */}
       <section className={`grain ${styles.partnerSection} section-pad`}>
         <div className="container">
-          <h2 className={styles.sectionTitle}>I nostri produttori</h2>
+          <h2 className={styles.sectionTitle} style={{ textWrap: 'balance' }}>I nostri produttori</h2>
           <div className={styles.grid}>
             {PARTNER.map((p) => (
               <article key={p.slug} className={styles.card} id={`partner-${p.slug}`}>
@@ -64,15 +64,13 @@ export default function PartnerPage() {
                   <p className={styles.claim}><em>&ldquo;{p.claim}&rdquo;</em></p>
                 </div>
                 <div className={styles.cardFoot}>
-                  <a
-                    href={BRAND.whatsapp}
-                    target="_blank"
-                    rel="noopener noreferrer"
+                  <Link
+                    href={`/partner/${p.slug}`}
                     className={styles.cardCta}
-                    aria-label={`Richiedi prodotti ${p.nome}`}
+                    aria-label={`Leggi la storia di ${p.nome}`}
                   >
-                    Richiedi campioni →
-                  </a>
+                    Leggi la storia &rarr;
+                  </Link>
                 </div>
               </article>
             ))}
