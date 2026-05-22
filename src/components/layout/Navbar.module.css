@@ -93,7 +93,6 @@
 .hamburger.open span:nth-child(2) { opacity: 0; }
 .hamburger.open span:nth-child(3) { transform: rotate(-45deg) translateY(-7px); width: 100%; }
 
-/* Mobile Menu */
 .mobileMenu {
   position: fixed;
   inset: var(--nav-height) 0 0 0;
@@ -105,6 +104,10 @@
   transition: transform var(--duration) var(--ease-out);
   z-index: 99;
   border-top: 1px solid var(--cream-dark);
+}
+.mobileMenu nav {
+  display: flex;
+  flex-direction: column;
 }
 .mobileMenu.mobileOpen { transform: translateX(0); }
 

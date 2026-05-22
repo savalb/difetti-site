@@ -42,11 +42,11 @@ export function HeroSection() {
 
         <h1 ref={headlineRef} className={styles.headline}>
           Smetti di servire perfezione industriale.<br />
-          Inizia a servire la <i>Verità</i>.
+          Inizia a servire la <i>Pasta Vera</i>.
         </h1>
 
         <p className={styles.subtext}>
-          Porta in tavola il <strong>"Difetto Certificato"</strong>: l'unica garanzia che quello che servi è passato per mani umane, non per stampi di plastica.
+          La pasta a marchio <strong>Difetti</strong> è trafilata in bronzo reale ed essiccata a bassa temperatura per trattenere il sugo. Nessun catalogo fotocopia: valorizziamo il tuo menù con la nostra consulenza gastronomica strategica.
         </p>
 
         <div className={styles.ctas}>

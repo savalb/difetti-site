@@ -1,28 +1,29 @@
 'use client';
 
 import { useEffect, useRef } from 'react';
+import Link from 'next/link';
 import styles from './MetodoOperativoSection.module.css';
 
 const STEPS = [
   {
     num: '01',
     titolo: 'Ricerca',
-    desc: 'Batto l\'Irpinia palmo a palmo per trovare chi produce senza scorciatoie industriali.',
+    desc: 'Seleziono i migliori artigiani dell\'Irpinia che rifiutano la chimica industriale.',
   },
   {
     num: '02',
     titolo: 'Degustazione',
-    desc: 'Porto i prodotti nel tuo ristorante. Li assaggi in cucina, dove conta davvero.',
+    desc: 'Porto i prodotti direttamente nella cucina del tuo ristorante per un assaggio reale.',
   },
   {
     num: '03',
-    titolo: 'Riordino Digitale',
-    desc: 'Un gestionale senza carta per te. Due tap sul tablet e l\'ordine parte su WhatsApp.',
+    titolo: 'Ordine Diretto',
+    desc: 'Nessun portale complicato. Ordini con un messaggio WhatsApp o una chiamata diretta ad Antonio.',
   },
   {
     num: '04',
-    titolo: 'Consegna',
-    desc: 'Veloce, puntuale, diretta. Senza passaggi in inutili magazzini di stoccaggio.',
+    titolo: 'Consegna Rapida',
+    desc: 'Distribuzione diretta in tempi record senza passaggi in magazzini di terzi.',
   },
 ];
 
@@ -53,9 +54,12 @@ export function MetodoOperativoSection() {
           <div className={`reveal ${styles.header}`}>
             <span className="section-tag" style={{ color: 'var(--amaranto-light)' }}>Efficienza</span>
             <h2 className={styles.title}>Come Lavoriamo</h2>
-            <p className={styles.subtitle}>
-              Il prodotto è artigianale, ma il servizio non può permettersi "difetti". Uniamo la lentezza della tradizione alla velocità del digitale.
+            <p className={styles.subtitle} style={{ marginBottom: 'var(--space-md)' }}>
+              Il prodotto è artigianale, ma il servizio non può permettersi "difetti". Uniamo la lentezza della tradizione alla velocità della distribuzione locale.
             </p>
+            <Link href="/servizi" className="btn btn-outline-light">
+              Scopri i nostri Servizi →
+            </Link>
           </div>
 
           <div className={styles.steps}>

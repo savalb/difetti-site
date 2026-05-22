@@ -126,12 +126,59 @@
 }
 .card:hover .cardCta { gap: 16px; }
 
-/* Bottom CTA */
-.cta { text-align: center; margin-top: var(--space-lg); }
+/* Bottom Partner Block */
+.partnerBlock {
+  margin-top: var(--space-xl);
+  padding-top: var(--space-lg);
+  border-top: 1px solid rgba(90, 62, 54, 0.1);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: var(--space-lg);
+}
+
+.partnerText {
+  flex: 1;
+  max-width: 680px;
+}
+
+.partnerText h3 {
+  font-family: var(--font-title);
+  font-size: 1.8rem;
+  color: var(--earth);
+  margin-bottom: 8px;
+}
+
+.partnerText p {
+  font-family: var(--font-body);
+  font-size: 1.1rem;
+  color: var(--earth-light);
+  line-height: 1.6;
+}
+
+.inlineLink {
+  color: var(--amaranto);
+  text-decoration: underline;
+  font-weight: 500;
+  transition: color var(--duration);
+}
+
+.inlineLink:hover {
+  color: var(--earth);
+}
+
+.partnerCta {
+  flex-shrink: 0;
+}
 
 /* Responsive */
 @media (max-width: 900px) {
   .grid { grid-template-columns: 1fr; gap: var(--space-xl); }
   .card:nth-child(2) { margin-top: 0; }
   .imgWrapper { aspect-ratio: 4/3; }
+  .partnerBlock {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--space-md);
+  }
 }

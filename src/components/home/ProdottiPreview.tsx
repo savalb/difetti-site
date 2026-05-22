@@ -7,31 +7,31 @@ import styles from './ProdottiPreview.module.css';
 
 const PRODOTTI = [
   {
-    id: 'pasta-pomodoro',
-    titolo: 'Pasta e Pomodoro',
-    claim: 'Il Difetto del KM Vero',
-    desc: 'Pasta trafilata al bronzo (davvero), bianca, ruvida, essiccata a bassa temperatura per 48 ore. Passata di pomodoro dai colori veri, non fluo. Non scivola via.',
-    href: '/difetti#pasta',
+    id: 'pasta',
+    titolo: 'Pasta Artigianale',
+    claim: '6 Formati, un solo grano',
+    desc: 'Trafilata al bronzo e essiccata a bassa temperatura per 48 ore. Una superficie bianca e ruvida che cattura il condimento e racconta il lavoro dell\'uomo.',
+    href: '/difetti/pasta',
     img: '/images/prodotti/pasta-candele.jpg',
+    badge: 'ECCELLENZA',
+  },
+  {
+    id: 'conserve',
+    titolo: 'Conserve di Pomodoro',
+    claim: '3 Varietà di pomodoro vero',
+    desc: 'Solo pomodoro campano e sale. Senza correttori di acidità, conservanti o addensanti. Colore naturale che varia con le stagioni.',
+    href: '/difetti/conserve',
+    img: '/images/prodotti/passata-pomodoro.jpg',
     badge: 'VERITÀ',
   },
   {
     id: 'crostate',
     titolo: 'Crostate Artigianali',
-    claim: 'Il Difetto dell\'Estetica',
-    desc: 'Bordi irregolari, frolla stesa a mano, marmellata vera. Se vedi una griglia perfetta, stai mangiando un algoritmo. La nostra crostata ha "sincerità olfattiva".',
-    href: '/difetti#crostate',
+    claim: 'Fatte a mano, pezzo per pezzo',
+    desc: 'Frolla stesa a mano con burro di alta qualità, farcita con marmellata vera. Il bordo irregolare è la nostra firma di sincerità olfattiva.',
+    href: '/difetti/crostate',
     img: '/images/prodotti/crostate.jpg',
     badge: 'ARTIGIANALE',
-  },
-  {
-    id: 'taralli',
-    titolo: 'I Taralli di Giuseppe',
-    claim: 'Il Difetto dell\'Intreccio',
-    desc: 'Trecce irregolari, coloriture diverse per via del forno a legna. Senti il "crack" secco al morso. Non li chiamo "Difetti", li chiamo col nome di chi li fa da 50 anni.',
-    href: '/difetti#taralli', /* We can map this to a specific page or section later */
-    img: '/images/prodotti/prodotto-1.jpg', /* We don't have a specific tarallo AI image yet, using placeholder */
-    badge: 'NONNO GIUSEPPE',
   },
 ];
 
@@ -62,7 +62,7 @@ export function ProdottiPreview() {
             Tre linee.<br />Un solo principio.
           </h2>
           <p className={styles.subtitle}>
-            Ogni prodotto a marchio Difetti viene selezionato, confezionato e raccontato
+            Ogni prodotto a marchio Difetti viene selezionato, confezionato e garantito
             da Antonio De Matteis. Nessun intermediario. Nessun compromesso.
           </p>
         </div>
@@ -90,17 +90,27 @@ export function ProdottiPreview() {
                 <p className={styles.cardClaim}><em>{p.claim}</em></p>
                 <p className={styles.cardDesc}>{p.desc}</p>
                 <span className={styles.cardCta}>
-                  Scopri →
+                  Dettagli Prodotto →
                 </span>
               </div>
             </Link>
           ))}
         </div>
 
-        <div className={`reveal ${styles.cta}`}>
-          <Link href="/difetti" className="btn btn-outline">
-            Vedi tutti i prodotti
-          </Link>
+        <div className={`reveal ${styles.partnerBlock}`}>
+          <div className={styles.partnerText}>
+            <h3>Oltre il Marchio: Le Nostre Alleanze</h3>
+            <p>
+              Non siamo soli in questa battaglia. Selezioniamo e distribuiamo le eccellenze dei migliori produttori campani. 
+              Scopri la storia dei <Link href="/partner/nonno-giuseppe" className={styles.inlineLink}>taralli intrecciati a mano di Nonno Giuseppe</Link>, 
+              oppure lasciati tentare dalla pura <Link href="/partner/noccioro" className={styles.inlineLink}>nocciola irpina spalmabile di Noccioro</Link>.
+            </p>
+          </div>
+          <div className={styles.partnerCta}>
+            <Link href="/partner" className="btn btn-outline">
+              Incontra tutti i Partner
+            </Link>
+          </div>
         </div>
       </div>
     </section>

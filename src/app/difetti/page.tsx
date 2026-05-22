@@ -104,15 +104,13 @@ export default function DifettiPage() {
               </div>
 
               <div className={styles.lineaCtas}>
-                <a
-                  href={BRAND.whatsapp}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className={`btn ${linea.bgDark ? 'btn-whatsapp' : 'btn-primary'}`}
-                  id={`difetti-wa-${linea.id}`}
+                <Link
+                  href={linea.href}
+                  className={`btn ${linea.bgDark ? 'btn-outline-light' : 'btn-primary'}`}
+                  id={`difetti-link-${linea.id}`}
                 >
-                  Richiedi campioni
-                </a>
+                  Vedi il Difetto Certificato
+                </Link>
               </div>
             </div>
           </div>
