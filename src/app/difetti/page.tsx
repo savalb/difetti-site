@@ -17,7 +17,7 @@ const LINEE = [
     sottotitolo: 'Trafilata al bronzo. Rugosa per vocazione.',
     corpo: `Il grano duro viene scelto campo per campo in Irpinia. La trafila al bronzo crea una superficie rugosa che non è un difetto — è la ragione per cui il sugo non scivola via.\n\nL'essiccazione lenta a basse temperature preserva le proteine e il sapore. Non troverai mai due formati identici nello stesso sacchetto. Questo è il segno che qualcuno ci ha messo le mani.`,
     img: '/images/prodotti/pasta-candele.jpg',
-    formati: ['Candele spezzate', 'Paccheri', 'Spaghetti ruvidi', 'Fusilli lunghi', 'Mezzi Paccheri', 'Penne Rigate'],
+    formati: ['Calamarata', 'Fusillo', 'Paccheri', 'Rigatone', 'Candela', 'Spaghetto'],
     badge: 'KM VERO',
     href: '/difetti/pasta',
     bgDark: false,

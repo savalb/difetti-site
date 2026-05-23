@@ -22,6 +22,7 @@ interface ProdottoDettaglio {
   claim: string;
   introduzione: string;
   immagine: string;
+  immagineTitolare: string;
   badge: string;
   storiaParagrafi: string[];
   confronto: ConfrontoRiga[];
@@ -36,6 +37,7 @@ const DIFETTI_PRODUCTS: ProdottoDettaglio[] = [
     claim: 'Trafilata al bronzo reale. Bianca, ruvida, digeribile.',
     introduzione: 'La nostra pasta è pensata per i ristoratori che rifiutano la standardizzazione industriale. Essiccata lentamente per preservare la struttura del grano, offre una superficie straordinariamente rugosa.',
     immagine: '/images/prodotti/pasta-close.jpg',
+    immagineTitolare: '/images/brand/antonio-pasta.png',
     badge: 'KM VERO',
     storiaParagrafi: [
       'Vendere pasta con l’immagine bucolica del campo di grano, per poi produrla con grani esteri stoccati per anni nei silos e trafilata a velocità folli con teflon. Questa è la bugia del “Km Zero” di facciata che molti produttori industriali propongono ai ristoratori.',
@@ -65,7 +67,7 @@ const DIFETTI_PRODUCTS: ProdottoDettaglio[] = [
       { etichetta: 'Lavorazione', valore: 'Artigianale con trafila in bronzo' },
       { etichetta: 'Uso consigliato', valore: 'Ristorazione HoReCa d’eccellenza' }
     ],
-    formati: ['Candele spezzate', 'Paccheri', 'Spaghetti ruvidi', 'Fusilli lunghi', 'Mezzi Paccheri', 'Penne Rigate']
+    formati: ['Calamarata', 'Fusillo', 'Paccheri', 'Rigatone', 'Candela', 'Spaghetto']
   },
   {
     slug: 'conserve',
@@ -73,6 +75,7 @@ const DIFETTI_PRODUCTS: ProdottoDettaglio[] = [
     claim: 'Il rosso vero del pomodoro di collina. Nessun addensante.',
     introduzione: 'Realizzate solo con pomodori di collina, raccolti al perfetto grado di maturazione. Nessun addensante chimico: la densità è frutto del tempo e del sole.',
     immagine: '/images/prodotti/passata-pomodoro.jpg',
+    immagineTitolare: '/images/brand/antonio-pomodoro.png',
     badge: 'ARTIGIANALE',
     storiaParagrafi: [
       'Il pomodoro vero non è di un rosso fluorescente chimico. Nel marketing industriale, le conserve vengono addensate artificialmente con amidi e fecole per dare consistenza a pomodori acerbi e acquosi, mascherandoli con correttori di acidità e coloranti.',
@@ -110,10 +113,11 @@ const DIFETTI_PRODUCTS: ProdottoDettaglio[] = [
     claim: 'Intrecciate a mano. Frolla viva, non un algoritmo.',
     introduzione: 'Frolla fatta a mano e marmellate a cottura lenta con alta percentuale di frutta. Le imperfezioni visive testimoniano il lavoro artigianale di chi le intreccia una ad una.',
     immagine: '/images/prodotti/crostate.jpg',
+    immagineTitolare: '/images/brand/antonio-crostata.png',
     badge: 'FATTO A MANO',
     storiaParagrafi: [
       'Il mercato dolciario per i bar è dominato da crostate esteticamente impeccabili, con griglie perfette, bordi millimetrici e colori ultra-saturi. Spesso surgelate e piene di umettanti e grassi vegetali idrogenati per durare settimane in vetrina senza seccarsi mai.',
-      'Questa perfezione artificiale è la sicurezza dell’industria, ma per il palato del cliente è solo “assenza di anima”. Se una crostata può stare in vetrina per giorni senza cambiare aspetto, non è merito della ricetta tradizionale, ma della chimica.',
+      'Questa perfezione artificiale è la sicurezza dell’industria, ma per il palato del cliente è solo “assenza di anima”. Se una crostata può stare in vetrina per giorni senza cambiare aspetto, non è merito della ricetta tradicional­e, ma della chimica.',
       'La Crostata Difetti fa una promessa diversa: dopo 4 giorni inizia a indurirsi. Perché? Perché è fatta di frolla vera con burro fresco e uova intere, senza conservanti. È cibo vivo. Il reticolo è intrecciato a mano da un fornaio campano che si sveglia alle 4 del mattino, i bordi sono irregolari e la marmellata ha un’alta percentuale di frutta cotta lentamente. Il profumo del nostro dolce è la “sincerità olfattiva” del burro e del forno, non della vanillina di sintesi.'
     ],
     confronto: [
@@ -221,13 +225,13 @@ export default async function DifettiDetailPage({ params }: Props) {
             </div>
           </div>
           
-          <div className={styles.heroImgWrapper}>
+          <div className={styles.heroAntonioWrapper}>
             <Image 
-              src={prodotto.immagine} 
-              alt={prodotto.nome} 
+              src={prodotto.immagineTitolare} 
+              alt={`Antonio De Matteis con ${prodotto.nome}`} 
               fill 
               sizes="(max-width: 900px) 100vw, 50vw" 
-              className={styles.heroImg} 
+              className={styles.antonioHero} 
               priority
             />
           </div>
