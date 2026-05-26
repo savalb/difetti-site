@@ -340,3 +340,257 @@
     position: static;
   }
 }
+
+/* Sezione Shock (Il Nemico Industriale) */
+.shockSection {
+  padding: var(--space-xl) 0;
+  background-color: var(--black-soft);
+  border-bottom: 1px solid rgba(242, 239, 234, 0.08);
+}
+
+.shockBox {
+  border: 1px solid rgba(163, 62, 73, 0.25);
+  background: rgba(163, 62, 73, 0.02);
+  padding: var(--space-lg);
+  border-radius: var(--radius-lg);
+}
+
+.shockTitle {
+  font-family: var(--font-title);
+  font-size: clamp(1.8rem, 3.5vw, 2.6rem);
+  color: var(--cream);
+  margin-top: 8px;
+  margin-bottom: var(--space-md);
+  font-weight: 700;
+}
+
+.shockPointsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: var(--space-md);
+  margin-bottom: var(--space-md);
+}
+
+.shockCard {
+  background: rgba(20, 14, 12, 0.6);
+  border: 1px solid rgba(242, 239, 234, 0.05);
+  padding: var(--space-md);
+  border-radius: var(--radius-md);
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.shockCardHeader {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.shockCardNumber {
+  font-family: var(--font-title);
+  font-size: 1.5rem;
+  color: var(--amaranto-light);
+  font-weight: 700;
+}
+
+.shockCardTitle {
+  font-family: var(--font-ui);
+  font-size: 1rem;
+  letter-spacing: 0.05em;
+  color: var(--cream);
+  font-weight: 600;
+}
+
+.shockCardText {
+  font-family: var(--font-body);
+  font-size: 1.05rem;
+  color: rgba(242, 239, 234, 0.7);
+  line-height: 1.6;
+}
+
+.shockConclusion {
+  font-family: var(--font-body);
+  font-size: 1.2rem;
+  color: var(--cream);
+  border-left: 3px solid var(--amaranto);
+  padding-left: 16px;
+  line-height: 1.6;
+  margin-top: var(--space-md);
+}
+
+/* Sezione Meccanismo Unico (Il Protocollo) */
+.mechanismSection {
+  padding: var(--space-xl) 0;
+  background-color: var(--black);
+  border-bottom: 1px solid rgba(242, 239, 234, 0.08);
+}
+
+.mechanismTitle {
+  font-family: var(--font-title);
+  font-size: clamp(2rem, 4vw, 2.8rem);
+  color: var(--cream);
+  margin-top: 8px;
+  margin-bottom: 12px;
+  font-weight: 700;
+}
+
+.mechanismSub {
+  font-family: var(--font-body);
+  font-size: 1.2rem;
+  color: rgba(242, 239, 234, 0.75);
+  max-width: var(--max-width-text);
+  margin-bottom: var(--space-lg);
+  line-height: 1.7;
+}
+
+.mechanismGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: var(--space-md);
+}
+
+.mechanismCard {
+  background: rgba(242, 239, 234, 0.01);
+  border: 1px dashed rgba(242, 239, 234, 0.08);
+  padding: var(--space-md);
+  border-radius: var(--radius-md);
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  transition: border-color 0.3s var(--ease-out);
+}
+
+.mechanismCard:hover {
+  border-color: rgba(163, 62, 73, 0.4);
+}
+
+.mechanismCardHeader {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+}
+
+.mechanismNumber {
+  font-family: var(--font-title);
+  font-size: 1.8rem;
+  color: var(--amaranto-light);
+  font-weight: 700;
+  opacity: 0.8;
+}
+
+.mechanismCardTitle {
+  font-family: var(--font-title);
+  font-size: 1.15rem;
+  color: var(--cream);
+  font-weight: 600;
+}
+
+.mechanismCardText {
+  font-family: var(--font-body);
+  font-size: 1.05rem;
+  color: rgba(242, 239, 234, 0.7);
+  line-height: 1.6;
+}
+
+/* Sezione Vetrina Prodotti */
+.showcaseSection {
+  padding: var(--space-xl) 0;
+  background-color: var(--black-dark, #0d0c0a);
+  border-bottom: 1px solid rgba(242, 239, 234, 0.08);
+}
+
+.showcaseTitle {
+  font-family: var(--font-title);
+  font-size: clamp(2rem, 4vw, 2.8rem);
+  color: var(--cream);
+  margin-top: 8px;
+  margin-bottom: var(--space-lg);
+  font-weight: 700;
+}
+
+.showcaseGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: var(--space-md);
+}
+
+.showcaseCard {
+  background: rgba(163, 62, 73, 0.03);
+  border: 1px solid rgba(163, 62, 73, 0.12);
+  padding: var(--space-md);
+  border-radius: var(--radius-md);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.showcaseCardTitle {
+  font-family: var(--font-title);
+  font-size: 1.25rem;
+  color: var(--cream);
+  font-weight: 600;
+}
+
+.showcaseCardDesc {
+  font-family: var(--font-body);
+  font-size: 1.05rem;
+  color: rgba(242, 239, 234, 0.75);
+  line-height: 1.65;
+}
+
+/* Sezione FAQ/Obiezioni */
+.faqSection {
+  padding: var(--space-xl) 0;
+  background-color: var(--black-soft);
+  border-bottom: 1px solid rgba(242, 239, 234, 0.08);
+}
+
+.faqTitle {
+  font-family: var(--font-title);
+  font-size: clamp(2rem, 4vw, 2.8rem);
+  color: var(--cream);
+  margin-top: 8px;
+  margin-bottom: var(--space-lg);
+  font-weight: 700;
+}
+
+.faqList {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+  max-width: var(--max-width-text);
+}
+
+.faqItem {
+  border-bottom: 1px dashed rgba(242, 239, 234, 0.08);
+  padding-bottom: var(--space-md);
+}
+
+.faqItem:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+.faqQuestion {
+  font-family: var(--font-title);
+  font-size: 1.25rem;
+  font-style: italic;
+  color: var(--amaranto-light);
+  margin-bottom: 10px;
+  font-weight: 500;
+}
+
+.faqAnswer {
+  font-family: var(--font-body);
+  font-size: 1.1rem;
+  color: rgba(242, 239, 234, 0.8);
+  line-height: 1.7;
+}
+
+@media (max-width: 768px) {
+  .shockBox {
+    padding: var(--space-md);
+  }
+}
+

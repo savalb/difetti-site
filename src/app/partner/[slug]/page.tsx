@@ -70,20 +70,29 @@ export default async function PartnerDetailPage({ params }: Props) {
     },
   };
 
+  const haRichCopy = !!partner.sottoOcchiello;
+
   return (
     <main className={styles.main}>
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
+      
       {/* Hero Section */}
       <section className={`grain ${styles.hero}`}>
         <div className={`container ${styles.heroInner}`}>
           <div className={styles.heroText}>
-            <span className="section-tag" style={{ color: 'var(--amaranto-light)' }}>I PRODUTTORI DI DIFETTI</span>
-            <h1 className={styles.title} style={{ textWrap: 'balance' }}>{partner.nome}</h1>
+            <span className="section-tag" style={{ color: 'var(--amaranto-light)' }}>
+              {haRichCopy ? partner.sottoOcchiello : 'I PRODUTTORI DI DIFETTI'}
+            </span>
+            <h1 className={styles.title} style={{ textWrap: 'balance' }}>
+              {haRichCopy ? partner.mainHeadline : partner.nome}
+            </h1>
             <p className={styles.claim}><em>&ldquo;{partner.claim}&rdquo;</em></p>
-            <p className={styles.content}>{partner.descrizione}</p>
+            <p className={styles.content}>
+              {haRichCopy ? partner.subHeadline : partner.descrizione}
+            </p>
 
             <div className={styles.ctas}>
               <a
@@ -131,6 +140,37 @@ export default async function PartnerDetailPage({ params }: Props) {
           </div>
         </div>
       </section>
+
+      {/* Sezione Introduzione Shock (Il Nemico Industriale) */}
+      {haRichCopy && partner.introduzioneShock && (
+        <section className={`grain ${styles.shockSection}`}>
+          <div className="container">
+            <div className={styles.shockBox}>
+              <span className="section-tag" style={{ color: 'var(--amaranto-light)' }}>IL NEMICO INDUSTRIALE</span>
+              <h2 className={styles.shockTitle}>{partner.introduzioneShock.titolo}</h2>
+              <div className={styles.shockPointsGrid}>
+                {partner.introduzioneShock.punti.map((punto, index) => {
+                  const parts = punto.split(':');
+                  const t = parts[0];
+                  const d = parts.slice(1).join(':');
+                  return (
+                    <div key={index} className={styles.shockCard}>
+                      <div className={styles.shockCardHeader}>
+                        <span className={styles.shockCardNumber}>0{index + 1}</span>
+                        {d ? <h3 className={styles.shockCardTitle}>{t}</h3> : null}
+                      </div>
+                      <p className={styles.shockCardText}>{d ? d.strip ? d.strip() : d.trim() : punto}</p>
+                    </div>
+                  );
+                })}
+              </div>
+              <p className={styles.shockConclusion}>
+                <strong>La Verità:</strong> {partner.introduzioneShock.conclusione}
+              </p>
+            </div>
+          </div>
+        </section>
+      )}
 
       {/* Storytelling & Dettagli Section */}
       <section className={`grain ${styles.storySection}`}>
@@ -180,11 +220,71 @@ export default async function PartnerDetailPage({ params }: Props) {
         </div>
       </section>
 
+      {/* Sezione Meccanismo Unico (Il Protocollo) */}
+      {haRichCopy && partner.meccanismoUnico && (
+        <section className={`grain ${styles.mechanismSection}`}>
+          <div className="container">
+            <span className="section-tag">IL NOSTRO PROTOCOLLO</span>
+            <h2 className={styles.mechanismTitle}>{partner.meccanismoUnico.titolo}</h2>
+            <p className={styles.mechanismSub}>{partner.meccanismoUnico.descrizione}</p>
+            <div className={styles.mechanismGrid}>
+              {partner.meccanismoUnico.pilastri.map((pilastro, index) => (
+                <div key={index} className={styles.mechanismCard}>
+                  <div className={styles.mechanismCardHeader}>
+                    <span className={styles.mechanismNumber}>0{index + 1}</span>
+                    <h3 className={styles.mechanismCardTitle}>{pilastro.titolo}</h3>
+                  </div>
+                  <p className={styles.mechanismCardText}>{pilastro.testo}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
+
+      {/* Sezione Vetrina Prodotti */}
+      {haRichCopy && partner.prodottiShowcase && (
+        <section className={`grain ${styles.showcaseSection}`}>
+          <div className="container">
+            <span className="section-tag">LA SELEZIONE ESCLUSIVA</span>
+            <h2 className={styles.showcaseTitle}>Cosa portiamo sulla tua tavola</h2>
+            <div className={styles.showcaseGrid}>
+              {partner.prodottiShowcase.map((prod, index) => (
+                <div key={index} className={styles.showcaseCard}>
+                  <h3 className={styles.showcaseCardTitle}>{prod.nome}</h3>
+                  <p className={styles.showcaseCardDesc}>{prod.descrizione}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
+
+      {/* Sezione Domande Scomode (Obiezioni/FAQ) */}
+      {haRichCopy && partner.obiezioni && partner.obiezioni.length > 0 && (
+        <section className={`grain ${styles.faqSection}`}>
+          <div className="container">
+            <span className="section-tag">DOMANDE SCOMODE</span>
+            <h2 className={styles.faqTitle}>Parliamoci chiaro: risposte oneste</h2>
+            <div className={styles.faqList}>
+              {partner.obiezioni.map((obi, index) => (
+                <div key={index} className={styles.faqItem}>
+                  <h3 className={styles.faqQuestion}>&ldquo;{obi.domanda}&rdquo;</h3>
+                  <p className={styles.faqAnswer}>{obi.risposta}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
+
       {/* Lead CTA */}
       <section className={`grain ${styles.leadSection}`}>
         <div className="container" style={{ textAlign: 'center', maxWidth: '800px' }}>
           <span className="section-tag" style={{ justifyContent: 'center' }}>COLLABORA CON NOI</span>
-          <h2 className={styles.leadTitle}>Vuoi servire i prodotti di {partner.nome}?</h2>
+          <h2 className={styles.leadTitle}>
+            {haRichCopy ? partner.ctaFinale : `Vuoi servire i prodotti di ${partner.nome}?`}
+          </h2>
           <p className={styles.leadText}>
             Tutti i prodotti di {partner.nome} fanno parte della selezione esclusiva Difetti. Contatta Antonio per ricevere il campionario o concordare una visita del produttore nella tua cucina.
           </p>
@@ -202,3 +302,4 @@ export default async function PartnerDetailPage({ params }: Props) {
     </main>
   );
 }
+
