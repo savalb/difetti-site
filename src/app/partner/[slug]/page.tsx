@@ -2,9 +2,11 @@ import { notFound } from 'next/navigation';
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import Image from 'next/image';
-import { PARTNER } from '@/lib/data/partner';
+import { getPartnerBySlug, getAllPartners } from '@/lib/services/partnerService';
 import { BRAND } from '@/lib/constants';
 import styles from './page.module.css';
+
+export const revalidate = 60;
 
 interface Props {
   params: Promise<{ slug: string }>;
@@ -12,7 +14,7 @@ interface Props {
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const resolvedParams = await params;
-  const p = PARTNER.find((x) => x.slug === resolvedParams.slug);
+  const p = await getPartnerBySlug(resolvedParams.slug);
   if (!p) return { title: 'Partner non trovato' };
   return {
     title: `${p.nome} — I Partner di Difetti | ${p.zona}`,
@@ -21,14 +23,15 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 }
 
 export async function generateStaticParams() {
-  return PARTNER.map((p) => ({
+  const allPartners = await getAllPartners();
+  return allPartners.map((p) => ({
     slug: p.slug,
   }));
 }
 
 export default async function PartnerDetailPage({ params }: Props) {
   const resolvedParams = await params;
-  const partner = PARTNER.find((x) => x.slug === resolvedParams.slug);
+  const partner = await getPartnerBySlug(resolvedParams.slug);
 
   if (!partner) {
     notFound();

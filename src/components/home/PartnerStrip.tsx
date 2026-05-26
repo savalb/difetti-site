@@ -2,11 +2,15 @@
 
 import { useEffect, useRef } from 'react';
 import Link from 'next/link';
-import { PARTNER } from '@/lib/data/partner';
+import { Partner } from '@/lib/data/partner';
 import { BRAND } from '@/lib/constants';
 import styles from './PartnerStrip.module.css';
 
-export function PartnerStrip() {
+interface PartnerStripProps {
+  partners: Partner[];
+}
+
+export function PartnerStrip({ partners }: PartnerStripProps) {
   const sectionRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
@@ -37,7 +41,7 @@ export function PartnerStrip() {
         </div>
 
         <div className={styles.grid}>
-          {PARTNER.map((p, i) => (
+          {partners.map((p, i) => (
             <Link
               href={`/partner/${p.slug}`}
               key={p.slug}

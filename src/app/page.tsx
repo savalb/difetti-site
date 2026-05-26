@@ -7,6 +7,9 @@ import { MetodoOperativoSection } from '@/components/home/MetodoOperativoSection
 import { PartnerStrip } from '@/components/home/PartnerStrip';
 import { SocialProofSection } from '@/components/home/SocialProofSection';
 import { CTASection } from '@/components/home/CTASection';
+import { getAllPartners } from '@/lib/services/partnerService';
+
+export const revalidate = 60;
 
 export const metadata: Metadata = {
   title: 'Difetti — Eccellenze Campane | Prodotti Artigianali Irpinia per HoReCa',
@@ -14,7 +17,9 @@ export const metadata: Metadata = {
   keywords: ['prodotti artigianali Irpinia', 'fornitore HoReCa Avellino', 'pasta bronze die Campania', 'conserve artigianali', 'km zero Irpinia'],
 };
 
-export default function HomePage() {
+export default async function HomePage() {
+  const partners = await getAllPartners();
+  
   return (
     <>
       <HeroSection />
@@ -22,7 +27,7 @@ export default function HomePage() {
       <ManifestoSection />
       <ProdottiPreview />
       <MetodoOperativoSection />
-      <PartnerStrip />
+      <PartnerStrip partners={partners} />
       <SocialProofSection />
       <CTASection />
     </>

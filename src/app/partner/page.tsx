@@ -1,15 +1,18 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
-import { PARTNER } from '@/lib/data/partner';
+import { getAllPartners } from '@/lib/services/partnerService';
 import { BRAND } from '@/lib/constants';
 import styles from './page.module.css';
+
+export const revalidate = 60;
 
 export const metadata: Metadata = {
   title: 'I Partner Difetti — Produttori Artigianali Irpinia e Campania',
   description: 'Gli 8 produttori artigianali partner di Difetti: Noccioro, Poma Moris, Alici Nettuno, Nonno Giuseppe e altri. Ogni partner è stato visitato personalmente da Antonio De Matteis.',
 };
 
-export default function PartnerPage() {
+export default async function PartnerPage() {
+  const partners = await getAllPartners();
   return (
     <main className={styles.main}>
       {/* Hero */}
@@ -52,7 +55,7 @@ export default function PartnerPage() {
         <div className="container">
           <h2 className={styles.sectionTitle} style={{ textWrap: 'balance' }}>I nostri produttori</h2>
           <div className={styles.grid}>
-            {PARTNER.map((p) => (
+            {partners.map((p) => (
               <article key={p.slug} className={styles.card} id={`partner-${p.slug}`}>
                 <div className={styles.cardTop}>
                   <span className={styles.zona}>{p.zona}</span>

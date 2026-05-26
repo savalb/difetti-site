@@ -1,7 +1,7 @@
 import type { MetadataRoute } from 'next';
-import { PARTNER } from '@/lib/data/partner';
+import { getAllPartners } from '@/lib/services/partnerService';
 
-export default function sitemap(): MetadataRoute.Sitemap {
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const baseUrl = 'https://difetti-site3.vercel.app';
 
   // Rotte statiche di base
@@ -20,8 +20,11 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.8,
   }));
 
+  // Recupera i partner dinamicamente
+  const partners = await getAllPartners();
+
   // Rotte dinamiche dei partner
-  const partnerRoutes = PARTNER.map((partner) => ({
+  const partnerRoutes = partners.map((partner) => ({
     url: `${baseUrl}/partner/${partner.slug}`,
     lastModified: new Date(),
     changeFrequency: 'monthly' as const,
