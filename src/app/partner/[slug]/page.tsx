@@ -159,7 +159,7 @@ export default async function PartnerDetailPage({ params }: Props) {
                         <span className={styles.shockCardNumber}>0{index + 1}</span>
                         {d ? <h3 className={styles.shockCardTitle}>{t}</h3> : null}
                       </div>
-                      <p className={styles.shockCardText}>{d ? d.strip ? d.strip() : d.trim() : punto}</p>
+                      <p className={styles.shockCardText}>{d ? d.trim() : punto}</p>
                     </div>
                   );
                 })}
