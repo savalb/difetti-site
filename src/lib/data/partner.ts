@@ -187,10 +187,10 @@ export const PARTNER: Partner[] = [
   {
     slug: 'alici-nettuno',
     nome: 'Alici Nettuno',
-    zona: 'Cilento',
+    zona: 'Golfo di Salerno',
     prodotto: 'Alici e prodotti ittici',
     descrizione: 'Dalla pesca al barattolo con il rispetto del mare. Alici sotto sale con il metodo tradizionale, maturazione lenta.',
-    claim: 'Il mare del Cilento in ogni filetto.',
+    claim: 'Il mare del Golfo di Salerno in ogni filetto.',
     storiaParagrafi: [
       'Alici Nettuno rappresenta l’eccellenza della pesca tradizionale a Cetara, nel cuore della Costiera Amalfitana. Le alici industriali vengono pulite con macchinari chimici, sbiancate e confezionate in oli di semi raffinati dopo pochi giorni di stoccaggio.',
       'La lavorazione di Nettuno segue il metodo storico della menaica o del cianciolo: le alici vengono pescate nel Golfo di Salerno, decapitate ed eviscerate una ad una, a mano, e messe sotto sale in terzigni di legno di rovere per una maturazione lenta che dura fino a 24 mesi.',

@@ -41,14 +41,14 @@ const DIFETTI_PRODUCTS: ProdottoDettaglio[] = [
     badge: 'KM VERO',
     storiaParagrafi: [
       'Vendere pasta con l’immagine bucolica del campo di grano, per poi produrla con grani esteri stoccati per anni nei silos e trafilata a velocità folli con teflon. Questa è la bugia del “Km Zero” di facciata che molti produttori industriali propongono ai ristoratori.',
-      'La verità è che la velocità di estrusione industriale scalda il glutine e “brucia” le proteine della pasta, rendendola estremamente difficile da digerire. Inoltre, le trafile in teflon rendono la superficie liscia e lucida: il sugo scivolerà via inesorabilmente nel piatto del cliente.',
-      'La Pasta Difetti è l’esatto opposto. Utilizziamo solo grano selezionato ed essiccato lentamente a bassa temperatura per 48 ore. Questo processo preserva le qualità organolettiche e la digeribilità. La nostra pasta viene estrusa solo con trafile in bronzo reale, lasciandola bianca, opaca e ruvida. Una consistenza che lega il sugo in modo impeccabile, trattenendolo al 100%.'
+      'La verità è che la velocità di estrusione industriale scalda il glutine e “brucia” le proteine della pasta, rendendola estremamente difficile da digerire. Inoltre, le trafile in teflon standardizzano la pasta rendendola anonima e priva di quella consistenza porosa e rustica tipica della trafilatura lenta.',
+      'La Pasta Difetti è l’esatto opposto. Utilizziamo solo grano selezionato ed essiccato lentamente a bassa temperatura per 48 ore. Questo processo preserva le qualità organolettiche e la digeribilità. La nostra pasta viene estrusa solo con trafile in bronzo reale, lasciandola bianca, opaca e ruvida. Una consistenza che testimonia la lavorazione artigianale in ogni singolo dettaglio.'
     ],
     confronto: [
       {
         campo: 'Trafilatura',
-        bugia: 'Teflon industriale. Crea una superficie liscia e scivolosa su cui il sugo scivola via nel piatto.',
-        verita: 'Bronzo Reale. Rilascia amido naturale e crea una superficie porosa che lega il sugo alla perfezione.'
+        bugia: 'Teflon industriale. Velocizza la produzione ma standardizza la pasta, privandola di porosità.',
+        verita: 'Bronzo Reale. Crea una superficie rugosa e rustica che esalta la struttura naturale della pasta.'
       },
       {
         campo: 'Essiccazione',
@@ -63,6 +63,9 @@ const DIFETTI_PRODUCTS: ProdottoDettaglio[] = [
     ],
     specifiche: [
       { etichetta: 'Grano', valore: '100% Grano duro campano selezionato' },
+      { etichetta: 'Tempo di Cottura', valore: '10-12 minuti (variabile per formato)' },
+      { etichetta: 'Umidità Massima', valore: '< 12.5% (a norma di legge)' },
+      { etichetta: 'Proteine', valore: '> 13.5% (struttura e tenuta della cottura eccellenti)' },
       { etichetta: 'Tempo Essiccazione', valore: '48 ore a 40°C' },
       { etichetta: 'Lavorazione', valore: 'Artigianale con trafila in bronzo' },
       { etichetta: 'Uso consigliato', valore: 'Ristorazione HoReCa d’eccellenza' }
@@ -78,8 +81,8 @@ const DIFETTI_PRODUCTS: ProdottoDettaglio[] = [
     immagineTitolare: '/images/brand/antonio-pomodoro.png',
     badge: 'ARTIGIANALE',
     storiaParagrafi: [
-      'Il pomodoro vero non è di un rosso fluorescente chimico. Nel marketing industriale, le conserve vengono addensate artificialmente con amidi e fecole per dare consistenza a pomodori acerbi e acquosi, mascherandoli con correttori di acidità e coloranti.',
-      'La nostra conserva è prodotta esclusivamente con pomodori di collina raccolti a mano al perfetto grado di maturazione. Nelle conserve Difetti non troverai alcun addensante chimico: la sua densità densa e corposa è il frutto naturale del tempo e della riduzione a bassa temperatura.',
+      'Il pomodoro vero non è di un rosso fluorescente chimico. Nel marketing industriale, le conserve vengono addensate artificialmente con amidi e fecole per dare consistenza a pomodori acerbi e acquosi, correggendo l\'acidità con acido citrico industriale.',
+      'La nostra conserva è prodotta esclusivamente con pomodori di collina raccolti a mano. Al posto dell\'acido citrico di sintesi, utilizziamo una piccolissima quantità di vero succo di limone biologico come correttore naturale di acidità. Questa scelta protegge la dolcezza naturale del pomodoro e garantisce una passata pulita, priva di retrogusti chimici. La densità densa e corposa è il frutto naturale del tempo e della riduzione a bassa temperatura.',
       'Inoltre, la foglia di basilico fresco che inseriamo in ogni barattolo di vetro non è uno specchietto per le allodole: ossida naturalmente a contatto con l’ossigeno residuo. Se in una conserva industriale vedi un basilico sempre verde brillante, c’è il trucco della chimica. L’ossidazione naturale della nostra foglia è la garanzia che non usiamo stabilizzanti artificiali.'
     ],
     confronto: [
@@ -89,9 +92,9 @@ const DIFETTI_PRODUCTS: ProdottoDettaglio[] = [
         verita: 'Consistenza corposa naturale ottenuta per riduzione termica lenta dei soli pomodori freschi.'
       },
       {
-        campo: 'Basilico e Conservanti',
-        bugia: 'Aromi di sintesi chimica o foglie trattate industrialmente per non cambiare colore.',
-        verita: 'Foglia fresca intera che ossida naturalmente nel vaso di vetro, a garanzia dell’assenza di chimica.'
+        campo: 'Acidità e Conservazione',
+        bugia: 'Corretta con acido citrico industriale di sintesi chimica per mascherare i frutti acidi o acerbi.',
+        verita: 'Equilibrata naturalmente con vero succo di limone biologico campano, preservando la dolcezza originaria.'
       },
       {
         campo: 'Colore e Sapore',
@@ -101,11 +104,11 @@ const DIFETTI_PRODUCTS: ProdottoDettaglio[] = [
     ],
     specifiche: [
       { etichetta: 'Materia prima', valore: 'Pomodoro di collina campano selezionato a mano' },
-      { etichetta: 'Additivi', valore: 'Zero (Niente amidi, fecole o correttori)' },
-      { etichetta: 'Confezionamento', valore: 'Vaso di vetro con foglia di basilico fresco' },
+      { etichetta: 'Additivi', valore: 'Zero (Niente amidi, fecole o correttori chimici)' },
+      { etichetta: 'Confezionamento', valore: 'Vaso di vetro premium sigillato a caldo' },
       { etichetta: 'Stagionalità', valore: 'Lavorato esclusivamente ad agosto' }
     ],
-    formati: ['Passata arancione', 'Passata gialla', 'Pomodorini interi al naturale']
+    formati: ['Passata di pomodoro 20 Smec', 'Passata arancione', 'Passata gialla', 'Pomodorini interi al naturale']
   },
   {
     slug: 'crostate',
