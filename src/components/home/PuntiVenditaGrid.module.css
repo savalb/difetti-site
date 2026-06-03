@@ -130,8 +130,8 @@
   left: 0;
   right: 0;
   bottom: 0;
-  background: rgba(37, 32, 31, 0.96);
-  padding: 1.75rem;
+  background: #25201f; /* Completely solid premium dark background for total readability */
+  padding: 1.5rem;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -141,6 +141,7 @@
   transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
   border-radius: 16px;
   z-index: 10;
+  border: 1px solid rgba(232, 227, 220, 0.15);
 }
 
 .popoverVisible {
@@ -151,22 +152,24 @@
 
 .popoverTitle {
   font-family: var(--font-title);
-  font-size: 1.25rem;
-  color: var(--cream);
-  margin-bottom: 0.25rem;
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: #ffffff; /* Pure white for title readability */
+  margin-bottom: 0.35rem;
 }
 
 .popoverSub {
-  font-size: 0.8rem;
-  color: rgba(242, 239, 234, 0.5);
+  font-size: 0.85rem;
+  color: rgba(242, 239, 234, 0.85); /* Much higher contrast for address text */
+  font-weight: 500;
   display: block;
   margin-bottom: 0.75rem;
 }
 
 .popoverDesc {
-  font-size: 0.85rem;
-  line-height: 1.4;
-  color: rgba(242, 239, 234, 0.8);
+  font-size: 0.9rem;
+  line-height: 1.5;
+  color: #f2efea; /* High contrast body text */
   margin-bottom: 1rem;
 }
 
@@ -177,7 +180,7 @@
 .popoverProducts strong {
   display: block;
   font-size: 0.75rem;
-  color: rgba(242, 239, 234, 0.4);
+  color: rgba(242, 239, 234, 0.55);
   text-transform: uppercase;
   letter-spacing: 1px;
   margin-bottom: 0.4rem;
@@ -186,16 +189,17 @@
 .productsList {
   display: flex;
   flex-wrap: wrap;
-  gap: 4px;
+  gap: 6px;
 }
 
 .productTag {
-  font-size: 0.7rem;
-  background: rgba(232, 227, 220, 0.08);
-  color: var(--cream);
-  padding: 2px 6px;
-  border-radius: 4px;
-  border: 1px solid rgba(232, 227, 220, 0.1);
+  font-size: 0.75rem;
+  background: rgba(163, 62, 73, 0.12); /* Wine colored background */
+  color: #ff8a80; /* Brighter rose text for high contrast */
+  padding: 3px 8px;
+  border-radius: 6px;
+  font-weight: 600;
+  border: 1px solid rgba(163, 62, 73, 0.25);
 }
 
 .popoverContact {
@@ -208,12 +212,13 @@
   text-align: center;
   background: var(--primary);
   color: var(--cream);
-  padding: 0.5rem;
+  padding: 0.65rem;
   border-radius: 8px;
-  font-size: 0.85rem;
+  font-size: 0.9rem;
   text-decoration: none;
   font-weight: 600;
   transition: background 0.2s ease;
+  border: 1px solid rgba(232, 227, 220, 0.1);
 }
 
 .contactBtn:hover {
