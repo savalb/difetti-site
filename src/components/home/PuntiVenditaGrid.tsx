@@ -35,8 +35,8 @@ export function PuntiVenditaGrid() {
       <div className="container">
         {/* Header Sezione */}
         <div className={styles.header}>
-          <span className="subtitle">La Rete delle Selezioni</span>
-          <h2 className="title">Dove Trovare i <br /><em>Prodotti Selezionati da Difetti</em></h2>
+          <span className={styles.subtitle}>La Rete delle Selezioni</span>
+          <h2 className={styles.title}>Dove Trovare i <br /><em>Prodotti Selezionati da Difetti</em></h2>
           <p className={styles.intro}>
             I ristoranti, i bistrot e le enoteche d'eccellenza che hanno scelto di rifiutare la standardizzazione 
             industriale per servire la sincera qualità dei prodotti a marchio Difetti e dei nostri partner.
@@ -75,17 +75,6 @@ export function PuntiVenditaGrid() {
                   <h3 className={styles.popoverTitle}>{p.nome}</h3>
                   <span className={styles.popoverSub}>📍 {p.indirizzo}</span>
                   <p className={styles.popoverDesc}>{p.dettaglio}</p>
-                  
-                  {p.prodotti && p.prodotti.length > 0 && (
-                    <div className={styles.popoverProducts}>
-                      <strong>Selezioni disponibili:</strong>
-                      <div className={styles.productsList}>
-                        {p.prodotti.map((pr) => (
-                          <span key={pr} className={styles.productTag}>{pr}</span>
-                        ))}
-                      </div>
-                    </div>
-                  )}
 
                   {p.telefono && (
                     <div className={styles.popoverContact}>

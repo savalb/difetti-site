@@ -12,6 +12,30 @@
   margin: 0 auto 5rem;
 }
 
+.title {
+  color: var(--cream);
+  font-family: var(--font-title);
+  font-size: clamp(2rem, 4vw, 3.5rem);
+  line-height: 1.15;
+  font-weight: 500;
+  margin-top: 0.5rem;
+}
+
+.title em {
+  font-style: italic;
+  color: var(--amaranto-light);
+}
+
+.subtitle {
+  font-family: var(--font-ui);
+  font-weight: 500;
+  font-size: 0.75rem;
+  letter-spacing: 0.2em;
+  color: var(--amaranto-light);
+  text-transform: uppercase;
+  display: block;
+}
+
 .intro {
   color: rgba(242, 239, 234, 0.7);
   font-family: var(--font-body);
