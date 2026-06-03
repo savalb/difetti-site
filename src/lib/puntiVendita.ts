@@ -4,96 +4,84 @@ export interface PuntoVendita {
   tipologia: 'ristorante' | 'enoteca' | 'pizzeria' | 'bistrot';
   provincia: 'Avellino' | 'Napoli' | 'Salerno' | 'Benevento';
   indirizzo: string;
-  lat: number;
-  lng: number;
+  lat?: number;
+  lng?: number;
+  telefono?: string;
+  whatsapp?: string;
   prodotti: string[];
   dettaglio: string;
-  whatsapp?: string;
+  logo_url?: string;
+  ordine?: number;
 }
 
 export const PUNTI_VENDITA: PuntoVendita[] = [
   {
-    id: 'osteria-valleverde',
-    nome: 'Osteria Valleverde',
-    tipologia: 'ristorante',
-    provincia: 'Avellino',
-    indirizzo: 'Via Appia 32, Atripalda (AV)',
-    lat: 40.9161,
-    lng: 14.8258,
-    prodotti: ['Pasta Artigianale (Candele e Fusilli Avellinesi)', 'Conserve di Pomodoro Antico'],
-    dettaglio: 'Una storica osteria irpina dove la pasta ruvida trafilata al bronzo Difetti incontra le ricette tradizionali a fuoco lento.',
-    whatsapp: 'https://wa.me/393330000000', // Sostituibile
-  },
-  {
-    id: 'decanto-bistrot',
-    nome: 'Decanto Bistrot',
-    tipologia: 'enoteca',
-    provincia: 'Avellino',
-    indirizzo: 'Corso Vittorio Emanuele II 112, Avellino (AV)',
-    lat: 40.9140,
-    lng: 14.7938,
-    prodotti: ['Selezione Completa Conserve', 'Crostate Artigianali Imperfette'],
-    dettaglio: 'Enoteca di riferimento in città che offre taglieri d\'eccellenza e propone le crostate artigianali Difetti in abbinamento a passiti locali.',
-    whatsapp: 'https://wa.me/393330000001',
-  },
-  {
-    id: 'pizzeria-da-salvo',
-    nome: 'Pizzeria Da Salvo',
-    tipologia: 'pizzeria',
-    provincia: 'Napoli',
-    indirizzo: 'Largo Arso 10, San Giorgio a Cremano (NA)',
-    lat: 40.8322,
-    lng: 14.3378,
-    prodotti: ['Conserve di Pomodoro (Passata e Pelati per pizza)'],
-    dettaglio: 'Pizzeria d\'autore che ha scelto esclusivamente il pomodoro a ridotta acidità Difetti per le sue margherite storiche e le marinare.',
-    whatsapp: 'https://wa.me/393330000002',
-  },
-  {
-    id: 'ristorante-il-faro',
-    nome: 'Ristorante Il Faro',
-    tipologia: 'ristorante',
-    provincia: 'Salerno',
-    indirizzo: 'Via Porto Alegre 5, Salerno (SA)',
-    lat: 40.6782,
-    lng: 14.7592,
-    prodotti: ['Pasta Artigianale (Formati Lunghi)', 'Passata di Pomodoro'],
-    dettaglio: 'Una terrazza sul mare che serve piatti marinari d\'élite usando la pasta Difetti per trattenere al massimo i sughi di pesce fresco.',
-    whatsapp: 'https://wa.me/393330000003',
-  },
-  {
-    id: 'antica-trattoria-nando',
-    nome: 'Antica Trattoria da Nando',
-    tipologia: 'ristorante',
-    provincia: 'Avellino',
-    indirizzo: 'Via S. Nicola 4, Forino (AV)',
-    lat: 40.8631,
-    lng: 14.7352,
-    prodotti: ['Pasta Artigianale', 'Crostate con Confettura di Ciliegie selvatiche'],
-    dettaglio: 'Tradizione irpina genuina. Nando prepara primi robusti con la pasta Difetti e serve a fine pasto le nostre crostate intrecciate a mano.',
-    whatsapp: 'https://wa.me/393330000004',
-  },
-  {
-    id: 'enoteca-vinicola-irpina',
-    nome: 'Enoteca Vinicola Irpina',
-    tipologia: 'enoteca',
-    provincia: 'Avellino',
-    indirizzo: 'Via Carducci 12, Ariano Irpino (AV)',
-    lat: 41.1512,
-    lng: 15.0881,
-    prodotti: ['Crostate Artigianali', 'Conserve di Pomodoro e Salse da abbinamento'],
-    dettaglio: 'Spazio enoculturale dove trovare il meglio della produzione irpina. Propone le conserve di pomodoro Difetti in kit degustazione.',
-    whatsapp: 'https://wa.me/393330000005',
-  },
-  {
-    id: 'cantiere-bistrot',
-    nome: 'Bistrot Il Cantiere',
+    id: 'madi-alimentari',
+    nome: 'MA.DI. Alimentari',
     tipologia: 'bistrot',
-    provincia: 'Benevento',
-    indirizzo: 'Piazza Vari 8, Benevento (BN)',
-    lat: 41.1310,
-    lng: 14.7794,
-    prodotti: ['Pasta Artigianale', 'Conserve di Pomodoro Antico'],
-    dettaglio: 'Un locale moderno e giovanile nel cuore della movida sannita che serve deliziosi primi piatti veloci ma di altissima qualità artigianale.',
-    whatsapp: 'https://wa.me/393330000006',
+    provincia: 'Avellino',
+    indirizzo: 'Piazza Municipio 2, Montefredane (AV)',
+    telefono: '3382480967',
+    whatsapp: 'https://wa.me/393382480967',
+    prodotti: ['Conserve di Pomodoro', 'Crostate Artigianali'],
+    dettaglio: 'Bottega e bistrot di specialità irpine che seleziona conserve e crostate artigianali per taglieri ed esperienze enogastronomiche.',
+    ordine: 1
+  },
+  {
+    id: 'il-testone',
+    nome: 'Il Testone',
+    tipologia: 'ristorante',
+    provincia: 'Avellino',
+    indirizzo: 'Corso Umberto I 127, Avellino (AV)',
+    telefono: '3929688596',
+    whatsapp: 'https://wa.me/393929688596',
+    prodotti: ['Pasta Artigianale', 'Conserve di Pomodoro', 'Alici Nettuno'],
+    dettaglio: 'Ristorante tradizionale nel cuore di Avellino. La pasta trafilata al bronzo e il pomodoro a ridotta acidità sono la base dei loro primi piatti storici.',
+    ordine: 2
+  },
+  {
+    id: 'in-tavola',
+    nome: 'In Tavola (Diego Testa)',
+    tipologia: 'bistrot',
+    provincia: 'Avellino',
+    indirizzo: 'Via Colombo 68, Avellino (AV)',
+    telefono: '3332210226',
+    whatsapp: 'https://wa.me/393332210226',
+    prodotti: ['Pasta Artigianale', 'Conserve di Pomodoro'],
+    dettaglio: 'Bistrot moderno famoso per la cura maniacale delle materie prime, propone primi piatti espressi realizzati con pasta e conserve selezionate da Difetti.',
+    ordine: 3
+  },
+  {
+    id: 'panificio-spagnuolo',
+    nome: 'Panificio Spagnuolo',
+    tipologia: 'bistrot',
+    provincia: 'Avellino',
+    indirizzo: 'Via Giordano Bruno 10, Aiello del Sabato (AV)',
+    telefono: '0825667195',
+    prodotti: ['Crostate Artigianali', 'Conserve di Pomodoro'],
+    dettaglio: 'Forno storico che offre degustazioni ed eccellenze campane. Le crostate artigianali e i pomodori sono scelti per arricchire la loro offerta gourmet.',
+    ordine: 4
+  },
+  {
+    id: 'super-enne-market',
+    nome: 'Super Enne Market',
+    tipologia: 'enoteca',
+    provincia: 'Avellino',
+    indirizzo: 'Via Provinciale Aiello, Cesinali (AV)',
+    telefono: '3384308035',
+    prodotti: ['Pasta Artigianale', 'Conserve di Pomodoro', 'Confetture'],
+    dettaglio: 'Market gastronomico specializzato in prodotti locali di altissima qualità, con uno scaffale interamente dedicato alle selezioni e conserve Difetti.',
+    ordine: 5
+  },
+  {
+    id: 'chico-srl',
+    nome: 'Chico',
+    tipologia: 'bistrot',
+    provincia: 'Avellino',
+    indirizzo: 'Via U. Nobile 35, Avellino (AV)',
+    telefono: '3296063892',
+    prodotti: ['Conserve di Pomodoro', 'Pasta Artigianale', 'Alici Nettuno'],
+    dettaglio: 'Punto di ritrovo moderno che propone taglieri, aperitivi e piatti veloci valorizzando le alici e i pomodori selezionati da Difetti.',
+    ordine: 6
   }
 ];

@@ -2,12 +2,12 @@ import type { Metadata } from 'next';
 import Image from 'next/image';
 import Link from 'next/link';
 import { BRAND } from '@/lib/constants';
-import { MapSection } from '@/components/home/MapSection';
+import { PuntiVenditaGrid } from '@/components/home/PuntiVenditaGrid';
 import styles from './page.module.css';
 
 export const metadata: Metadata = {
-  title: 'I Prodotti Difetti — Pasta, Conserve e Crostate Artigianali Campane',
-  description: 'Linee prodotto a marchio Difetti: pasta trafilata al bronzo, conserve di pomodoro arancione, crostate artigianali. Selezionati per ristoranti e HoReCa in Irpinia e Campania.',
+  title: 'I Prodotti Selezionati da Difetti — Pasta, Conserve, Pesce e Confetture',
+  description: 'Linee prodotto a marchio Difetti ed eccellenze artigianali campane selezionate da partner d\'autore (Nettuno, Noccioro, ecc.). Forniture HoReCa in Irpinia e Campania.',
 };
 
 const LINEE = [
@@ -118,8 +118,8 @@ export default function DifettiPage() {
         </section>
       ))}
 
-      {/* Mappa dei Punti Vendita */}
-      <MapSection />
+      {/* Punti Vendita Logo Grid */}
+      <PuntiVenditaGrid />
 
       {/* Bottom CTA */}
       <section className={`grain ${styles.bottomCta}`}>

@@ -3,6 +3,8 @@
 import { useState, useEffect, useCallback } from 'react';
 import { useRouter } from 'next/navigation';
 
+import Link from 'next/link';
+
 interface PartnerRow {
   slug: string;
   nome: string;
@@ -106,6 +108,16 @@ export default function AdminDashboard() {
           <h2>Difetti</h2>
           <span>Content Manager</span>
         </div>
+        
+        <nav className="admin-nav" style={{ display: 'flex', gap: '1.5rem', marginLeft: '3rem', flex: 1 }}>
+          <Link href="/admin" className="admin-nav-link active" style={{ color: 'var(--cream)', borderBottom: '2px solid var(--cream)', paddingBottom: '0.25rem', textDecoration: 'none', fontWeight: 600 }}>
+            Partner
+          </Link>
+          <Link href="/admin/punti-vendita" className="admin-nav-link" style={{ color: 'rgba(242,239,234,0.6)', textDecoration: 'none' }}>
+            Punti Vendita
+          </Link>
+        </nav>
+
         <div className="admin-header-actions">
           <span style={{ fontSize: '0.75rem', color: 'rgba(232,227,220,0.35)' }}>
             {partners.length} partner

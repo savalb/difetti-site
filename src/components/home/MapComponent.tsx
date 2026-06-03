@@ -83,6 +83,7 @@ export default function MapComponent({ punti }: MapComponentProps) {
     const bounds = L.latLngBounds([]);
     
     punti.forEach((punto) => {
+      if (punto.lat === undefined || punto.lng === undefined) return;
       const marker = L.marker([punto.lat, punto.lng], { icon: customIcon })
         .addTo(map)
         .bindPopup(`

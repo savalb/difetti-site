@@ -1,0 +1,221 @@
+.section {
+  padding: 8rem 0;
+  background-color: #1e1a19;
+  border-top: 1px solid rgba(232, 227, 220, 0.05);
+  position: relative;
+  overflow: hidden;
+}
+
+.header {
+  text-align: center;
+  max-width: 700px;
+  margin: 0 auto 5rem;
+}
+
+.intro {
+  color: rgba(242, 239, 234, 0.7);
+  font-family: var(--font-body);
+  font-size: 1.15rem;
+  line-height: 1.7;
+  margin-top: 1.5rem;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+  margin-top: 3rem;
+}
+
+@media (max-width: 992px) {
+  .grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+  }
+}
+
+@media (max-width: 600px) {
+  .grid {
+    grid-template-columns: 1fr;
+    gap: 1.25rem;
+  }
+}
+
+.card {
+  position: relative;
+  background: rgba(37, 32, 31, 0.6);
+  border: 1px solid rgba(232, 227, 220, 0.08);
+  border-radius: 16px;
+  height: 220px;
+  cursor: pointer;
+  overflow: hidden;
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.2);
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  border-color: rgba(163, 62, 73, 0.4);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4);
+}
+
+.logoBox {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem;
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.logoImage {
+  max-width: 80%;
+  max-height: 70%;
+  object-fit: contain;
+  filter: grayscale(1) contrast(1.2) brightness(0.9);
+  transition: filter 0.3s ease;
+}
+
+.card:hover .logoImage {
+  filter: none;
+}
+
+.textLogo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.initials {
+  font-family: var(--font-title);
+  font-size: 2.75rem;
+  font-weight: 700;
+  color: var(--cream);
+  letter-spacing: 2px;
+  background: linear-gradient(135deg, var(--cream), rgba(232, 227, 220, 0.4));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  transition: transform 0.3s ease;
+}
+
+.brandSubtitle {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  color: rgba(242, 239, 234, 0.4);
+}
+
+.badge {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  font-size: 0.65rem;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  background: rgba(163, 62, 73, 0.15);
+  color: var(--primary);
+  border: 1px solid rgba(163, 62, 73, 0.3);
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-weight: 600;
+}
+
+/* Tooltip Popover Overlay styling */
+.popover {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(37, 32, 31, 0.96);
+  padding: 1.75rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  opacity: 0;
+  pointer-events: none;
+  transform: scale(0.95);
+  transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  border-radius: 16px;
+  z-index: 10;
+}
+
+.popoverVisible {
+  opacity: 1;
+  pointer-events: auto;
+  transform: scale(1);
+}
+
+.popoverTitle {
+  font-family: var(--font-title);
+  font-size: 1.25rem;
+  color: var(--cream);
+  margin-bottom: 0.25rem;
+}
+
+.popoverSub {
+  font-size: 0.8rem;
+  color: rgba(242, 239, 234, 0.5);
+  display: block;
+  margin-bottom: 0.75rem;
+}
+
+.popoverDesc {
+  font-size: 0.85rem;
+  line-height: 1.4;
+  color: rgba(242, 239, 234, 0.8);
+  margin-bottom: 1rem;
+}
+
+.popoverProducts {
+  margin-bottom: 1rem;
+}
+
+.popoverProducts strong {
+  display: block;
+  font-size: 0.75rem;
+  color: rgba(242, 239, 234, 0.4);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 0.4rem;
+}
+
+.productsList {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+}
+
+.productTag {
+  font-size: 0.7rem;
+  background: rgba(232, 227, 220, 0.08);
+  color: var(--cream);
+  padding: 2px 6px;
+  border-radius: 4px;
+  border: 1px solid rgba(232, 227, 220, 0.1);
+}
+
+.popoverContact {
+  margin-top: auto;
+}
+
+.contactBtn {
+  display: inline-block;
+  width: 100%;
+  text-align: center;
+  background: var(--primary);
+  color: var(--cream);
+  padding: 0.5rem;
+  border-radius: 8px;
+  font-size: 0.85rem;
+  text-decoration: none;
+  font-weight: 600;
+  transition: background 0.2s ease;
+}
+
+.contactBtn:hover {
+  background: #b24b56;
+}
