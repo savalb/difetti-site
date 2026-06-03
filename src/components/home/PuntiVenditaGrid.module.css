@@ -140,12 +140,13 @@
   font-size: 0.65rem;
   text-transform: uppercase;
   letter-spacing: 1.5px;
-  background: rgba(229, 115, 115, 0.15) !important;
-  color: #ff8a80 !important; /* Brighter rose text for high contrast */
-  border: 1px solid rgba(229, 115, 115, 0.3) !important;
-  padding: 4px 8px;
+  background-color: #a33e49 !important; /* Solid brand red background */
+  color: #ffffff !important; /* Force solid white text */
+  border: 1px solid rgba(255, 255, 255, 0.25) !important;
+  padding: 4px 10px;
   border-radius: 4px;
-  font-weight: 600;
+  font-weight: 700;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
 /* Tooltip Popover Overlay styling */
