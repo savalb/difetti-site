@@ -188,6 +188,33 @@ export default function AdminVipDashboard() {
     }
   };
 
+  // Eliminazione fisica di un coupon
+  const handleDeleteCoupon = async (id: string, nome: string) => {
+    if (!confirm(`Sei sicuro di voler eliminare definitivamente il coupon di "${nome}"?`)) return;
+    
+    const token = getToken();
+    if (!token) return;
+
+    try {
+      const res = await fetch(`/api/admin/coupons?id=${id}`, {
+        method: 'DELETE',
+        headers: { Authorization: `Bearer ${token}` }
+      });
+
+      if (!res.ok) {
+        const errData = await res.json();
+        throw new Error(errData.error || 'Eliminazione fallita');
+      }
+
+      setToast({ msg: 'Coupon eliminato con successo.', type: 'success' });
+      
+      // Aggiorna la lista locale rimuovendo il record eliminato
+      setCoupons(prev => prev.filter(c => c.id !== id));
+    } catch (err: any) {
+      setToast({ msg: `Errore: ${err.message}`, type: 'error' });
+    }
+  };
+
   // Esportazione Contatti CSV
   const handleExportCSV = () => {
     if (coupons.length === 0) {
@@ -535,16 +562,28 @@ export default function AdminVipDashboard() {
                         </span>
                       </td>
                       <td style={{ padding: '1rem', textAlign: 'right' }}>
-                        <button 
-                          className="admin-btn-ghost" 
-                          style={{ 
-                            color: c.stato === 'Valido' ? '#81c784' : '#e57373',
-                            fontWeight: 500
-                          }}
-                          onClick={() => handleToggleRedeem(c.id, c.stato)}
-                        >
-                          {c.stato === 'Valido' ? '✓ Segna Riscattato' : '↩ Ripristina Valido'}
-                        </button>
+                        <div style={{ display: 'flex', gap: '8px', justifyContent: 'flex-end' }}>
+                          <button 
+                            className="admin-btn-ghost" 
+                            style={{ 
+                              color: c.stato === 'Valido' ? '#81c784' : '#e57373',
+                              fontWeight: 500
+                            }}
+                            onClick={() => handleToggleRedeem(c.id, c.stato)}
+                          >
+                            {c.stato === 'Valido' ? '✓ Segna Riscattato' : '↩ Ripristina Valido'}
+                          </button>
+                          <button 
+                            className="admin-btn-ghost" 
+                            style={{ 
+                              color: '#ef5350',
+                              fontWeight: 500
+                            }}
+                            onClick={() => handleDeleteCoupon(c.id, c.nome)}
+                          >
+                            Elimina
+                          </button>
+                        </div>
                       </td>
                     </tr>
                   ))}

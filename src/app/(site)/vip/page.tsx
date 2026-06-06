@@ -404,6 +404,34 @@ export default function VipPromoPage() {
                   </div>
                 )}
 
+                {/* Immagine Espositore / Prodotto */}
+                {campaign.immagine_url && (
+                  <div style={{
+                    width: '100%',
+                    height: '220px',
+                    display: 'flex',
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                    background: 'rgba(20, 14, 12, 0.3)',
+                    borderRadius: '12px',
+                    padding: '1rem',
+                    border: '1px solid rgba(242,239,234,0.05)',
+                    overflow: 'hidden',
+                    marginBottom: '0.5rem'
+                  }}>
+                    <img 
+                      src={campaign.immagine_url} 
+                      alt={campaign.prodotto_nome} 
+                      style={{
+                        maxHeight: '100%',
+                        maxWidth: '100%',
+                        objectFit: 'contain',
+                        filter: 'drop-shadow(0 8px 16px rgba(0,0,0,0.5))'
+                      }}
+                    />
+                  </div>
+                )}
+
                 {/* Titoli dell'offerta */}
                 <div>
                   <h2 style={{ fontFamily: 'var(--font-title)', fontSize: '1.75rem', color: 'var(--cream)', lineHeight: '1.2' }}>

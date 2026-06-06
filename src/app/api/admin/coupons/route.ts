@@ -81,3 +81,35 @@ export async function PUT(request: NextRequest) {
     return NextResponse.json({ error: 'Errore interno del server.' }, { status: 500 });
   }
 }
+
+// DELETE: Elimina un coupon
+export async function DELETE(request: NextRequest) {
+  if (!verifyAdminToken(request)) return unauthorizedResponse();
+
+  if (!supabase) {
+    return NextResponse.json({ error: 'Supabase non configurato.' }, { status: 500 });
+  }
+
+  try {
+    const { searchParams } = new URL(request.url);
+    const id = searchParams.get('id');
+
+    if (!id) {
+      return NextResponse.json({ error: 'ID coupon mancante.' }, { status: 400 });
+    }
+
+    const { error } = await supabase
+      .from('coupon_richiesti')
+      .delete()
+      .eq('id', id);
+
+    if (error) {
+      return NextResponse.json({ error: error.message }, { status: 500 });
+    }
+
+    return NextResponse.json({ success: true });
+  } catch (err) {
+    console.error('Errore DELETE /api/admin/coupons:', err);
+    return NextResponse.json({ error: 'Errore interno del server.' }, { status: 500 });
+  }
+}
