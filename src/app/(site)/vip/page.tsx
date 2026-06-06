@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
+import { supabase } from '@/lib/supabaseClient';
 
 interface Campaign {
   id: string;
@@ -45,7 +46,26 @@ export default function VipPromoPage() {
         const cached = localStorage.getItem('difetti_vip_coupon');
         if (cached) {
           try {
-            setClaimedCoupon(JSON.parse(cached));
+            const parsed = JSON.parse(cached);
+            setClaimedCoupon(parsed); // Mostra subito il coupon locale per velocità
+
+            // Controlla lo stato più recente dal database Supabase in background
+            if (supabase) {
+              const { data, error } = await supabase
+                .from('coupon_richiesti')
+                .select('*')
+                .eq('codice_coupon', parsed.codice_coupon)
+                .maybeSingle();
+
+              if (!error && data) {
+                setClaimedCoupon(data);
+                localStorage.setItem('difetti_vip_coupon', JSON.stringify(data));
+              } else if (!error && !data) {
+                // Se è stato eliminato dal database (cancellato dall'admin), puliamo localmente
+                localStorage.removeItem('difetti_vip_coupon');
+                setClaimedCoupon(null);
+              }
+            }
           } catch (e) {
             localStorage.removeItem('difetti_vip_coupon');
           }
@@ -95,6 +115,8 @@ export default function VipPromoPage() {
         setClaimedCoupon(data.coupon);
         // Salviamo in cache locale per consentire l'accesso offline
         localStorage.setItem('difetti_vip_coupon', JSON.stringify(data.coupon));
+        // Scorri in alto all'inizio del ticket
+        window.scrollTo({ top: 0, behavior: 'smooth' });
       }
     } catch (err: any) {
       setErrorMsg(err.message || 'Si è verificato un errore, riprova.');
@@ -341,6 +363,7 @@ export default function VipPromoPage() {
                   if (confirm('Vuoi richiedere un altro coupon? Questo sovrascriverà quello attuale sul tuo telefono.')) {
                     localStorage.removeItem('difetti_vip_coupon');
                     setClaimedCoupon(null);
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
                   }
                 }} className="btn btn-outline" style={{
                   justifyContent: 'center',
