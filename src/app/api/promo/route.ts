@@ -71,8 +71,8 @@ export async function POST(request: NextRequest) {
       couponCode = generateRandomCode();
       attempts++;
 
-      // Inseriamo il record
-      const { data, error } = await supabase
+      // Inseriamo il record (scrittura cieca per evitare violazioni RLS nel select returning)
+      const { error } = await supabase
         .from('coupon_richiesti')
         .insert({
           campagna_id: campaignId,
@@ -80,13 +80,10 @@ export async function POST(request: NextRequest) {
           telefono: cleanPhone,
           codice_coupon: couponCode,
           stato: 'Valido'
-        })
-        .select()
-        .single();
+        });
 
       if (!error) {
         success = true;
-        finalCouponData = data;
       } else {
         // Se l'errore è dovuto a violazione di unicità (codice duplicato), riproviamo
         // Altrimenti, interrompiamo ed eseguiamo il throw dell'errore
@@ -105,12 +102,12 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({
       success: true,
       coupon: {
-        id: finalCouponData.id,
-        codice_coupon: finalCouponData.codice_coupon,
-        nome: finalCouponData.nome,
-        telefono: finalCouponData.telefono,
-        stato: finalCouponData.stato,
-        creato_il: finalCouponData.creato_il
+        id: '',
+        codice_coupon: couponCode,
+        nome: cleanName,
+        telefono: cleanPhone,
+        stato: 'Valido',
+        creato_il: new Date().toISOString()
       }
     }, { status: 201 });
 
