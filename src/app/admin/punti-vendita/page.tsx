@@ -222,6 +222,9 @@ export default function AdminPuntiVendita() {
           <Link href="/admin/punti-vendita" className="admin-nav-link active" style={{ color: 'var(--cream)', borderBottom: '2px solid var(--cream)', paddingBottom: '0.25rem', textDecoration: 'none', fontWeight: 600 }}>
             Punti Vendita
           </Link>
+          <Link href="/admin/vip" className="admin-nav-link" style={{ color: 'rgba(242,239,234,0.6)', textDecoration: 'none' }}>
+            Promozioni VIP
+          </Link>
         </nav>
 
         <div className="admin-header-actions">

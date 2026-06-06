@@ -116,6 +116,9 @@ export default function AdminDashboard() {
           <Link href="/admin/punti-vendita" className="admin-nav-link" style={{ color: 'rgba(242,239,234,0.6)', textDecoration: 'none' }}>
             Punti Vendita
           </Link>
+          <Link href="/admin/vip" className="admin-nav-link" style={{ color: 'rgba(242,239,234,0.6)', textDecoration: 'none' }}>
+            Promozioni VIP
+          </Link>
         </nav>
 
         <div className="admin-header-actions">
