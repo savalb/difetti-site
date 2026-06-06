@@ -49,18 +49,14 @@ export default function VipPromoPage() {
             const parsed = JSON.parse(cached);
             setClaimedCoupon(parsed); // Mostra subito il coupon locale per velocità
 
-            // Controlla lo stato più recente dal database Supabase in background
-            if (supabase) {
-              const { data, error } = await supabase
-                .from('coupon_richiesti')
-                .select('*')
-                .eq('codice_coupon', parsed.codice_coupon)
-                .maybeSingle();
-
-              if (!error && data) {
-                setClaimedCoupon(data);
-                localStorage.setItem('difetti_vip_coupon', JSON.stringify(data));
-              } else if (!error && !data) {
+            // Controlla lo stato più recente dal database in background via API server-side
+            const checkRes = await fetch(`/api/promo?code=${parsed.codice_coupon}`);
+            if (checkRes.ok) {
+              const checkData = await checkRes.json();
+              if (checkData.coupon) {
+                setClaimedCoupon(checkData.coupon);
+                localStorage.setItem('difetti_vip_coupon', JSON.stringify(checkData.coupon));
+              } else {
                 // Se è stato eliminato dal database (cancellato dall'admin), puliamo localmente
                 localStorage.removeItem('difetti_vip_coupon');
                 setClaimedCoupon(null);
@@ -85,6 +81,61 @@ export default function VipPromoPage() {
     }
     init();
   }, []);
+
+  // Polling per aggiornare lo stato del coupon in tempo reale
+  useEffect(() => {
+    if (!claimedCoupon) return;
+
+    const interval = setInterval(async () => {
+      try {
+        const res = await fetch(`/api/promo?code=${claimedCoupon.codice_coupon}`);
+        if (res.ok) {
+          const data = await res.json();
+          if (data.coupon) {
+            // Aggiorna lo stato solo se è cambiato per evitare re-render continui
+            if (data.coupon.stato !== claimedCoupon.stato || data.coupon.nome !== claimedCoupon.nome) {
+              setClaimedCoupon(data.coupon);
+              localStorage.setItem('difetti_vip_coupon', JSON.stringify(data.coupon));
+            }
+          } else {
+            // Se è stato eliminato dal database (cancellato dall'admin), puliamo localmente
+            localStorage.removeItem('difetti_vip_coupon');
+            setClaimedCoupon(null);
+          }
+        }
+      } catch (err) {
+        console.error('Errore polling coupon:', err);
+      }
+    }, 8000); // Controlla ogni 8 secondi
+
+    return () => clearInterval(interval);
+  }, [claimedCoupon]);
+
+  // Forza lo scroll in cima alla pagina quando viene caricato o generato un coupon
+  useEffect(() => {
+    if (claimedCoupon) {
+      // Scrolla all'inizio sia subito che dopo un breve delay per gestire la chiusura della tastiera mobile
+      window.scrollTo(0, 0);
+      
+      const t1 = setTimeout(() => {
+        window.scrollTo(0, 0);
+      }, 100);
+      
+      const t2 = setTimeout(() => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }, 300);
+
+      const t3 = setTimeout(() => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }, 600);
+
+      return () => {
+        clearTimeout(t1);
+        clearTimeout(t2);
+        clearTimeout(t3);
+      };
+    }
+  }, [claimedCoupon]);
 
   // Invio modulo per ottenere il coupon
   const handleSubmit = async (e: React.FormEvent) => {
@@ -115,8 +166,16 @@ export default function VipPromoPage() {
         setClaimedCoupon(data.coupon);
         // Salviamo in cache locale per consentire l'accesso offline
         localStorage.setItem('difetti_vip_coupon', JSON.stringify(data.coupon));
-        // Scorri in alto all'inizio del ticket
-        window.scrollTo({ top: 0, behavior: 'smooth' });
+        
+        // Forza la chiusura della tastiera virtuale su mobile sfuocando l'input
+        if (document.activeElement instanceof HTMLElement) {
+          document.activeElement.blur();
+        }
+        
+        // Ritarda lo scroll per permettere alla tastiera di chiudersi del tutto prima di scorrere
+        setTimeout(() => {
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+        }, 200);
       }
     } catch (err: any) {
       setErrorMsg(err.message || 'Si è verificato un errore, riprova.');
@@ -249,20 +308,27 @@ export default function VipPromoPage() {
             <div style={{ textAlign: 'center', marginBottom: '1.5rem' }}>
               <span style={{
                 fontFamily: 'var(--font-ui)',
-                fontSize: '0.7rem',
+                fontSize: '0.75rem',
                 fontWeight: 600,
-                color: '#81c784',
-                background: 'rgba(129, 199, 132, 0.1)',
+                color: claimedCoupon.stato === 'Valido' ? '#81c784' : '#ef5350',
+                background: claimedCoupon.stato === 'Valido' ? 'rgba(129, 199, 132, 0.1)' : 'rgba(239, 83, 80, 0.1)',
                 padding: '4px 12px',
                 borderRadius: '20px',
                 letterSpacing: '0.1em',
                 textTransform: 'uppercase',
                 display: 'inline-flex',
                 alignItems: 'center',
-                gap: '6px'
+                gap: '6px',
+                border: claimedCoupon.stato === 'Valido' ? '1px solid rgba(129, 199, 132, 0.2)' : '1px solid rgba(239, 83, 80, 0.2)'
               }}>
-                <span style={{ width: '6px', height: '6px', borderRadius: '50%', background: '#81c784', display: 'inline-block' }} />
-                Coupon Attivo & Valido
+                <span style={{ 
+                  width: '6px', 
+                  height: '6px', 
+                  borderRadius: '50%', 
+                  background: claimedCoupon.stato === 'Valido' ? '#81c784' : '#ef5350', 
+                  display: 'inline-block' 
+                }} />
+                {claimedCoupon.stato === 'Valido' ? 'Coupon Attivo & Valido' : 'Coupon Riscattato (Usato)'}
               </span>
               
               <h2 style={{
@@ -278,6 +344,35 @@ export default function VipPromoPage() {
                 Ecco il tuo pass di sconto personale
               </p>
             </div>
+
+            {/* Immagine Prodotto nel Ticket */}
+            {campaign?.immagine_url && (
+              <div style={{
+                width: '100%',
+                height: '180px',
+                display: 'flex',
+                justifyContent: 'center',
+                alignItems: 'center',
+                background: 'rgba(20, 14, 12, 0.2)',
+                borderRadius: '12px',
+                padding: '0.75rem',
+                border: '1px solid rgba(242,239,234,0.05)',
+                overflow: 'hidden',
+                marginBottom: '1.5rem',
+                marginTop: '0.5rem'
+              }}>
+                <img 
+                  src={campaign.immagine_url} 
+                  alt={campaign?.prodotto_nome || 'Prodotto'} 
+                  style={{
+                    maxHeight: '100%',
+                    maxWidth: '100%',
+                    objectFit: 'contain',
+                    filter: 'drop-shadow(0 6px 12px rgba(0,0,0,0.4))'
+                  }}
+                />
+              </div>
+            )}
 
             {/* Dettaglio del Coupon / Ticket */}
             <div style={{
@@ -363,7 +458,9 @@ export default function VipPromoPage() {
                   if (confirm('Vuoi richiedere un altro coupon? Questo sovrascriverà quello attuale sul tuo telefono.')) {
                     localStorage.removeItem('difetti_vip_coupon');
                     setClaimedCoupon(null);
-                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                    setTimeout(() => {
+                      window.scrollTo({ top: 0, behavior: 'smooth' });
+                    }, 100);
                   }
                 }} className="btn btn-outline" style={{
                   justifyContent: 'center',

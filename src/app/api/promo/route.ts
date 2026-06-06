@@ -11,13 +11,33 @@ function generateRandomCode(): string {
   return `VIP-SNT-${randomPart}`;
 }
 
-// GET: Recupera la promozione attiva con slug = 'vip'
+// GET: Recupera la promozione attiva o controlla lo stato di un coupon specifico
 export async function GET(request: NextRequest) {
   if (!supabase) {
     return NextResponse.json({ error: 'Supabase non configurato.' }, { status: 500 });
   }
 
   try {
+    const { searchParams } = new URL(request.url);
+    const code = searchParams.get('code');
+
+    // Se viene passato un codice coupon, restituisce le informazioni su quel coupon
+    if (code) {
+      const { data, error } = await supabase
+        .from('coupon_richiesti')
+        .select('*')
+        .eq('codice_coupon', code)
+        .maybeSingle();
+
+      if (error) {
+        console.error('Errore recupero coupon da codice:', error.message);
+        return NextResponse.json({ error: error.message }, { status: 500 });
+      }
+
+      return NextResponse.json({ coupon: data || null });
+    }
+
+    // Altrimenti, recupera la campagna attiva
     const { data, error } = await supabase
       .from('campagne_marketing')
       .select('*')
