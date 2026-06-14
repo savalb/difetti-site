@@ -2,7 +2,7 @@ import type { MetadataRoute } from 'next';
 import { getAllPartners } from '@/lib/services/partnerService';
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const baseUrl = 'https://difetti-site3.vercel.app';
+  const baseUrl = 'https://difetti.it';
 
   // Rotte statiche di base
   const staticRoutes = ['', '/difetti', '/partner', '/servizi', '/eventi', '/chi-siamo', '/contatti'].map((route) => ({

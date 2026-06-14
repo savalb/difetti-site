@@ -57,7 +57,7 @@ export default async function PartnerDetailPage({ params }: Props) {
     '@type': 'Organization',
     name: partner.nome,
     description: partner.descrizione,
-    image: partner.immagineUrl ? `https://difetti-site3.vercel.app${partner.immagineUrl}` : undefined,
+    image: partner.immagineUrl ? `https://difetti.it${partner.immagineUrl}` : undefined,
     slogan: partner.claim,
     knowsAbout: partner.prodotto,
     brand: {

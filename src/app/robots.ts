@@ -7,6 +7,6 @@ export default function robots(): MetadataRoute.Robots {
       allow: '/',
       disallow: ['/api/', '/private/'],
     },
-    sitemap: 'https://difetti-site3.vercel.app/sitemap.xml',
+    sitemap: 'https://difetti.it/sitemap.xml',
   };
 }

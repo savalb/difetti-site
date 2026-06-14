@@ -1,9 +1,10 @@
 import type { Metadata } from 'next';
 import './globals.css';
 import { BRAND } from '@/lib/constants';
+import { Analytics } from '@vercel/analytics/react';
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://difetti-site3.vercel.app'),
+  metadataBase: new URL('https://difetti.it'),
   title: {
     default: `${BRAND.name} — ${BRAND.tagline}`,
     template: `%s | ${BRAND.name}`,
@@ -27,7 +28,7 @@ const jsonLd = {
   '@type': 'LocalBusiness',
   name: 'Difetti — Eccellenze Campane',
   description: 'Selezionatori e distributori di prodotti gastronomici artigianali campani. Consulenza strategica HoReCa.',
-  url: 'https://difetti-site3.vercel.app',
+  url: 'https://difetti.it',
   telephone: '+393509684544',
   email: BRAND.email,
   address: {
@@ -49,6 +50,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       </head>
       <body>
         {children}
+        <Analytics />
       </body>
     </html>
   );

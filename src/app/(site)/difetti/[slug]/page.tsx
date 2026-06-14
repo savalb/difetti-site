@@ -182,7 +182,7 @@ export default async function DifettiDetailPage({ params }: Props) {
     '@context': 'https://schema.org',
     '@type': 'Product',
     name: prodotto.nome,
-    image: `https://difetti-site3.vercel.app${prodotto.immagine}`,
+    image: `https://difetti.it${prodotto.immagine}`,
     description: prodotto.introduzione,
     brand: {
       '@type': 'Brand',
@@ -193,7 +193,7 @@ export default async function DifettiDetailPage({ params }: Props) {
       priceCurrency: 'EUR',
       price: '0.00',
       description: 'Riservato a ristorazione e HoReCa, listino su richiesta via WhatsApp',
-      url: `https://difetti-site3.vercel.app/difetti/${prodotto.slug}`,
+      url: `https://difetti.it/difetti/${prodotto.slug}`,
       availability: 'https://schema.org/InStock',
     },
   };

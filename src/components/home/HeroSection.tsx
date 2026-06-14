@@ -41,10 +41,10 @@ export function HeroSection() {
           <span className="section-tag">Eccellenze Campane</span>
         </div>
 
-        <h1 ref={headlineRef} className={styles.headline}>
+        <h2 ref={headlineRef} className={styles.headline}>
           Smetti di servire perfezione industriale.<br />
           Inizia a servire la <i>Pasta Vera</i>.
-        </h1>
+        </h2>
 
         <p className={styles.subtext}>
           La pasta a marchio <strong>Difetti</strong> è trafilata in bronzo reale ed essiccata a bassa temperatura per trattenere il sugo. Nessun catalogo fotocopia: valorizziamo il tuo menù con la nostra consulenza gastronomica strategica.
