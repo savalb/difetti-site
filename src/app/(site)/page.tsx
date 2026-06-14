@@ -1,5 +1,4 @@
 import type { Metadata } from 'next';
-import { EventHero } from '@/components/home/EventHero';
 import { HeroSection } from '@/components/home/HeroSection';
 import { TheEnemySection } from '@/components/home/TheEnemySection';
 import { ManifestoSection } from '@/components/home/ManifestoSection';
@@ -23,7 +22,6 @@ export default async function HomePage() {
   
   return (
     <>
-      <EventHero />
       <HeroSection />
       <TheEnemySection />
       <ManifestoSection />
