@@ -1,13 +1,17 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { writeFile, mkdir } from 'fs/promises';
-import path from 'path';
 import { verifyAdminToken } from '@/lib/adminAuth';
+import { supabase } from '@/lib/supabaseClient';
+import path from 'path';
 
 export const runtime = 'nodejs';
 
 export async function POST(req: NextRequest) {
   if (!verifyAdminToken(req)) {
     return NextResponse.json({ error: 'Non autorizzato' }, { status: 401 });
+  }
+
+  if (!supabase) {
+    return NextResponse.json({ error: 'Errore server: client Supabase non disponibile' }, { status: 500 });
   }
 
   try {
@@ -45,21 +49,31 @@ export async function POST(req: NextRequest) {
     const timestamp = Date.now();
     const finalName = `${baseName}_${timestamp}${ext}`;
 
-    // Build target directory path (inside public/images/eventi/[slug]/)
-    const targetDir = path.join(process.cwd(), 'public', 'images', 'eventi', safeSlug);
-    await mkdir(targetDir, { recursive: true });
-
-    // Write file
+    const filePath = `${safeSlug}/${finalName}`;
     const buffer = Buffer.from(await file.arrayBuffer());
-    const filePath = path.join(targetDir, finalName);
-    await writeFile(filePath, buffer);
 
-    // Return public URL
-    const publicUrl = `/images/eventi/${safeSlug}/${finalName}`;
+    // Upload to Supabase Storage bucket 'eventi-immagini' (creato o esistente)
+    const { data, error } = await supabase.storage
+      .from('eventi-immagini')
+      .upload(filePath, buffer, {
+        contentType: file.type,
+        cacheControl: '3600',
+        upsert: false
+      });
+
+    if (error) {
+      console.error('[upload] Supabase upload error:', error);
+      return NextResponse.json({ error: `Errore caricamento storage: ${error.message}` }, { status: 500 });
+    }
+
+    // Get public URL
+    const { data: { publicUrl } } = supabase.storage
+      .from('eventi-immagini')
+      .getPublicUrl(filePath);
 
     return NextResponse.json({ url: publicUrl, filename: finalName }, { status: 200 });
-  } catch (err) {
+  } catch (err: any) {
     console.error('[upload] Error:', err);
-    return NextResponse.json({ error: 'Errore durante il caricamento del file.' }, { status: 500 });
+    return NextResponse.json({ error: `Errore durante il caricamento del file: ${err.message || err}` }, { status: 500 });
   }
 }
