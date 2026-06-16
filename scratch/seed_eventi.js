@@ -23,11 +23,11 @@ const SEED_EVENTI = [
     titolo: 'Aperitivo in Vigna',
     sotto_occhiello: 'Eccellenze & Convivialità',
     data: '14 Giugno 2026',
-    ora: '18:30',
+    ora: '10:00',
     luogo: 'Montefalcione (AV)',
     indirizzo: 'Contrada Fortuna 13, Montefalcione',
     descrizione: 'Un caso studio pratico di come un locale può generare valore e attrarre clienti con una serata degustazione. Oltre 30 partecipanti e un indotto reale tangibile.',
-    descrizione_estesa: 'Domenica 14 Giugno 2026, l\'Agriturismo Macchia dei Briganti a Montefalcione (AV) ha ospitato il nostro format B2B "Aperitivo in Vigna". L\'evento è stato concepito come una vera e propria dimostrazione pratica per ristoratori, enoteche e wine bar campani di come sia possibile creare un indotto concreto e un\'esperienza memorabile per i clienti finali.\n\nAl centro dell\'evento, oltre alla poesia del paesaggio irpino, c\'era il nostro corner shop/espositore in legno massello dotato di tag QR/NFC. Questo sistema, che permette il riordino istantaneo dei prodotti, ha dimostrato come l\'integrazione tra artigianalità e tecnologia possa stimolare l\'interesse all\'acquisto direttamente in sala.\n\nDurante le poche ore dell\'evento, circa 30 professionisti del settore HoReCa hanno testato l\'indotto reale della degustazione. Sono stati serviti e consumati sul posto:\n- 2 kg di alici di Cetara premium\n- 4 kg di pomodorini cotti a sole e conserve artigianali Difetti\n- 30 bottiglie di Fiano Irpino IGT della cantina ospitante\n\nQuesto dimostra il potere di attrazione di una proposta gastronomica basata sulla trasparenza del KM Vero e sul racconto delle unicità dei produttori.',
+    descrizione_estesa: 'Domenica 14 Giugno 2026, l\'Agriturismo Macchia dei Briganti a Montefalcione (AV) ha ospitato il nostro format "Aperitivo in Vigna". L\'evento, iniziato alle ore 10:00, è stato concepito come una vera e propria dimostrazione pratica per ristoratori e gestori di locali campani, ma aperto anche a persone comuni e appassionati venuti per godersi una degustazione di qualità in un\'atmosfera conviviale e rilassata.\n\nAl centro dell\'evento c\'erano le nostre materie prime e i prodotti artigianali Difetti, protagonisti assoluti come ingredienti chiave per la farcitura delle focacce calde servite sul momento. Ad accompagnare il cibo, gli ospiti hanno potuto degustare una selezione dei pregiati vini prodotti direttamente dalla cantina dell\'agriturismo che ospitava la giornata, creando un connubio perfetto tra territorio, autenticità e gusto.\n\nDurante le ore dell\'evento, circa 30 partecipanti tra professionisti HoReCa e clienti finali hanno testato con mano l\'indotto reale che un simile format può generare per una struttura. Sono stati consumati sul posto:\n- 2 kg di alici di Cetara premium\n- 4 kg di pomodorini cotti a sole e conserve artigianali Difetti\n- 30 bottiglie di Fiano Irpino IGT prodotte dalla cantina ospitante\n\nQuesto dimostra il potere di attrazione di un evento basato sulla trasparenza del KM Vero, sulla qualità degli ingredienti e sulla bellezza dell\'esperienza condivisa.',
     immagine_copertina: '/images/eventi/aperitivo-in-vigna/ai_mockup_vigna_irpinia.png',
     galleria_immagini: [
       '/images/eventi/aperitivo-in-vigna/ai_mockup_vigna_irpinia.png',
@@ -39,8 +39,8 @@ const SEED_EVENTI = [
       '/images/eventi/aperitivo-in-vigna/bozza_video_aperitivo.mp4'
     ],
     video_url: '',
-    promozione_titolo: 'Sconto 20% su Gin Sintony',
-    promozione_desc: 'Sei un ristoratore o hai partecipato all\'evento? Richiedi subito il tuo coupon VIP personale e acquista una bottiglia di Gin Sintony da 70cl a soli €48 anziché €60.',
+    promozione_titolo: 'Lancio Gin Sintony',
+    promozione_desc: 'In occasione dell\'evento Aperitivo in Vigna, Difetti ha proposto ai partecipanti una promozione esclusiva di lancio, offrendo la possibilità di acquistare in anteprima una bottiglia di Gin Sintony da 70cl con il 20% di sconto riservato.',
     promozione_link: '/vip',
     stato: 'passato',
     whatsapp_custom_text: 'Ciao Antonio, sono un ristoratore. Vorrei sapere come funziona l\'organizzazione degli eventi Difetti e ricevere informazioni sul listino prodotti B2B.'
