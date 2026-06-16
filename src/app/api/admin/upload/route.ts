@@ -52,9 +52,9 @@ export async function POST(req: NextRequest) {
     const filePath = `${safeSlug}/${finalName}`;
     const buffer = Buffer.from(await file.arrayBuffer());
 
-    // Upload to Supabase Storage bucket 'eventi-immagini' (creato o esistente)
+    // Upload to Supabase Storage bucket 'eventi'
     const { data, error } = await supabase.storage
-      .from('eventi-immagini')
+      .from('eventi')
       .upload(filePath, buffer, {
         contentType: file.type,
         cacheControl: '3600',
@@ -68,7 +68,7 @@ export async function POST(req: NextRequest) {
 
     // Get public URL
     const { data: { publicUrl } } = supabase.storage
-      .from('eventi-immagini')
+      .from('eventi')
       .getPublicUrl(filePath);
 
     return NextResponse.json({ url: publicUrl, filename: finalName }, { status: 200 });
