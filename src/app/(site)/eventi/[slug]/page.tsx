@@ -189,27 +189,29 @@ export default async function EventoDetailPage({ params }: PageProps) {
                 {/* Gin Sintony Promo Card */}
                 {evento.promozione_titolo && (
                   <div className={styles.promoCard}>
-                    <span className={styles.promoTag}>Campagna VIP Riservata</span>
+                    <span className={styles.promoTag}>Informazioni Evento</span>
                     <h4 className={styles.promoTitle}>{evento.promozione_titolo}</h4>
                     <p className={styles.promoDesc}>{evento.promozione_desc}</p>
                     
-                    <Link
-                      href={evento.promozione_link || '/vip'}
-                      className="btn btn-primary"
-                      style={{ 
-                        width: '100%', 
-                        textAlign: 'center', 
-                        display: 'block', 
-                        border: '2px solid var(--cream)', 
-                        boxShadow: '3px 3px 0 var(--cream)', 
-                        background: 'var(--cream)', 
-                        color: 'var(--earth)',
-                        fontWeight: 600,
-                        textDecoration: 'none'
-                      }}
-                    >
-                      🎁 Richiedi Buono Sconto Gin
-                    </Link>
+                    {evento.promozione_link && (
+                      <Link
+                        href={evento.promozione_link}
+                        className="btn btn-primary"
+                        style={{ 
+                          width: '100%', 
+                          textAlign: 'center', 
+                          display: 'block', 
+                          border: '2px solid var(--cream)', 
+                          boxShadow: '3px 3px 0 var(--cream)', 
+                          background: 'var(--cream)', 
+                          color: 'var(--earth)',
+                          fontWeight: 600,
+                          textDecoration: 'none'
+                        }}
+                      >
+                        🎁 Richiedi Buono Sconto Gin
+                      </Link>
+                    )}
                   </div>
                 )}
 

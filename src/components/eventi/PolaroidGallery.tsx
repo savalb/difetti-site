@@ -68,7 +68,7 @@ export function PolaroidGallery({ immagini, titolo }: PolaroidGalleryProps) {
               priority
             />
             <div className={styles.polaroidBadge}>
-              📷 SFOGLIA ALBUM POLAROID
+              📷 GUARDA LE FOTO DELL&apos;EVENTO
             </div>
           </div>
           <div className={styles.polaroidCaption}>
