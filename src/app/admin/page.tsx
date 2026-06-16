@@ -119,6 +119,9 @@ export default function AdminDashboard() {
           <Link href="/admin/vip" className="admin-nav-link" style={{ color: 'rgba(242,239,234,0.6)', textDecoration: 'none' }}>
             Promozioni VIP
           </Link>
+          <Link href="/admin/eventi" className="admin-nav-link" style={{ color: 'rgba(242,239,234,0.6)', textDecoration: 'none' }}>
+            Eventi
+          </Link>
         </nav>
 
         <div className="admin-header-actions">

@@ -1,120 +1,35 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
+import { useRouter } from 'next/navigation';
 import Image from 'next/image';
 import { BRAND } from '@/lib/constants';
 import styles from './EventiClient.module.css';
 
 interface Evento {
   id: string;
-  data: string;
+  slug: string;
   titolo: string;
+  sotto_occhiello?: string;
+  data: string;
   luogo: string;
-  desc: string;
-  immagini?: string[];
+  descrizione: string;
+  immagine_copertina?: string;
+  galleria_immagini?: string[];
+  stato: 'futuro' | 'passato';
 }
 
-const EVENTI_FUTURI: Evento[] = [
-  {
-    id: 'b2b-alta-irpinia',
-    data: 'Giugno 2026',
-    titolo: 'Degustazione B2B — Ristoranti Alta Irpinia',
-    luogo: 'Alta Irpinia · Su invito',
-    desc: 'Sessione di degustazione riservata ai ristoratori dell\'Alta Irpinia. Presentazione della nuova linea conserve estive e partnership con Poma Moris.',
-  },
-  {
-    id: 'masterclass-pasta',
-    data: 'Luglio 2026',
-    titolo: 'Masterclass Pasta Artigianale: La Verità del Bronzo',
-    luogo: 'Avellino · Su prenotazione',
-    desc: 'Un incontro formativo dedicato a chef e pastai per riscoprire il comportamento in cottura della vera trafilatura in bronzo a bassa temperatura.',
-  },
-  {
-    id: 'degustazione-conserve',
-    data: 'Settembre 2026',
-    titolo: 'Degustazione Olio Nuovissimo e Conserve Autunnali',
-    luogo: 'Ariano Irpino · B2B',
-    desc: 'Anteprima dei pomodori cotti a sole e delle nuove conserve artigianali in vista della stagione invernale.',
-  }
-];
+interface EventiClientProps {
+  initialEventi: Evento[];
+}
 
-const EVENTI_PASSATI: Evento[] = [
-  {
-    id: 'b2b-avellino-maggio',
-    data: 'Maggio 2026',
-    titolo: 'Degustazione B2B — Ristoranti Avellino',
-    luogo: 'Avellino',
-    desc: 'Incontro con 12 ristoratori irpini. Presentazione linea pasta e conserve Difetti con assaggi comparativi tra pasta industriale e pasta Difetti.',
-    immagini: [
-      '/images/eventi/evento-degustazione.jpg',
-      '/images/prodotti/prodotti-group.jpg',
-      '/images/prodotti/prodotti-display.jpg'
-    ]
-  },
-  {
-    id: 'fiera-gusto-napoli',
-    data: 'Aprile 2026',
-    titolo: 'Fiera del Gusto Campano',
-    luogo: 'Napoli',
-    desc: 'Stand Difetti alla fiera regionale delle eccellenze. Oltre 200 contatti qualificati e avvio di 15 nuove importanti partnership con la ristorazione napoletana.',
-    immagini: [
-      '/images/prodotti/pasta-candele.jpg',
-      '/images/prodotti/passata-pomodoro.jpg',
-      '/images/prodotti/prodotti-hero.jpg'
-    ]
-  },
-  {
-    id: 'tasting-noccioro-giffoni',
-    data: 'Marzo 2026',
-    titolo: 'Serata Nocciolo — Tasting Nocciole Irpine',
-    luogo: 'Giffoni Valle Piana',
-    desc: 'Degustazione collaborativa con il partner Noccioro. Presentazione dei dessert realizzati con la crema di nocciole spalmabile pura artigianale.',
-    immagini: [
-      '/images/prodotti/crostate.jpg',
-      '/images/prodotti/prodotti-display.jpg'
-    ]
-  }
-];
-
-export function EventiClient() {
+export function EventiClient({ initialEventi }: EventiClientProps) {
   const [activeTab, setActiveTab] = useState<'futuri' | 'passati'>('futuri');
-  const [selectedEventId, setSelectedEventId] = useState<string | null>(null);
-  const [activeImageIdx, setActiveImageIdx] = useState<number>(0);
+  const router = useRouter();
 
-  // Trova l'evento selezionato per la galleria
-  const selectedEvent = EVENTI_PASSATI.find(e => e.id === selectedEventId);
-
-  // Navigazione all'interno del Lightbox
-  const handleNextImage = (e?: React.MouseEvent) => {
-    if (e) e.stopPropagation();
-    if (!selectedEvent?.immagini) return;
-    setActiveImageIdx((prev) => (prev + 1) % selectedEvent.immagini!.length);
-  };
-
-  const handlePrevImage = (e?: React.MouseEvent) => {
-    if (e) e.stopPropagation();
-    if (!selectedEvent?.immagini) return;
-    setActiveImageIdx((prev) => (prev - 1 + selectedEvent.immagini!.length) % selectedEvent.immagini!.length);
-  };
-
-  const handleCloseLightbox = () => {
-    setSelectedEventId(null);
-    setActiveImageIdx(0);
-  };
-
-  // Keyboard navigation per il Lightbox
-  useEffect(() => {
-    if (!selectedEventId) return;
-
-    const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.key === 'ArrowRight') handleNextImage();
-      if (e.key === 'ArrowLeft') handlePrevImage();
-      if (e.key === 'Escape') handleCloseLightbox();
-    };
-
-    window.addEventListener('keydown', handleKeyDown);
-    return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [selectedEventId]);
+  // Dividiamo gli eventi in base allo stato
+  const eventiFuturi = initialEventi.filter(e => e.stato === 'futuro');
+  const eventiPassati = initialEventi.filter(e => e.stato === 'passato');
 
   return (
     <main className={styles.main}>
@@ -138,13 +53,13 @@ export function EventiClient() {
               onClick={() => setActiveTab('futuri')}
               className={`${styles.tabBtn} ${activeTab === 'futuri' ? styles.tabBtnActive : ''}`}
             >
-              Prossimi Appuntamenti
+              Prossimi Appuntamenti ({eventiFuturi.length})
             </button>
             <button
               onClick={() => setActiveTab('passati')}
               className={`${styles.tabBtn} ${activeTab === 'passati' ? styles.tabBtnActive : ''}`}
             >
-              Archivio & Gallerie Foto
+              Archivio & Gallerie ({eventiPassati.length})
             </button>
           </div>
         </div>
@@ -159,24 +74,41 @@ export function EventiClient() {
               <h2 className={styles.sectionTitle}>I Prossimi Eventi</h2>
               
               <div className={styles.gridFuturi}>
-                {EVENTI_FUTURI.map((e) => (
+                {eventiFuturi.map((e) => (
                   <div key={e.id} className={styles.upcomingCard}>
                     <div className={styles.upcomingBadge}>PROSSIMO</div>
                     <span className={styles.upcomingData}>🗓️ {e.data}</span>
                     <h3 className={styles.upcomingTitle}>{e.titolo}</h3>
+                    {e.sotto_occhiello && <span style={{ fontSize: '0.8rem', color: 'var(--earth-muted)', display: 'block', marginBottom: '8px', textTransform: 'uppercase', letterSpacing: '0.05em' }}>{e.sotto_occhiello}</span>}
                     <p className={styles.upcomingMeta}>📍 {e.luogo}</p>
-                    <p className={styles.upcomingDesc}>{e.desc}</p>
-                    <a
-                      href={BRAND.whatsapp}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="btn btn-primary"
-                      id={`eventi-wa-${e.id}`}
-                    >
-                      Richiedi Invito / Info
-                    </a>
+                    <p className={styles.upcomingDesc}>{e.descrizione}</p>
+                    
+                    <div style={{ display: 'flex', gap: '12px', flexWrap: 'wrap', marginTop: '1rem' }}>
+                      <button
+                        onClick={() => router.push(`/eventi/${e.slug}`)}
+                        className="btn btn-primary"
+                        style={{ border: '2px solid var(--earth)', cursor: 'pointer' }}
+                      >
+                        Leggi Dettagli
+                      </button>
+                      <a
+                        href={`${BRAND.whatsapp}?text=${encodeURIComponent(`Ciao Antonio, vorrei richiedere informazioni per l'evento "${e.titolo}" a ${e.luogo}.`)}`}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="btn btn-whatsapp"
+                        id={`eventi-wa-${e.id}`}
+                      >
+                        Richiedi Invito / Info (WhatsApp)
+                      </a>
+                    </div>
                   </div>
                 ))}
+                
+                {eventiFuturi.length === 0 && (
+                  <div style={{ padding: '3rem 1rem', textAlign: 'center', border: '2px dashed var(--earth-muted)', color: 'var(--earth-muted)' }}>
+                    Nessun prossimo evento programmato al momento. Resta aggiornato su questa pagina!
+                  </div>
+                )}
               </div>
             </div>
           ) : (
@@ -184,32 +116,27 @@ export function EventiClient() {
               <span className="section-tag">Memorie di Sapore</span>
               <h2 className={styles.sectionTitle}>Archivio Eventi Passati</h2>
               <p className={styles.archiveIntro}>
-                Clicca su uno degli eventi per aprire la galleria fotografica e rivivere l&apos;esperienza.
+                Clicca su uno degli eventi per aprire la pagina dedicata, vedere le foto, i video e scoprire i dettagli dell&apos;esperienza.
               </p>
 
               <div className={styles.gridPassati}>
-                {EVENTI_PASSATI.map((e) => (
+                {eventiPassati.map((e) => (
                   <div 
                     key={e.id} 
                     className={styles.passatoCard}
-                    onClick={() => {
-                      if (e.immagini && e.immagini.length > 0) {
-                        setSelectedEventId(e.id);
-                        setActiveImageIdx(0);
-                      }
-                    }}
+                    onClick={() => router.push(`/eventi/${e.slug}`)}
                   >
-                    {e.immagini && e.immagini.length > 0 && (
+                    {(e.immagine_copertina || (e.galleria_immagini && e.galleria_immagini.length > 0)) && (
                       <div className={styles.passatoThumbWrapper}>
                         <Image
-                          src={e.immagini[0]}
+                          src={e.immagine_copertina || e.galleria_immagini![0]}
                           alt={e.titolo}
                           fill
                           sizes="(max-width: 768px) 100vw, 33vw"
                           className={styles.passatoThumb}
                         />
                         <div className={styles.galleryBadge}>
-                          📷 Vedi Galleria ({e.immagini.length} foto)
+                          📖 Leggi Resoconto & Foto
                         </div>
                       </div>
                     )}
@@ -217,49 +144,21 @@ export function EventiClient() {
                       <span className={styles.passatoData}>{e.data}</span>
                       <h3 className={styles.passatoTitle}>{e.titolo}</h3>
                       <span className={styles.passatoLuogo}>📍 {e.luogo}</span>
-                      <p className={styles.passatoDesc}>{e.desc}</p>
+                      <p className={styles.passatoDesc}>{e.descrizione}</p>
                     </div>
                   </div>
                 ))}
+                
+                {eventiPassati.length === 0 && (
+                  <div style={{ padding: '3rem 1rem', textAlign: 'center', border: '2px dashed var(--earth-muted)', color: 'var(--earth-muted)', gridColumn: '1 / -1' }}>
+                    Nessun evento passato in archivio al momento.
+                  </div>
+                )}
               </div>
             </div>
           )}
         </div>
       </section>
-
-      {/* Lightbox Modal */}
-      {selectedEvent && selectedEvent.immagini && (
-        <div className={styles.lightbox} onClick={handleCloseLightbox}>
-          <button className={styles.closeBtn} onClick={handleCloseLightbox} aria-label="Chiudi galleria">
-            ✕
-          </button>
-          
-          <div className={styles.lightboxInner} onClick={(e) => e.stopPropagation()}>
-            <button className={styles.navBtn} onClick={handlePrevImage} aria-label="Foto precedente">
-              ←
-            </button>
-
-            <div className={styles.imageContainer}>
-              <Image
-                src={selectedEvent.immagini[activeImageIdx]}
-                alt={`Foto evento ${selectedEvent.titolo} - ${activeImageIdx + 1}`}
-                fill
-                sizes="(max-width: 1200px) 100vw, 80vw"
-                className={styles.lightboxImg}
-                priority
-              />
-              <div className={styles.imageCaption}>
-                <h4>{selectedEvent.titolo}</h4>
-                <p>Foto {activeImageIdx + 1} di {selectedEvent.immagini.length}</p>
-              </div>
-            </div>
-
-            <button className={styles.navBtn} onClick={handleNextImage} aria-label="Foto successiva">
-              →
-            </button>
-          </div>
-        </div>
-      )}
 
       {/* CTA Bottom */}
       <section className={`${styles.ctaSection} section-pad`}>
@@ -270,7 +169,7 @@ export function EventiClient() {
             Mettiamo sul tavolo i nostri prodotti e smontiamo le bugie della produzione industriale.
           </p>
           <a
-            href={BRAND.whatsapp}
+            href={`${BRAND.whatsapp}?text=${encodeURIComponent("Ciao Antonio, vorrei organizzare una degustazione dei prodotti Difetti nel mio locale.")}`}
             target="_blank"
             rel="noopener noreferrer"
             className="btn btn-whatsapp"

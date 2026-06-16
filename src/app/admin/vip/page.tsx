@@ -280,6 +280,9 @@ export default function AdminVipDashboard() {
           <Link href="/admin/vip" className="admin-nav-link active" style={{ color: 'var(--cream)', borderBottom: '2px solid var(--cream)', paddingBottom: '0.25rem', textDecoration: 'none', fontWeight: 600 }}>
             Promozioni VIP
           </Link>
+          <Link href="/admin/eventi" className="admin-nav-link" style={{ color: 'rgba(242,239,234,0.6)', textDecoration: 'none' }}>
+            Eventi
+          </Link>
         </nav>
 
         <div className="admin-header-actions">
