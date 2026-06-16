@@ -1,7 +1,8 @@
 'use client';
 
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect, useCallback, useRef } from 'react';
 import { useRouter, useParams } from 'next/navigation';
+import Image from 'next/image';
 
 interface EventoData {
   id: string;
@@ -45,6 +46,248 @@ const emptyEvento: EventoData = {
   whatsapp_custom_text: '',
 };
 
+// ── Inline styles per upload zone (CSS-in-JS per non sporcare il CSS globale) ──
+const uploadZoneStyle = (isDragging: boolean): React.CSSProperties => ({
+  border: `2px dashed ${isDragging ? 'var(--amaranto)' : 'var(--earth)'}`,
+  borderRadius: '4px',
+  padding: '28px 20px',
+  textAlign: 'center',
+  cursor: 'pointer',
+  background: isDragging ? 'rgba(140,0,0,0.04)' : 'var(--cream)',
+  transition: 'all 0.2s ease',
+  position: 'relative',
+});
+
+const uploadProgressStyle: React.CSSProperties = {
+  position: 'absolute',
+  bottom: 0,
+  left: 0,
+  height: '3px',
+  background: 'var(--amaranto)',
+  transition: 'width 0.3s',
+};
+
+// ── Sub-component: Upload Zone ──────────────────────────────────────────────
+function UploadZone({
+  slug,
+  onUploaded,
+  multiple = false,
+  label,
+  token,
+}: {
+  slug: string;
+  onUploaded: (urls: string[]) => void;
+  multiple?: boolean;
+  label: string;
+  token: string;
+}) {
+  const inputRef = useRef<HTMLInputElement>(null);
+  const [isDragging, setIsDragging] = useState(false);
+  const [uploading, setUploading] = useState(false);
+  const [uploadCount, setUploadCount] = useState(0);
+  const [uploadTotal, setUploadTotal] = useState(0);
+  const [error, setError] = useState<string | null>(null);
+
+  const uploadFiles = async (files: File[]) => {
+    if (!files.length) return;
+    setError(null);
+    setUploading(true);
+    setUploadTotal(files.length);
+    setUploadCount(0);
+
+    const uploaded: string[] = [];
+
+    for (const file of files) {
+      const fd = new FormData();
+      fd.append('file', file);
+      fd.append('slug', slug || 'eventi');
+
+      try {
+        const res = await fetch('/api/admin/upload', {
+          method: 'POST',
+          headers: { Authorization: `Bearer ${token}` },
+          body: fd,
+        });
+        const data = await res.json();
+        if (res.ok && data.url) {
+          uploaded.push(data.url);
+        } else {
+          setError(data.error || 'Errore caricamento');
+        }
+      } catch {
+        setError('Errore di rete durante il caricamento.');
+      }
+
+      setUploadCount((c) => c + 1);
+    }
+
+    setUploading(false);
+    if (uploaded.length) onUploaded(uploaded);
+  };
+
+  const handleDrop = (e: React.DragEvent) => {
+    e.preventDefault();
+    setIsDragging(false);
+    uploadFiles(Array.from(e.dataTransfer.files));
+  };
+
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    uploadFiles(Array.from(e.target.files || []));
+    if (inputRef.current) inputRef.current.value = '';
+  };
+
+  const progress = uploadTotal > 0 ? (uploadCount / uploadTotal) * 100 : 0;
+
+  return (
+    <div
+      style={uploadZoneStyle(isDragging)}
+      onClick={() => !uploading && inputRef.current?.click()}
+      onDragOver={(e) => { e.preventDefault(); setIsDragging(true); }}
+      onDragLeave={() => setIsDragging(false)}
+      onDrop={handleDrop}
+    >
+      <input
+        ref={inputRef}
+        type="file"
+        multiple={multiple}
+        accept="image/jpeg,image/jpg,image/png,image/webp,image/gif,video/mp4,video/quicktime"
+        style={{ display: 'none' }}
+        onChange={handleInputChange}
+      />
+
+      {uploading ? (
+        <div>
+          <div style={{ fontSize: '1.5rem', marginBottom: '8px' }}>⏳</div>
+          <p style={{ fontFamily: 'var(--font-ui)', fontSize: '0.9rem', color: 'var(--earth)' }}>
+            Caricamento {uploadCount}/{uploadTotal}...
+          </p>
+          {/* Progress bar */}
+          <div style={uploadProgressStyle as any} />
+          <div style={{ ...uploadProgressStyle, width: `${progress}%` }} />
+        </div>
+      ) : (
+        <div>
+          <div style={{ fontSize: '2rem', marginBottom: '8px' }}>📁</div>
+          <p style={{ fontFamily: 'var(--font-ui)', fontSize: '0.95rem', color: 'var(--earth)', fontWeight: 600, marginBottom: '4px' }}>
+            {label}
+          </p>
+          <p style={{ fontFamily: 'var(--font-ui)', fontSize: '0.78rem', color: 'var(--earth-muted)' }}>
+            Clicca o trascina qui • JPEG, PNG, WEBP, MP4 • Max 50MB cad.
+          </p>
+        </div>
+      )}
+
+      {error && (
+        <p style={{ color: '#d32f2f', fontSize: '0.82rem', marginTop: '8px' }}>{error}</p>
+      )}
+    </div>
+  );
+}
+
+// ── Sub-component: Gallery Preview ──────────────────────────────────────────
+function GalleryPreview({
+  urls,
+  onRemove,
+  onReorder,
+}: {
+  urls: string[];
+  onRemove: (idx: number) => void;
+  onReorder: (from: number, to: number) => void;
+}) {
+  const [draggingIdx, setDraggingIdx] = useState<number | null>(null);
+  const [overIdx, setOverIdx] = useState<number | null>(null);
+
+  if (!urls.length) return null;
+
+  const isVideo = (u: string) => u.endsWith('.mp4') || u.endsWith('.mov');
+
+  return (
+    <div style={{ display: 'flex', flexWrap: 'wrap', gap: '10px', marginTop: '12px' }}>
+      {urls.map((url, idx) => (
+        <div
+          key={`${url}-${idx}`}
+          draggable
+          onDragStart={() => setDraggingIdx(idx)}
+          onDragOver={(e) => { e.preventDefault(); setOverIdx(idx); }}
+          onDragEnd={() => {
+            if (draggingIdx !== null && overIdx !== null && draggingIdx !== overIdx) {
+              onReorder(draggingIdx, overIdx);
+            }
+            setDraggingIdx(null);
+            setOverIdx(null);
+          }}
+          style={{
+            position: 'relative',
+            width: '90px',
+            height: '90px',
+            border: `2px solid ${overIdx === idx && draggingIdx !== idx ? 'var(--amaranto)' : 'var(--earth)'}`,
+            background: '#000',
+            cursor: 'grab',
+            opacity: draggingIdx === idx ? 0.5 : 1,
+            flexShrink: 0,
+          }}
+          title="Trascina per riordinare"
+        >
+          {isVideo(url) ? (
+            <div style={{ width: '100%', height: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'white', fontSize: '1.8rem' }}>
+              🎬
+            </div>
+          ) : (
+            <Image
+              src={url}
+              alt={`Gallery ${idx + 1}`}
+              fill
+              sizes="90px"
+              style={{ objectFit: 'cover' }}
+            />
+          )}
+          {/* Remove button */}
+          <button
+            onClick={(e) => { e.stopPropagation(); onRemove(idx); }}
+            title="Rimuovi dalla galleria"
+            style={{
+              position: 'absolute',
+              top: '-8px',
+              right: '-8px',
+              width: '22px',
+              height: '22px',
+              borderRadius: '50%',
+              background: '#d32f2f',
+              color: 'white',
+              border: 'none',
+              fontSize: '0.7rem',
+              cursor: 'pointer',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              fontWeight: 700,
+              lineHeight: 1,
+              zIndex: 10,
+            }}
+          >
+            ✕
+          </button>
+          {/* Index badge */}
+          <div style={{
+            position: 'absolute',
+            bottom: '2px',
+            left: '4px',
+            background: 'rgba(0,0,0,0.6)',
+            color: 'white',
+            fontSize: '0.6rem',
+            padding: '1px 4px',
+            fontFamily: 'var(--font-ui)',
+            pointerEvents: 'none',
+          }}>
+            {idx + 1}
+          </div>
+        </div>
+      ))}
+    </div>
+  );
+}
+
+// ── Main Editor Page ─────────────────────────────────────────────────────────
 export default function EventoEditorPage() {
   const params = useParams();
   const id = params.id as string;
@@ -55,16 +298,14 @@ export default function EventoEditorPage() {
   const [saving, setSaving] = useState(false);
   const [dirty, setDirty] = useState(false);
   const [toast, setToast] = useState<{ msg: string; type: string } | null>(null);
-  const [galleriaInput, setGalleriaInput] = useState('');
+  const [galleria, setGalleria] = useState<string[]>([]);
+  const [token, setToken] = useState('');
 
   const getToken = useCallback(() => {
-    const token = localStorage.getItem('admin_token');
-    if (!token) {
-      router.push('/admin/login');
-      return null;
-    }
+    const t = localStorage.getItem('admin_token');
+    if (!t) { router.push('/admin/login'); return null; }
     try {
-      const decoded = JSON.parse(atob(token));
+      const decoded = JSON.parse(atob(t));
       if (decoded.exp < Date.now()) {
         localStorage.removeItem('admin_token');
         router.push('/admin/login');
@@ -75,34 +316,32 @@ export default function EventoEditorPage() {
       router.push('/admin/login');
       return null;
     }
-    return token;
+    return t;
   }, [router]);
 
   useEffect(() => {
+    const t = getToken();
+    if (t) setToken(t);
+  }, [getToken]);
+
+  useEffect(() => {
     const loadEvento = async () => {
-      const token = getToken();
-      if (!token) return;
+      const t = getToken();
+      if (!t) return;
 
       try {
         const res = await fetch('/api/admin/eventi', {
-          headers: { Authorization: `Bearer ${token}` },
+          headers: { Authorization: `Bearer ${t}` },
         });
 
-        if (res.status === 401) {
-          router.push('/admin/login');
-          return;
-        }
+        if (res.status === 401) { router.push('/admin/login'); return; }
 
         const data = await res.json();
         const found = data.eventi?.find((e: any) => e.id === id);
 
         if (found) {
-          setEvento({
-            ...emptyEvento,
-            ...found,
-            galleria_immagini: found.galleria_immagini || [],
-          });
-          setGalleriaInput((found.galleria_immagini || []).join('\n'));
+          setEvento({ ...emptyEvento, ...found, galleria_immagini: found.galleria_immagini || [] });
+          setGalleria(found.galleria_immagini || []);
         } else {
           setToast({ msg: 'Evento non trovato.', type: 'error' });
           setTimeout(() => router.push('/admin/eventi'), 2000);
@@ -131,17 +370,62 @@ export default function EventoEditorPage() {
     setDirty(true);
   };
 
+  // ── Gallery helpers ──
+  const addToGallery = (urls: string[]) => {
+    setGalleria((prev) => [...prev, ...urls]);
+    setDirty(true);
+  };
+
+  const removeFromGallery = (idx: number) => {
+    setGalleria((prev) => prev.filter((_, i) => i !== idx));
+    setDirty(true);
+  };
+
+  const reorderGallery = (from: number, to: number) => {
+    setGalleria((prev) => {
+      const arr = [...prev];
+      const [moved] = arr.splice(from, 1);
+      arr.splice(to, 0, moved);
+      return arr;
+    });
+    setDirty(true);
+  };
+
+  // ── Cover image upload ──
+  const [coverUploading, setCoverUploading] = useState(false);
+  const coverInputRef = useRef<HTMLInputElement>(null);
+
+  const uploadCoverFile = async (file: File) => {
+    if (!file) return;
+    setCoverUploading(true);
+    const fd = new FormData();
+    fd.append('file', file);
+    fd.append('slug', evento?.slug || 'eventi');
+    try {
+      const res = await fetch('/api/admin/upload', {
+        method: 'POST',
+        headers: { Authorization: `Bearer ${token}` },
+        body: fd,
+      });
+      const data = await res.json();
+      if (res.ok && data.url) {
+        update('immagine_copertina', data.url);
+        setToast({ msg: 'Immagine di copertina caricata!', type: 'success' });
+      } else {
+        setToast({ msg: data.error || 'Errore caricamento copertina', type: 'error' });
+      }
+    } catch {
+      setToast({ msg: 'Errore di rete.', type: 'error' });
+    } finally {
+      setCoverUploading(false);
+    }
+  };
+
   const handleSave = async () => {
-    const token = getToken();
-    if (!token || !evento) return;
+    const t = getToken();
+    if (!t || !evento) return;
 
-    // Parse the gallery array from textarea input (one per line)
-    const galleryArray = galleriaInput
-      .split('\n')
-      .map((line) => line.trim())
-      .filter((line) => line.length > 0);
-
-    // Genera slug in base al titolo se vuoto o se è quello temporaneo
+    // Genera slug da titolo se mancante
     let finalSlug = evento.slug;
     if (!finalSlug || finalSlug.startsWith('nuovo-evento-')) {
       finalSlug = evento.titolo
@@ -150,20 +434,13 @@ export default function EventoEditorPage() {
         .replace(/(^-|-$)/g, '');
     }
 
-    const payload = {
-      ...evento,
-      slug: finalSlug,
-      galleria_immagini: galleryArray,
-    };
+    const payload = { ...evento, slug: finalSlug, galleria_immagini: galleria };
 
     setSaving(true);
     try {
       const res = await fetch('/api/admin/eventi', {
         method: 'PUT',
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: `Bearer ${token}`,
-        },
+        headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${t}` },
         body: JSON.stringify(payload),
       });
 
@@ -184,19 +461,14 @@ export default function EventoEditorPage() {
   };
 
   const handleDelete = async () => {
-    if (!confirm('Sei sicuro di voler eliminare questo evento? Questa operazione è irreversibile.')) {
-      return;
-    }
-
-    const token = getToken();
-    if (!token || !evento) return;
+    if (!confirm('Sei sicuro di voler eliminare questo evento? Questa operazione è irreversibile.')) return;
+    const t = getToken();
+    if (!t || !evento) return;
 
     try {
       const res = await fetch(`/api/admin/eventi?id=${id}`, {
         method: 'DELETE',
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
+        headers: { Authorization: `Bearer ${t}` },
       });
 
       if (!res.ok) {
@@ -260,7 +532,7 @@ export default function EventoEditorPage() {
 
       {/* Content */}
       <div className="admin-content admin-editor" style={{ paddingBottom: '100px' }}>
-        
+
         {/* === Sezione Info Base === */}
         <div className="admin-editor-section">
           <h3>Informazioni Base</h3>
@@ -307,7 +579,7 @@ export default function EventoEditorPage() {
 
           <div className="admin-field-row">
             <div className="admin-field">
-              <label>Data dell'Evento (testo libero)</label>
+              <label>Data dell&apos;Evento (testo libero)</label>
               <input
                 value={evento.data}
                 onChange={(e) => update('data', e.target.value)}
@@ -315,7 +587,7 @@ export default function EventoEditorPage() {
               />
             </div>
             <div className="admin-field">
-              <label>Ora dell'Evento (opzionale)</label>
+              <label>Ora dell&apos;Evento (opzionale)</label>
               <input
                 value={evento.ora || ''}
                 onChange={(e) => update('ora', e.target.value)}
@@ -326,7 +598,7 @@ export default function EventoEditorPage() {
 
           <div className="admin-field-row">
             <div className="admin-field">
-              <label>Luogo dell'Evento</label>
+              <label>Luogo dell&apos;Evento</label>
               <input
                 value={evento.luogo}
                 onChange={(e) => update('luogo', e.target.value)}
@@ -366,31 +638,137 @@ export default function EventoEditorPage() {
 
         {/* === Sezione Media === */}
         <div className="admin-editor-section">
-          <h3>Media ed Estetica</h3>
+          <h3>📷 Media ed Estetica</h3>
+
+          {/* Cover image */}
           <div className="admin-field">
-            <label>URL Immagine Copertina (principale)</label>
-            <input
-              value={evento.immagine_copertina || ''}
-              onChange={(e) => update('immagine_copertina', e.target.value)}
-              placeholder="es. /images/eventi/aperitivo-in-vigna/locandina.png"
+            <label>Immagine di Copertina (Header dell&apos;evento)</label>
+
+            {/* Preview copertina */}
+            {evento.immagine_copertina && (
+              <div style={{ position: 'relative', width: '100%', height: '160px', marginBottom: '10px', background: '#000', border: '2px solid var(--earth)', overflow: 'hidden' }}>
+                <Image
+                  src={evento.immagine_copertina}
+                  alt="Copertina"
+                  fill
+                  sizes="(max-width:768px) 100vw, 600px"
+                  style={{ objectFit: 'cover' }}
+                />
+                <button
+                  onClick={() => update('immagine_copertina', '')}
+                  style={{ position: 'absolute', top: '8px', right: '8px', background: '#d32f2f', color: 'white', border: 'none', borderRadius: '50%', width: '28px', height: '28px', cursor: 'pointer', fontSize: '0.9rem', fontWeight: 700 }}
+                >
+                  ✕
+                </button>
+              </div>
+            )}
+
+            {/* Upload zona copertina */}
+            <div
+              style={uploadZoneStyle(false)}
+              onClick={() => !coverUploading && coverInputRef.current?.click()}
+            >
+              <input
+                ref={coverInputRef}
+                type="file"
+                accept="image/jpeg,image/jpg,image/png,image/webp,image/gif"
+                style={{ display: 'none' }}
+                onChange={(e) => { const f = e.target.files?.[0]; if (f) uploadCoverFile(f); }}
+              />
+              {coverUploading ? (
+                <p style={{ fontFamily: 'var(--font-ui)', fontSize: '0.9rem', color: 'var(--earth)' }}>⏳ Caricamento in corso…</p>
+              ) : (
+                <>
+                  <div style={{ fontSize: '1.6rem', marginBottom: '6px' }}>🖼️</div>
+                  <p style={{ fontFamily: 'var(--font-ui)', fontSize: '0.9rem', color: 'var(--earth)', fontWeight: 600, marginBottom: '2px' }}>
+                    {evento.immagine_copertina ? 'Sostituisci copertina dal computer' : 'Carica copertina dal computer'}
+                  </p>
+                  <p style={{ fontFamily: 'var(--font-ui)', fontSize: '0.75rem', color: 'var(--earth-muted)' }}>JPEG, PNG, WEBP • Max 50MB</p>
+                </>
+              )}
+            </div>
+
+            {/* Alternativamente, URL manuale */}
+            <div style={{ marginTop: '8px' }}>
+              <label style={{ fontSize: '0.78rem', color: 'var(--earth-muted)', fontFamily: 'var(--font-ui)' }}>
+                …oppure incolla un URL diretto:
+              </label>
+              <input
+                value={evento.immagine_copertina || ''}
+                onChange={(e) => update('immagine_copertina', e.target.value)}
+                placeholder="es. /images/eventi/aperitivo-in-vigna/locandina.png"
+                style={{ marginTop: '4px' }}
+              />
+            </div>
+          </div>
+
+          {/* Galleria */}
+          <div className="admin-field">
+            <label>
+              Galleria Foto & Video{' '}
+              <span style={{ fontWeight: 400, fontSize: '0.8rem', color: 'var(--earth-muted)' }}>
+                ({galleria.length} file • trascina le miniature per riordinare)
+              </span>
+            </label>
+
+            {/* Preview griglia */}
+            <GalleryPreview
+              urls={galleria}
+              onRemove={removeFromGallery}
+              onReorder={reorderGallery}
             />
+
+            {/* Upload zona galleria */}
+            {token && (
+              <div style={{ marginTop: '12px' }}>
+                <UploadZone
+                  slug={evento.slug}
+                  token={token}
+                  multiple
+                  label="Carica foto e video dal computer (anche più file insieme)"
+                  onUploaded={addToGallery}
+                />
+              </div>
+            )}
+
+            {/* URL manuali */}
+            <details style={{ marginTop: '12px' }}>
+              <summary style={{ fontFamily: 'var(--font-ui)', fontSize: '0.82rem', color: 'var(--earth-muted)', cursor: 'pointer', userSelect: 'none' }}>
+                + Aggiungi URL manuale (avanzato)
+              </summary>
+              <div style={{ marginTop: '8px' }}>
+                <div style={{ display: 'flex', gap: '8px' }}>
+                  <input
+                    id="manual-url-input"
+                    placeholder="/images/eventi/slug/foto.jpg"
+                    style={{ flex: 1 }}
+                    onKeyDown={(e) => {
+                      if (e.key === 'Enter') {
+                        const v = (e.target as HTMLInputElement).value.trim();
+                        if (v) { addToGallery([v]); (e.target as HTMLInputElement).value = ''; }
+                      }
+                    }}
+                  />
+                  <button
+                    className="admin-btn-ghost"
+                    onClick={() => {
+                      const inp = document.getElementById('manual-url-input') as HTMLInputElement;
+                      if (inp?.value.trim()) { addToGallery([inp.value.trim()]); inp.value = ''; }
+                    }}
+                    style={{ whiteSpace: 'nowrap' }}
+                  >
+                    + Aggiungi
+                  </button>
+                </div>
+                <p style={{ fontFamily: 'var(--font-ui)', fontSize: '0.72rem', color: 'var(--earth-muted)', marginTop: '4px' }}>
+                  Premi Invio o clicca + Aggiungi per inserire un URL nella galleria
+                </p>
+              </div>
+            </details>
           </div>
 
           <div className="admin-field">
-            <label>URL Galleria Immagini (Inserisci un URL per riga)</label>
-            <textarea
-              value={galleriaInput}
-              onChange={(e) => {
-                setGalleriaInput(e.target.value);
-                setDirty(true);
-              }}
-              rows={6}
-              placeholder="es.&#10;/images/eventi/aperitivo-in-vigna/whatsapp_image_2026-06-14_at_22.16.05.jpeg"
-            />
-          </div>
-
-          <div className="admin-field">
-            <label>URL Video dell'Evento (opzionale mp4 caricato o YouTube embed)</label>
+            <label>URL Video dell&apos;Evento (opzionale mp4 caricato o YouTube embed)</label>
             <input
               value={evento.video_url || ''}
               onChange={(e) => update('video_url', e.target.value)}
@@ -416,11 +794,11 @@ export default function EventoEditorPage() {
               value={evento.promozione_desc || ''}
               onChange={(e) => update('promozione_desc', e.target.value)}
               rows={3}
-              placeholder="Dettaglia la promo legata all'evento (es. Espositore in legno omaggio per ordini di pasta...)"
+              placeholder="Dettaglia la promo legata all'evento..."
             />
           </div>
           <div className="admin-field">
-            <label>Link Promozione (opzionale - se diverso da WhatsApp)</label>
+            <label>Link Promozione (lascia vuoto per nascondere il pulsante)</label>
             <input
               value={evento.promozione_link || ''}
               onChange={(e) => update('promozione_link', e.target.value)}
