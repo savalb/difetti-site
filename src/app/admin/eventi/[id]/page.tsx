@@ -734,13 +734,13 @@ export default function EventoEditorPage() {
             {/* URL manuali */}
             <details style={{ marginTop: '12px' }}>
               <summary style={{ fontFamily: 'var(--font-ui)', fontSize: '0.82rem', color: 'var(--earth-muted)', cursor: 'pointer', userSelect: 'none' }}>
-                + Aggiungi URL manuale (avanzato)
+                + Aggiungi URL manuale (avanzato, es. link da Postimages)
               </summary>
               <div style={{ marginTop: '8px' }}>
                 <div style={{ display: 'flex', gap: '8px' }}>
                   <input
                     id="manual-url-input"
-                    placeholder="/images/eventi/slug/foto.jpg"
+                    placeholder="https://i.postimg.cc/..."
                     style={{ flex: 1 }}
                     onKeyDown={(e) => {
                       if (e.key === 'Enter') {
@@ -761,7 +761,7 @@ export default function EventoEditorPage() {
                   </button>
                 </div>
                 <p style={{ fontFamily: 'var(--font-ui)', fontSize: '0.72rem', color: 'var(--earth-muted)', marginTop: '4px' }}>
-                  Premi Invio o clicca + Aggiungi per inserire un URL nella galleria
+                  Incolla il link diretto dell&apos;immagine (che termina con .jpg o .png) e premi Invio o clicca + Aggiungi
                 </p>
               </div>
             </details>
