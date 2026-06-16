@@ -1,10 +1,10 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
-import Image from 'next/image';
 import { notFound } from 'next/navigation';
 import { supabase } from '@/lib/supabaseClient';
 import { BRAND } from '@/lib/constants';
 import { FALLBACK_EVENTI } from '../page';
+import { PolaroidGallery } from '@/components/eventi/PolaroidGallery';
 import styles from './page.module.css';
 
 interface PageProps {
@@ -40,12 +40,11 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   }
 
   return {
-    title: `${evento.titolo} — Eventi | Difetti Eccellenze Campane`,
+    title: `${evento.titolo} — Eventi B2B | Difetti Eccellenze Campane`,
     description: evento.descrizione || `Dettagli dell'evento ${evento.titolo} organizzato da Difetti Eccellenze Campane.`,
   };
 }
 
-// Forza il rendering dinamico o revalidation per riflettere le modifiche dell'admin
 export const revalidate = 10;
 
 export default async function EventoDetailPage({ params }: PageProps) {
@@ -82,11 +81,8 @@ export default async function EventoDetailPage({ params }: PageProps) {
     .split('\n')
     .filter((p: string) => p.trim().length > 0);
 
-  // Costruisce la galleria immagini unendo immagine copertina ed eventuali immagini aggiuntive
+  // Costruisce la galleria immagini
   const galleria: string[] = [];
-  if (evento.immagine_copertina) {
-    galleria.push(evento.immagine_copertina);
-  }
   if (evento.galleria_immagini && Array.isArray(evento.galleria_immagini)) {
     evento.galleria_immagini.forEach((img: string) => {
       if (img && !galleria.includes(img)) {
@@ -95,15 +91,22 @@ export default async function EventoDetailPage({ params }: PageProps) {
     });
   }
 
-  // Testo per WhatsApp
-  const waText = evento.whatsapp_custom_text || `Ciao Antonio, vorrei maggiori informazioni sull'evento "${evento.titolo}" svolto a ${evento.luogo}.`;
+  // Bottone e CTA WhatsApp per gli imprenditori (Messaggio opzione B + Testo pulsante opzione A)
+  const waText = evento.whatsapp_custom_text || `Ciao Antonio, sono un ristoratore. Vorrei sapere come funziona l'organizzazione degli eventi Difetti e ricevere informazioni sul listino prodotti B2B.`;
   const waLink = `${BRAND.whatsapp}?text=${encodeURIComponent(waText)}`;
+
+  // Immagine di copertina per l'header full-bleed
+  const headerBg = evento.immagine_copertina || '/images/eventi/aperitivo-in-vigna/ai_mockup_vigna_irpinia.png';
 
   return (
     <main className={styles.main}>
-      {/* Hero Header */}
-      <section className={styles.hero}>
-        <div className="container">
+      {/* Hero Header Full-Bleed con Sfondo Immagine */}
+      <section 
+        className={styles.hero}
+        style={{ backgroundImage: `url(${headerBg})` }}
+      >
+        <div className={styles.heroOverlay} />
+        <div className="container" style={{ position: 'relative', zIndex: 2 }}>
           <div className={styles.breadcrumbs}>
             <Link href="/">Home</Link> &gt; <Link href="/eventi">Eventi</Link> &gt; <span>{evento.titolo}</span>
           </div>
@@ -121,9 +124,6 @@ export default async function EventoDetailPage({ params }: PageProps) {
               <div className={styles.metaItem}>
                 <span>📍</span> <strong>{evento.luogo}</strong> {evento.indirizzo && `(${evento.indirizzo})`}
               </div>
-              <div className={styles.metaItem}>
-                <span>🏷️</span> <span style={{ textTransform: 'uppercase', fontSize: '0.8rem', background: 'var(--amaranto)', color: 'var(--cream)', padding: '2px 8px', fontWeight: 700 }}>{evento.stato}</span>
-              </div>
             </div>
           </div>
         </div>
@@ -134,50 +134,50 @@ export default async function EventoDetailPage({ params }: PageProps) {
         <div className="container">
           <div className={styles.layoutGrid}>
             
-            {/* Left Column: Description, Video, Gallery */}
+            {/* Left Column: Description, Stats, and Polaroid Album */}
             <div className={styles.mainContent}>
+              
+              {/* Copy Storytelling B2B */}
               <div className={styles.descriptionSection}>
                 {paragrafi.map((p: string, idx: number) => (
                   <p key={idx}>{p}</p>
                 ))}
               </div>
 
-              {/* Optimized Video Container */}
-              {evento.video_url && (
-                <div className={styles.videoSection}>
-                  <h3 className={styles.galleryTitle}>Riprese Video dell&apos;Esperienza</h3>
-                  <div className={styles.videoWrapper}>
-                    <video
-                      src={evento.video_url}
-                      className={styles.videoElement}
-                      controls
-                      preload="none"
-                      playsInline
-                      muted
-                      poster={evento.immagine_copertina || undefined}
-                    />
+              {/* Sezione Statistiche Consumo & Indotto (Mix Opzione A e B) */}
+              <div>
+                <h3 style={{ fontFamily: 'var(--font-title)', fontSize: '1.75rem', color: 'var(--earth)', marginBottom: '8px' }}>
+                  I Numeri e l&apos;Indotto dell&apos;Evento
+                </h3>
+                <p style={{ fontFamily: 'var(--font-body)', fontSize: '1.05rem', color: 'var(--earth-muted)', lineHeight: '1.6', marginBottom: '16px' }}>
+                  Un evento a firma Difetti attira appassionati del vero gusto artigianale e genera un consumo tangibile fin da subito. Ecco l&apos;indotto generato sul posto in poche ore per il locale ospitante:
+                </p>
+                
+                <div className={styles.statsGrid}>
+                  <div className={styles.statCard}>
+                    <div className={styles.statVal}>30+</div>
+                    <div className={styles.statLbl}>Partecipanti</div>
+                  </div>
+                  <div className={styles.statCard}>
+                    <div className={styles.statVal}>30</div>
+                    <div className={styles.statLbl}>Bottiglie Fiano</div>
+                  </div>
+                  <div className={styles.statCard}>
+                    <div className={styles.statVal}>2 kg</div>
+                    <div className={styles.statLbl}>Alici Cetara</div>
+                  </div>
+                  <div className={styles.statCard}>
+                    <div className={styles.statVal}>4 kg</div>
+                    <div className={styles.statLbl}>Pomodorini</div>
                   </div>
                 </div>
-              )}
+              </div>
 
-              {/* Photo Gallery Grid */}
+              {/* Polaroid Single Album Cover -> opens modal Lightbox */}
               {galleria.length > 0 && (
                 <div className={styles.gallerySection}>
-                  <h3 className={styles.galleryTitle}>Galleria Foto ({galleria.length} immagini)</h3>
-                  <div className={styles.galleryGrid}>
-                    {galleria.map((img: string, idx: number) => (
-                      <div key={idx} className={styles.galleryItem}>
-                        <Image
-                          src={img}
-                          alt={`Foto ${idx + 1} per l'evento ${evento!.titolo}`}
-                          fill
-                          sizes="(max-width: 768px) 100vw, 33vw"
-                          className={styles.galleryImg}
-                          priority={idx === 0}
-                        />
-                      </div>
-                    ))}
-                  </div>
+                  <h3 className={styles.galleryTitle}>Album Fotografico</h3>
+                  <PolaroidGallery immagini={galleria} titolo={evento.titolo} />
                 </div>
               )}
             </div>
@@ -186,39 +186,47 @@ export default async function EventoDetailPage({ params }: PageProps) {
             <div className={styles.sidebar}>
               <div className={styles.stickyBox}>
                 
-                {/* Promo Card if promotion details exist */}
+                {/* Gin Sintony Promo Card */}
                 {evento.promozione_titolo && (
                   <div className={styles.promoCard}>
-                    <span className={styles.promoTag}>Offerta Riservata HoReCa</span>
+                    <span className={styles.promoTag}>Campagna VIP Riservata</span>
                     <h4 className={styles.promoTitle}>{evento.promozione_titolo}</h4>
                     <p className={styles.promoDesc}>{evento.promozione_desc}</p>
                     
-                    <a
-                      href={evento.promozione_link || waLink}
-                      target={evento.promozione_link ? undefined : '_blank'}
-                      rel={evento.promozione_link ? undefined : 'noopener noreferrer'}
+                    <Link
+                      href={evento.promozione_link || '/vip'}
                       className="btn btn-primary"
-                      style={{ width: '100%', textAlign: 'center', display: 'block', border: '2px solid var(--cream)', boxShadow: '3px 3px 0 var(--cream)', background: 'var(--cream)', color: 'var(--earth)' }}
+                      style={{ 
+                        width: '100%', 
+                        textAlign: 'center', 
+                        display: 'block', 
+                        border: '2px solid var(--cream)', 
+                        boxShadow: '3px 3px 0 var(--cream)', 
+                        background: 'var(--cream)', 
+                        color: 'var(--earth)',
+                        fontWeight: 600,
+                        textDecoration: 'none'
+                      }}
                     >
-                      {evento.promozione_link ? 'Vedi Offerta' : 'Richiedi Promo su WhatsApp'}
-                    </a>
+                      🎁 Richiedi Buono Sconto Gin
+                    </Link>
                   </div>
                 )}
 
-                {/* Direct Action Card */}
+                {/* Direct Action B2B Card */}
                 <div className="upcomingCard" style={{ background: 'var(--cream-dark)', border: '2px solid var(--earth)', padding: 'var(--space-md)', boxShadow: '4px 4px 0 var(--earth)' }}>
-                  <h4 style={{ fontFamily: 'var(--font-title)', fontSize: '1.25rem', marginBottom: '8px', color: 'var(--earth)' }}>Ospita questo Format</h4>
+                  <h4 style={{ fontFamily: 'var(--font-title)', fontSize: '1.25rem', marginBottom: '8px', color: 'var(--earth)' }}>Proponi una serata</h4>
                   <p style={{ fontFamily: 'var(--font-body)', fontSize: '0.9rem', lineHeight: '1.5', color: 'var(--earth-muted)', marginBottom: '16px' }}>
-                    Ti piace questo tipo di degustazione? Possiamo organizzarne una a quattro mani nel tuo locale per stupire i tuoi clienti.
+                    Vuoi portare la trasparenza del vero km zero nel tuo locale, generare passaparola ed aumentare gli scontrini con una serata a tema?
                   </p>
                   <a
                     href={waLink}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="btn btn-whatsapp"
-                    style={{ display: 'block', textAlign: 'center' }}
+                    style={{ display: 'block', textAlign: 'center', fontWeight: 600 }}
                   >
-                    💬 Scrivici su WhatsApp
+                    👉 Proponi un Evento nel tuo Locale
                   </a>
                 </div>
 
