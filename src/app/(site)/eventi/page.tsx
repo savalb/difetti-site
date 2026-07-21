@@ -38,18 +38,18 @@ In sole quattro ore, la sinergia tra prodotti d'eccellenza, grande musica e acco
 - 7 Bottiglie di Limoncello artigianale (oltre 5 Litri serviti)
 
 Un caso studio concreto di come il "KM Vero" e la riprova sociale possano creare valore per i locali partner, attrarre pubblico entusiasta e trasformare il cibo in un'esperienza collettiva indimenticabile.`,
-    immagine_copertina: '/images/eventi/serata-in-vigna-piscina/WhatsApp Image 2026-07-18 at 02.13.22 (2).jpeg',
+    immagine_copertina: '/images/eventi/serata-in-vigna-piscina/WhatsApp Image 2026-07-18 at 02.13.22 (2).webp',
     galleria_immagini: [
-      '/images/eventi/serata-in-vigna-piscina/WhatsApp Image 2026-07-18 at 02.13.22 (2).jpeg',
-      '/images/eventi/serata-in-vigna-piscina/WhatsApp Image 2026-07-18 at 02.13.05.jpeg',
-      '/images/eventi/serata-in-vigna-piscina/WhatsApp Image 2026-07-18 at 02.13.25 (1).jpeg',
-      '/images/eventi/serata-in-vigna-piscina/WhatsApp Image 2026-07-18 at 02.13.26 (3).jpeg',
-      '/images/eventi/serata-in-vigna-piscina/WhatsApp Image 2026-07-18 at 02.13.40 (2).jpeg',
-      '/images/eventi/serata-in-vigna-piscina/WhatsApp Image 2026-07-18 at 02.13.47 (1).jpeg',
-      '/images/eventi/serata-in-vigna-piscina/WhatsApp Image 2026-07-18 at 02.12.56 (1).jpeg',
-      '/images/eventi/serata-in-vigna-piscina/WhatsApp Image 2026-07-18 at 12.05.31.jpeg',
-      '/images/eventi/serata-in-vigna-piscina/WhatsApp Image 2026-07-17 at 18.35.16 (1).jpeg',
-      '/images/eventi/serata-in-vigna-piscina/WhatsApp Image 2026-07-19 at 19.59.22 (1).jpeg'
+      '/images/eventi/serata-in-vigna-piscina/WhatsApp Image 2026-07-18 at 02.13.22 (2).webp',
+      '/images/eventi/serata-in-vigna-piscina/WhatsApp Image 2026-07-18 at 02.13.05.webp',
+      '/images/eventi/serata-in-vigna-piscina/WhatsApp Image 2026-07-18 at 02.13.25 (1).webp',
+      '/images/eventi/serata-in-vigna-piscina/WhatsApp Image 2026-07-18 at 02.13.26 (3).webp',
+      '/images/eventi/serata-in-vigna-piscina/WhatsApp Image 2026-07-18 at 02.13.40 (2).webp',
+      '/images/eventi/serata-in-vigna-piscina/WhatsApp Image 2026-07-18 at 02.13.47 (1).webp',
+      '/images/eventi/serata-in-vigna-piscina/WhatsApp Image 2026-07-18 at 02.12.56 (1).webp',
+      '/images/eventi/serata-in-vigna-piscina/WhatsApp Image 2026-07-18 at 12.05.31.webp',
+      '/images/eventi/serata-in-vigna-piscina/WhatsApp Image 2026-07-17 at 18.35.16 (1).webp',
+      '/images/eventi/serata-in-vigna-piscina/WhatsApp Image 2026-07-19 at 19.59.22 (1).webp'
     ],
     stats: [
       { val: '65', lbl: 'Ospiti (SOLD OUT)' },
@@ -61,7 +61,7 @@ Un caso studio concreto di come il "KM Vero" e la riprova sociale possano creare
       { val: '7 (5L)', lbl: 'Bottiglie Limoncello' },
       { val: '4,3 kg', lbl: 'Pomodorini Cotti a Sole' }
     ],
-    video_url: '/videos/recap_mini_sagra_17_luglio.mp4',
+    video_url: '',
     promozione_titolo: 'Vuoi ospitare questo format nel tuo locale?',
     promozione_desc: 'Porta le degustazioni esperienziali Difetti nella tua struttura. Organizziamo serate a tema complete di materie prime, branding e supporto marketing.',
     promozione_link: '',
