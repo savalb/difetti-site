@@ -144,39 +144,101 @@ export default async function EventoDetailPage({ params }: PageProps) {
                 ))}
               </div>
 
-              {/* Sezione Statistiche Consumo & Indotto (Mix Opzione A e B) */}
-              <div>
-                <h3 style={{ fontFamily: 'var(--font-title)', fontSize: '1.75rem', color: 'var(--earth)', marginBottom: '8px' }}>
-                  I Numeri e l&apos;Indotto dell&apos;Evento
-                </h3>
-                <p style={{ fontFamily: 'var(--font-body)', fontSize: '1.05rem', color: 'var(--earth-muted)', lineHeight: '1.6', marginBottom: '16px' }}>
-                  Un evento a firma Difetti attira appassionati del vero gusto artigianale e genera un consumo tangibile fin da subito. Ecco l&apos;indotto generato sul posto in poche ore per il locale ospitante:
-                </p>
-                
-                <div className={styles.statsGrid}>
-                  <div className={styles.statCard}>
-                    <div className={styles.statVal}>30+</div>
-                    <div className={styles.statLbl}>Partecipanti</div>
-                  </div>
-                  <div className={styles.statCard}>
-                    <div className={styles.statVal}>30</div>
-                    <div className={styles.statLbl}>Bottiglie Fiano</div>
-                  </div>
-                  <div className={styles.statCard}>
-                    <div className={styles.statVal}>2 kg</div>
-                    <div className={styles.statLbl}>Alici Cetara</div>
-                  </div>
-                  <div className={styles.statCard}>
-                    <div className={styles.statVal}>4 kg</div>
-                    <div className={styles.statLbl}>Pomodorini</div>
+              {/* Sezione Video Reel Recap (se presente) */}
+              {evento.video_url && (
+                <div style={{ marginBottom: '2.5rem' }}>
+                  <h3 style={{ fontFamily: 'var(--font-title)', fontSize: '1.75rem', color: 'var(--earth)', marginBottom: '12px' }}>
+                    🎬 Video Recap dell&apos;Evento
+                  </h3>
+                  <div style={{ position: 'relative', borderRadius: '16px', overflow: 'hidden', border: '3px solid var(--earth)', boxShadow: '6px 6px 0 var(--earth)', maxWidth: '440px', margin: '0 auto', background: '#000' }}>
+                    <video
+                      src={evento.video_url}
+                      controls
+                      playsInline
+                      preload="metadata"
+                      poster={evento.immagine_copertina}
+                      style={{ width: '100%', height: 'auto', display: 'block' }}
+                    />
                   </div>
                 </div>
-              </div>
+              )}
+
+              {/* Sezione Statistiche Consumo (per eventi passati) OPPURE Programma & Highlights (per eventi futuri) */}
+              {evento.stato === 'passato' ? (
+                <div style={{ marginBottom: '2.5rem' }}>
+                  <h3 style={{ fontFamily: 'var(--font-title)', fontSize: '1.75rem', color: 'var(--earth)', marginBottom: '8px' }}>
+                    I Numeri e l&apos;Indotto dell&apos;Evento
+                  </h3>
+                  <p style={{ fontFamily: 'var(--font-body)', fontSize: '1.05rem', color: 'var(--earth-muted)', lineHeight: '1.6', marginBottom: '16px' }}>
+                    Un evento a firma Difetti attira appassionati del vero gusto artigianale e genera un consumo tangibile fin da subito. Ecco l&apos;indotto generato sul posto in poche ore per la struttura ospitante:
+                  </p>
+                  
+                  <div className={styles.statsGrid}>
+                    {evento.stats && Array.isArray(evento.stats) ? (
+                      evento.stats.map((s: { val: string; lbl: string }, idx: number) => (
+                        <div key={idx} className={styles.statCard}>
+                          <div className={styles.statVal}>{s.val}</div>
+                          <div className={styles.statLbl}>{s.lbl}</div>
+                        </div>
+                      ))
+                    ) : (
+                      <>
+                        <div className={styles.statCard}>
+                          <div className={styles.statVal}>30+</div>
+                          <div className={styles.statLbl}>Partecipanti</div>
+                        </div>
+                        <div className={styles.statCard}>
+                          <div className={styles.statVal}>30</div>
+                          <div className={styles.statLbl}>Bottiglie Fiano</div>
+                        </div>
+                        <div className={styles.statCard}>
+                          <div className={styles.statVal}>2 kg</div>
+                          <div className={styles.statLbl}>Alici Cetara</div>
+                        </div>
+                        <div className={styles.statCard}>
+                          <div className={styles.statVal}>4 kg</div>
+                          <div className={styles.statLbl}>Pomodorini</div>
+                        </div>
+                      </>
+                    )}
+                  </div>
+                </div>
+              ) : (
+                <div style={{ marginBottom: '2.5rem' }}>
+                  <h3 style={{ fontFamily: 'var(--font-title)', fontSize: '1.75rem', color: 'var(--earth)', marginBottom: '8px' }}>
+                    Programma &amp; Highlights della Serata
+                  </h3>
+                  <p style={{ fontFamily: 'var(--font-body)', fontSize: '1.05rem', color: 'var(--earth-muted)', lineHeight: '1.6', marginBottom: '16px' }}>
+                    Un&apos;esperienza immersiva tra il verde della vigna irpina e l&apos;atmosfera esclusiva di bordo piscina. Ecco cosa ti aspetta:
+                  </p>
+                  
+                  <div className={styles.statsGrid}>
+                    <div className={styles.statCard}>
+                      <div className={styles.statVal}>19:00</div>
+                      <div className={styles.statLbl}>Start &amp; Degustazione Subito</div>
+                    </div>
+                    <div className={styles.statCard}>
+                      <div className={styles.statVal}>Vini</div>
+                      <div className={styles.statLbl}>Selezione del Territorio</div>
+                    </div>
+                    <div className={styles.statCard}>
+                      <div className={styles.statVal}>LIVE</div>
+                      <div className={styles.statLbl}>Giuliano De Matteis</div>
+                    </div>
+                    <div className={styles.statCard}>
+                      <div className={styles.statVal}>Piscina</div>
+                      <div className={styles.statLbl}>Atmosfera in Vigna</div>
+                    </div>
+                  </div>
+                </div>
+              )}
 
               {/* Polaroid Single Album Cover -> opens modal Lightbox */}
               {galleria.length > 0 && (
                 <div className={styles.gallerySection}>
-                  <h3 className={styles.galleryTitle}>Album Fotografico</h3>
+                  <h3 className={styles.galleryTitle}>
+                    {evento.stato === 'futuro' ? 'Foto & Atmospere della Serata' : 'Album Fotografico'}
+                  </h3>
                   <PolaroidGallery immagini={galleria} titolo={evento.titolo} />
                 </div>
               )}
@@ -186,10 +248,12 @@ export default async function EventoDetailPage({ params }: PageProps) {
             <div className={styles.sidebar}>
               <div className={styles.stickyBox}>
                 
-                {/* Gin Sintony Promo Card */}
+                {/* Promo Card */}
                 {evento.promozione_titolo && (
                   <div className={styles.promoCard}>
-                    <span className={styles.promoTag}>Informazioni Evento</span>
+                    <span className={styles.promoTag}>
+                      {evento.stato === 'futuro' ? 'Info Prenotazioni' : 'Informazioni Evento'}
+                    </span>
                     <h4 className={styles.promoTitle}>{evento.promozione_titolo}</h4>
                     <p className={styles.promoDesc}>{evento.promozione_desc}</p>
                     
@@ -215,11 +279,15 @@ export default async function EventoDetailPage({ params }: PageProps) {
                   </div>
                 )}
 
-                {/* Direct Action B2B Card */}
+                {/* Direct Action Card (WhatsApp) */}
                 <div className="upcomingCard" style={{ background: 'var(--cream-dark)', border: '2px solid var(--earth)', padding: 'var(--space-md)', boxShadow: '4px 4px 0 var(--earth)' }}>
-                  <h4 style={{ fontFamily: 'var(--font-title)', fontSize: '1.25rem', marginBottom: '8px', color: 'var(--earth)' }}>Proponi una serata</h4>
+                  <h4 style={{ fontFamily: 'var(--font-title)', fontSize: '1.25rem', marginBottom: '8px', color: 'var(--earth)' }}>
+                    {evento.stato === 'futuro' ? 'Riserva il tuo Posto' : 'Proponi una serata'}
+                  </h4>
                   <p style={{ fontFamily: 'var(--font-body)', fontSize: '0.9rem', lineHeight: '1.5', color: 'var(--earth-muted)', marginBottom: '16px' }}>
-                    Vuoi portare la trasparenza del vero km zero nel tuo locale, generare passaparola ed aumentare gli scontrini con una serata a tema?
+                    {evento.stato === 'futuro'
+                      ? 'I posti a bordo piscina sono limitati per garantire la massima cura. Riserva subito il tuo tavolo chiedendo disponibilità a Antonio De Matteis.'
+                      : 'Vuoi portare la trasparenza del vero km zero nel tuo locale, generare passaparola ed aumentare gli scontrini con una serata a tema?'}
                   </p>
                   <a
                     href={waLink}
@@ -228,7 +296,7 @@ export default async function EventoDetailPage({ params }: PageProps) {
                     className="btn btn-whatsapp"
                     style={{ display: 'block', textAlign: 'center', fontWeight: 600 }}
                   >
-                    👉 Proponi un Evento nel tuo Locale
+                    {evento.stato === 'futuro' ? '📲 Prenota Ora su WhatsApp' : '👉 Proponi un Evento nel tuo Locale'}
                   </a>
                 </div>
 

@@ -1,9 +1,10 @@
 'use client';
 
 import { useState } from 'react';
-import { useRouter } from 'next/navigation';
+import Link from 'next/link';
 import Image from 'next/image';
 import { BRAND } from '@/lib/constants';
+import { track } from '@vercel/analytics';
 import styles from './EventiClient.module.css';
 
 interface Evento {
@@ -24,12 +25,13 @@ interface EventiClientProps {
 }
 
 export function EventiClient({ initialEventi }: EventiClientProps) {
-  const [activeTab, setActiveTab] = useState<'futuri' | 'passati'>('futuri');
-  const router = useRouter();
-
   // Dividiamo gli eventi in base allo stato
   const eventiFuturi = initialEventi.filter(e => e.stato === 'futuro');
   const eventiPassati = initialEventi.filter(e => e.stato === 'passato');
+
+  const [activeTab, setActiveTab] = useState<'futuri' | 'passati'>(
+    eventiFuturi.length > 0 ? 'futuri' : 'passati'
+  );
 
   return (
     <main className={styles.main}>
@@ -84,19 +86,20 @@ export function EventiClient({ initialEventi }: EventiClientProps) {
                     <p className={styles.upcomingDesc}>{e.descrizione}</p>
                     
                     <div style={{ display: 'flex', gap: '12px', flexWrap: 'wrap', marginTop: '1rem' }}>
-                      <button
-                        onClick={() => router.push(`/eventi/${e.slug}`)}
+                      <Link
+                        href={`/eventi/${e.slug || e.id}`}
                         className="btn btn-primary"
-                        style={{ border: '2px solid var(--earth)', cursor: 'pointer' }}
+                        style={{ border: '2px solid var(--earth)', cursor: 'pointer', textDecoration: 'none', display: 'inline-block' }}
                       >
                         Leggi Dettagli
-                      </button>
+                      </Link>
                       <a
                         href={`${BRAND.whatsapp}?text=${encodeURIComponent(`Ciao Antonio, vorrei richiedere informazioni per l'evento "${e.titolo}" a ${e.luogo}.`)}`}
                         target="_blank"
                         rel="noopener noreferrer"
                         className="btn btn-whatsapp"
                         id={`eventi-wa-${e.id}`}
+                        onClick={() => track('whatsapp_click', { location: 'eventi-futuri', eventId: e.id })}
                       >
                         Richiedi Invito / Info (WhatsApp)
                       </a>
@@ -121,10 +124,11 @@ export function EventiClient({ initialEventi }: EventiClientProps) {
 
               <div className={styles.gridPassati}>
                 {eventiPassati.map((e) => (
-                  <div 
+                  <Link 
                     key={e.id} 
+                    href={`/eventi/${e.slug || e.id}`}
                     className={styles.passatoCard}
-                    onClick={() => router.push(`/eventi/${e.slug}`)}
+                    style={{ textDecoration: 'none', color: 'inherit', display: 'block' }}
                   >
                     {(e.immagine_copertina || (e.galleria_immagini && e.galleria_immagini.length > 0)) && (
                       <div className={styles.passatoThumbWrapper}>
@@ -146,7 +150,7 @@ export function EventiClient({ initialEventi }: EventiClientProps) {
                       <span className={styles.passatoLuogo}>📍 {e.luogo}</span>
                       <p className={styles.passatoDesc}>{e.descrizione}</p>
                     </div>
-                  </div>
+                  </Link>
                 ))}
                 
                 {eventiPassati.length === 0 && (
@@ -174,6 +178,7 @@ export function EventiClient({ initialEventi }: EventiClientProps) {
             rel="noopener noreferrer"
             className="btn btn-whatsapp"
             id="eventi-wa-bottom"
+            onClick={() => track('whatsapp_click', { location: 'eventi-bottom' })}
           >
             Scrivici su WhatsApp
           </a>

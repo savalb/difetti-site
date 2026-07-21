@@ -11,6 +11,64 @@ export const revalidate = 10; // Ricarica ogni 10 secondi per aggiornamenti rapi
 
 export const FALLBACK_EVENTI = [
   {
+    id: 'serata-vigna-piscina',
+    slug: 'serata-in-vigna-piscina',
+    titolo: 'Mini-Sagra in Vigna & Piscina',
+    sotto_occhiello: 'Resoconto Evento & Case Study Sold Out',
+    data: '17 Luglio 2026',
+    ora: '19:00',
+    luogo: 'Montefalcione (AV)',
+    indirizzo: 'Agriturismo Macchia dei Briganti, Contrada Fortuna 13',
+    descrizione: 'Un successo da 65 ospiti (SOLD OUT). Una serata tra i vigneti e il bordo piscina di Macchia dei Briganti con eccellenze Difetti, musica dal vivo di Giuliano De Matteis e banchetto IncisioniLive.',
+    descrizione_estesa: `Venerdì 17 Luglio 2026, l'Agriturismo Macchia dei Briganti a Montefalcione (AV) ha ospitato l'edizione serale della "Mini-Sagra in Vigna & Piscina" firmata Difetti Eccellenze Campane.
+
+L'evento ha registrato un entusiastico SOLD OUT con 65 partecipanti a pochi giorni dal lancio della comunicazione broadcast.
+
+Immersi nel suggestivo scenario tra i filari della vigna e l'atmosfera a bordo piscina illuminata al tramonto, gli ospiti hanno degustato un menù speciale ideato per esaltare le materie prime del territorio in abbinamento ai vini d'eccellenza.
+
+La serata è stata animata dalla musica dal vivo del cantautore Giuliano De Matteis, con un repertorio festoso e conviviale, e arricchita dalla presenza dello stand di IncisioniLive (LC3D Lab), che ha realizzato sul momento incisioni al laser personalizzate su portachiavi e accessori per i partecipanti.
+
+In sole quattro ore, la sinergia tra prodotti d'eccellenza, grande musica e accoglienza calorosa ha generato un consumo reale e tangibile:
+- 63 Tegamini di pane con fagioli, cotechino e coteca
+- 60+ Bruschette croccanti con Caciocavallo fuso
+- 46 Pinse Romane con pomodorini freschi e bocconcini
+- 43 Porzioni di trofie artigianali con zucchine e speck
+- 4,3 kg di Pomodorini cotti al sole firmati Difetti
+- 60 Bottiglie di vino locale servite in degustazione (Fiano & Aglianico)
+- 7 Bottiglie di Limoncello artigianale (oltre 5 Litri serviti)
+
+Un caso studio concreto di come il "KM Vero" e la riprova sociale possano creare valore per i locali partner, attrarre pubblico entusiasta e trasformare il cibo in un'esperienza collettiva indimenticabile.`,
+    immagine_copertina: '/images/eventi/serata-in-vigna-piscina/WhatsApp Image 2026-07-18 at 02.13.22 (2).jpeg',
+    galleria_immagini: [
+      '/images/eventi/serata-in-vigna-piscina/WhatsApp Image 2026-07-18 at 02.13.22 (2).jpeg',
+      '/images/eventi/serata-in-vigna-piscina/WhatsApp Image 2026-07-18 at 02.13.05.jpeg',
+      '/images/eventi/serata-in-vigna-piscina/WhatsApp Image 2026-07-18 at 02.13.25 (1).jpeg',
+      '/images/eventi/serata-in-vigna-piscina/WhatsApp Image 2026-07-18 at 02.13.26 (3).jpeg',
+      '/images/eventi/serata-in-vigna-piscina/WhatsApp Image 2026-07-18 at 02.13.40 (2).jpeg',
+      '/images/eventi/serata-in-vigna-piscina/WhatsApp Image 2026-07-18 at 02.13.47 (1).jpeg',
+      '/images/eventi/serata-in-vigna-piscina/WhatsApp Image 2026-07-18 at 02.12.56 (1).jpeg',
+      '/images/eventi/serata-in-vigna-piscina/WhatsApp Image 2026-07-18 at 12.05.31.jpeg',
+      '/images/eventi/serata-in-vigna-piscina/WhatsApp Image 2026-07-17 at 18.35.16 (1).jpeg',
+      '/images/eventi/serata-in-vigna-piscina/WhatsApp Image 2026-07-19 at 19.59.22 (1).jpeg'
+    ],
+    stats: [
+      { val: '65', lbl: 'Ospiti (SOLD OUT)' },
+      { val: '63', lbl: 'Tegamini di Pane' },
+      { val: '60+', lbl: 'Bruschette Caciocavallo' },
+      { val: '46', lbl: 'Pinse Romane' },
+      { val: '43', lbl: 'Trofie Zucchine/Speck' },
+      { val: '60', lbl: 'Bottiglie di Vino' },
+      { val: '7 (5L)', lbl: 'Bottiglie Limoncello' },
+      { val: '4,3 kg', lbl: 'Pomodorini Cotti a Sole' }
+    ],
+    video_url: '/videos/recap_mini_sagra_17_luglio.mp4',
+    promozione_titolo: 'Vuoi ospitare questo format nel tuo locale?',
+    promozione_desc: 'Porta le degustazioni esperienziali Difetti nella tua struttura. Organizziamo serate a tema complete di materie prime, branding e supporto marketing.',
+    promozione_link: '',
+    stato: 'passato',
+    whatsapp_custom_text: 'Ciao Antonio, ho letto il resoconto della Mini-Sagra in Vigna del 17 Luglio. Vorrei organizzare un evento simile o una degustazione nel mio locale.'
+  },
+  {
     id: 'aperitivo-vigna',
     slug: 'aperitivo-in-vigna',
     titolo: 'Aperitivo in Vigna',
@@ -41,7 +99,7 @@ export const FALLBACK_EVENTI = [
 ];
 
 export default async function EventiPage() {
-  let eventi = [];
+  let eventi: any[] = [];
   
   try {
     if (supabase) {
@@ -51,7 +109,9 @@ export default async function EventiPage() {
         .order('created_at', { ascending: false });
       
       if (!error && data && data.length > 0) {
-        eventi = data;
+        const dbSlugs = new Set(data.map((e: any) => e.slug));
+        const fallbacksMissingInDb = FALLBACK_EVENTI.filter(e => !dbSlugs.has(e.slug));
+        eventi = [...data, ...fallbacksMissingInDb];
       } else {
         eventi = FALLBACK_EVENTI;
       }

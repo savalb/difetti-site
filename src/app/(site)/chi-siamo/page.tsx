@@ -1,11 +1,13 @@
 import type { Metadata } from 'next';
 import { BRAND, PRINCIPI } from '@/lib/constants';
 import Image from 'next/image';
+import { ChiSiamoClient } from './ChiSiamoClient';
 import styles from './page.module.css';
 
 export const metadata: Metadata = {
-  title: 'Chi Siamo — Antonio De Matteis, Ricercatore del Gusto | Difetti',
-  description: 'La storia di Antonio De Matteis e di Difetti. Eccellenze Campane: chi siamo, cosa crediamo, perché il difetto è una virtù. I 5 principi che guidano ogni scelta.',
+  title: 'Chi Siamo — Antonio De Matteis, Selezionatore Irpinia | Difetti',
+  description: 'La storia di Antonio De Matteis e di Difetti. Selezionatori di eccellenze gastronomiche campane ad Avellino per la ristorazione HoReCa.',
+  keywords: ['Antonio De Matteis', 'Difetti eccellenze campane', 'selezionatore HoReCa Avellino', 'storia Difetti Irpinia'],
 };
 
 export default function ChiSiamoPage() {
@@ -115,15 +117,12 @@ export default function ChiSiamoPage() {
                 personalizzate per ogni cliente, con la storia del prodotto raccontata da chi lo ha
                 selezionato.
               </p>
-              <a
-                href={BRAND.whatsapp}
-                target="_blank"
-                rel="noopener noreferrer"
+              <ChiSiamoClient
                 className="btn btn-primary"
                 id="chisiamo-wa-degustazione"
               >
                 Organizza una degustazione
-              </a>
+              </ChiSiamoClient>
             </div>
           </div>
         </div>

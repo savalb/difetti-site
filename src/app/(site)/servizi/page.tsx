@@ -1,10 +1,12 @@
 import type { Metadata } from 'next';
 import { BRAND } from '@/lib/constants';
+import { ServiziClient } from './ServiziClient';
 import styles from './page.module.css';
 
 export const metadata: Metadata = {
-  title: 'Servizi — Consulenza Menù e Regali Aziendali | Difetti',
-  description: 'Consulenza strategica per ristoranti HoReCa: analisi del menù, selezione prodotti artigianali campani. Cofanetti regalo aziendali personalizzati con eccellenze irpine.',
+  title: 'Servizi HoReCa — Fornitura e Consulenza Menù Avellino | Difetti',
+  description: 'Consulenza strategica per ristoranti HoReCa ad Avellino e in Campania: analisi del menù, fornitura di eccellenze gastronomiche artigianali campane. Cofanetti regalo aziendali.',
+  keywords: ['consulenza menu ristorante Avellino', 'fornitura ristoranti Campania', 'eccellenze gastronomiche HoReCa', 'regali aziendali gastronomici Irpinia'],
 };
 
 const SERVIZI = [
@@ -48,9 +50,71 @@ const SERVIZI = [
   },
 ];
 
+// Dati Strutturati per i Servizi e FAQ (SEO/GEO)
+const servicesJsonLd = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'Service',
+      'name': 'Consulenza Menù HoReCa',
+      'description': 'Analisi gratuita del menù e selezione mirata di ingredienti artigianali campani per ristoranti ed HoReCa.',
+      'provider': {
+        '@type': 'LocalBusiness',
+        'name': 'Difetti — Eccellenze Campane'
+      },
+      'areaServed': 'Campania',
+      'serviceType': 'B2B Consulting'
+    },
+    {
+      '@type': 'Service',
+      'name': 'Fornitura Alimentare Ristorazione',
+      'description': 'Distribuzione e fornitura di pasta artigianale, conserve e prodotti gastronomici KM Vero per la ristorazione.',
+      'provider': {
+        '@type': 'LocalBusiness',
+        'name': 'Difetti — Eccellenze Campane'
+      },
+      'areaServed': 'Campania'
+    },
+    {
+      '@type': 'FAQPage',
+      'mainEntity': [
+        {
+          '@type': 'Question',
+          'name': 'Quali sono i tempi di consegna per i ristoranti?',
+          'acceptedAnswer': {
+            '@type': 'Answer',
+            'text': 'Le consegne vengono effettuate direttamente con i nostri mezzi refrigerati in tutta l\'Irpinia e la Campania entro 24/48 ore dalla conferma dell\'ordine.'
+          }
+        },
+        {
+          '@type': 'Question',
+          'name': 'È previsto un minimo d\'ordine per la fornitura HoReCa?',
+          'acceptedAnswer': {
+            '@type': 'Answer',
+            'text': 'Non imponiamo minimi d\'ordine rigidi per permettere ai ristoratori di testare i prodotti ed evitare sprechi. Ottimizziamo le consegne per area geografica.'
+          }
+        },
+        {
+          '@type': 'Question',
+          'name': 'Come funziona l\'analisi gratuita del menù?',
+          'acceptedAnswer': {
+            '@type': 'Answer',
+            'text': 'Antonio De Matteis effettua un incontro conoscitivo per analizzare l\'attuale menù del ristorante, identificando i piatti dove una materia prima d\'eccellenza campana può elevare il gusto e il margine.'
+          }
+        }
+      ]
+    }
+  ]
+};
+
 export default function ServiziPage() {
   return (
     <main className={styles.main}>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(servicesJsonLd) }}
+      />
+
       {/* Hero */}
       <section className={`grain ${styles.hero}`}>
         <div className={`container ${styles.heroContent}`}>
@@ -63,54 +127,8 @@ export default function ServiziPage() {
         </div>
       </section>
 
-      {/* Servizi */}
-      {SERVIZI.map((s, i) => (
-        <section
-          key={s.id}
-          id={s.id}
-          className={`grain ${styles.servizio} ${i % 2 !== 0 ? styles.dark : ''}`}
-        >
-          <div className="container">
-            <div className={styles.servizioHeader}>
-              <span className="section-tag">{s.tag}</span>
-              <h2 className={styles.servizioTitle}>{s.titolo}</h2>
-              <p className={styles.servizioClaim}><em>{s.sottotitolo}</em></p>
-            </div>
-
-            <div className={styles.servizioCols}>
-              <div className={styles.servizioText}>
-                {s.paragrafi.map((p, pi) => (
-                  <p key={pi}>{p}</p>
-                ))}
-              </div>
-
-              <div className={styles.servizioSteps}>
-                {s.steps.map((step) => (
-                  <div key={step.n} className={styles.step}>
-                    <span className={styles.stepN}>{step.n}</span>
-                    <div>
-                      <h4 className={styles.stepT}>{step.t}</h4>
-                      <p className={styles.stepD}>{step.d}</p>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-
-            <div className={styles.servizioCta}>
-              <a
-                href={BRAND.whatsapp}
-                target="_blank"
-                rel="noopener noreferrer"
-                className={`btn ${i % 2 !== 0 ? 'btn-whatsapp' : 'btn-primary'}`}
-                id={s.ctaId}
-              >
-                {s.cta}
-              </a>
-            </div>
-          </div>
-        </section>
-      ))}
+      {/* Servizi Rendered Client-Side for Event Tracking */}
+      <ServiziClient servizi={SERVIZI} />
     </main>
   );
 }
