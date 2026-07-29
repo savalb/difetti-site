@@ -37,9 +37,9 @@ Disponibile anche la Sangria estiva ed ordinazioni singole fuori menù.
 
 DJ Set Live con Maurizio Pacilio & Luca Preziosi.
 Ingresso completamente libero senza prenotazione obbligatoria dei tavoli.`,
-    immagine_copertina: '/images/eventi/bar-gamea/locandina.webp',
+    immagine_copertina: '/images/eventi/bar-gamea/locandina.jpg',
     galleria_immagini: [
-      '/images/eventi/bar-gamea/locandina.webp'
+      '/images/eventi/bar-gamea/locandina.jpg'
     ],
     stats: [
       { val: '20:00', lbl: 'Start Party Bar Gamea' },
