@@ -161,9 +161,7 @@ export default async function EventoDetailPage({ params }: PageProps) {
                     />
                   </div>
                 </div>
-              )}
-
-              {/* Sezione Statistiche Consumo (per eventi passati) OPPURE Programma & Highlights (per eventi futuri) */}
+                   {/* Sezione Statistiche Consumo (per eventi passati) OPPURE Programma & Highlights (per eventi futuri) */}
               {evento.stato === 'passato' ? (
                 <div style={{ marginBottom: '2.5rem' }}>
                   <h3 style={{ fontFamily: 'var(--font-title)', fontSize: '1.75rem', color: 'var(--earth)', marginBottom: '8px' }}>
@@ -204,33 +202,25 @@ export default async function EventoDetailPage({ params }: PageProps) {
                   </div>
                 </div>
               ) : (
-                <div style={{ marginBottom: '2.5rem' }}>
-                  <h3 style={{ fontFamily: 'var(--font-title)', fontSize: '1.75rem', color: 'var(--earth)', marginBottom: '8px' }}>
-                    Programma &amp; Highlights della Serata
-                  </h3>
-                  <p style={{ fontFamily: 'var(--font-body)', fontSize: '1.05rem', color: 'var(--earth-muted)', lineHeight: '1.6', marginBottom: '16px' }}>
-                    Un&apos;esperienza immersiva tra il verde della vigna irpina e l&apos;atmosfera esclusiva di bordo piscina. Ecco cosa ti aspetta:
-                  </p>
-                  
-                  <div className={styles.statsGrid}>
-                    <div className={styles.statCard}>
-                      <div className={styles.statVal}>19:00</div>
-                      <div className={styles.statLbl}>Start &amp; Degustazione Subito</div>
-                    </div>
-                    <div className={styles.statCard}>
-                      <div className={styles.statVal}>Vini</div>
-                      <div className={styles.statLbl}>Selezione del Territorio</div>
-                    </div>
-                    <div className={styles.statCard}>
-                      <div className={styles.statVal}>LIVE</div>
-                      <div className={styles.statLbl}>Giuliano De Matteis</div>
-                    </div>
-                    <div className={styles.statCard}>
-                      <div className={styles.statVal}>Piscina</div>
-                      <div className={styles.statLbl}>Atmosfera in Vigna</div>
+                evento.stats && Array.isArray(evento.stats) && evento.stats.length > 0 && (
+                  <div style={{ marginBottom: '2.5rem' }}>
+                    <h3 style={{ fontFamily: 'var(--font-title)', fontSize: '1.75rem', color: 'var(--earth)', marginBottom: '8px' }}>
+                      Programma &amp; Highlights della Serata
+                    </h3>
+                    <p style={{ fontFamily: 'var(--font-body)', fontSize: '1.05rem', color: 'var(--earth-muted)', lineHeight: '1.6', marginBottom: '16px' }}>
+                      Ecco i dettagli principali e le opzioni previste per la serata:
+                    </p>
+                    
+                    <div className={styles.statsGrid}>
+                      {evento.stats.map((s: { val: string; lbl: string }, idx: number) => (
+                        <div key={idx} className={styles.statCard}>
+                          <div className={styles.statVal}>{s.val}</div>
+                          <div className={styles.statLbl}>{s.lbl}</div>
+                        </div>
+                      ))}
                     </div>
                   </div>
-                </div>
+                )
               )}
 
               {/* Polaroid Single Album Cover -> opens modal Lightbox */}
@@ -273,7 +263,7 @@ export default async function EventoDetailPage({ params }: PageProps) {
                           textDecoration: 'none'
                         }}
                       >
-                        🎁 Richiedi Buono Sconto Gin
+                         Richiedi Buono Sconto Gin
                       </Link>
                     )}
                   </div>
@@ -282,13 +272,13 @@ export default async function EventoDetailPage({ params }: PageProps) {
                 {/* Direct Action Card (WhatsApp) */}
                 <div className="upcomingCard" style={{ background: 'var(--cream-dark)', border: '2px solid var(--earth)', padding: 'var(--space-md)', boxShadow: '4px 4px 0 var(--earth)' }}>
                   <h4 style={{ fontFamily: 'var(--font-title)', fontSize: '1.25rem', marginBottom: '8px', color: 'var(--earth)' }}>
-                    {evento.stato === 'futuro' ? 'Riserva il tuo Posto' : 'Proponi una serata'}
+                    {evento.stato === 'futuro' ? 'Informazioni Evento' : 'Proponi una serata'}
                   </h4>
                   <p style={{ fontFamily: 'var(--font-body)', fontSize: '0.9rem', lineHeight: '1.5', color: 'var(--earth-muted)', marginBottom: '16px' }}>
                     {evento.stato === 'futuro'
-                      ? 'I posti a bordo piscina sono limitati per garantire la massima cura. Riserva subito il tuo tavolo chiedendo disponibilità a Antonio De Matteis.'
+                      ? 'L\'ingresso è libero senza prenotazione obbligatoria. Per informazioni o dettagli sul menù, puoi scriverci su WhatsApp.'
                       : 'Vuoi portare la trasparenza del vero km zero nel tuo locale, generare passaparola ed aumentare gli scontrini con una serata a tema?'}
-                  </p>
+                  </p>             </p>
                   <a
                     href={waLink}
                     target="_blank"

@@ -20,14 +20,18 @@ export const FALLBACK_EVENTI = [
     luogo: 'Avellino (AV)',
     indirizzo: 'Bar Gamea, Piazza de Marsico 14',
     descrizione: 'Un apericena estivo al centro di Avellino con DJ Set di Maurizio Pacilio & Luca Preziosi e Food Partner DIFETTI. Menù Pinsa + Gin + Limoncello a 15€.',
-    descrizione_estesa: `Giovedì 6 Agosto 2026 dalle ore 20:00, il Bar Gamea a Piazza de Marsico (Avellino) ospita il Summer Party speciale con DIFETTI Eccellenze Campane come Food Partner ufficiale.
+    descrizione_estesa: `Giovedì 6 Agosto 2026 dalle ore 20:00, il Bar Gamea in Piazza de Marsico ad Avellino ospita il Summer Party speciale targato DIFETTI Eccellenze Campane.
 
-Una serata di festa all'aperto all'insegna della buona musica, del gusto e dei cocktail d'autore.
+Una grande serata estiva all'aperto nata dalla sinergia tra eccellenze del territorio e partner selezionati:
+- Bar Gamea: accoglienza e location partner nel cuore di Avellino.
+- Pinsa del Fortore: fornitore ed eccellenza artigianale delle Pinse Romane ad alta idratazione.
+- Fattorie Cilentane: produttore d'eccellenza del Gin Sintony e del Limoncello Artigianale serviti durante la serata.
+- La vita in un morso: frutteria partner locale che collabora alla freschezza della proposta serale.
 
 Menù della Serata (Formula Completa 15€):
-- 1 Pinsa Romana a scelta tra 5 varianti gourmet
-- 1 Cocktail a base Gin a scelta tra 5 abbinamenti speciali
-- 1 Shottino di Limoncello Artigianale
+- 1 Pinsa Romana a scelta tra 5 varianti gourmet (Pinsa del Fortore)
+- 1 Cocktail a base Gin a scelta tra 5 abbinamenti speciali (Gin Sintony di Fattorie Cilentane)
+- 1 Shottino di Limoncello Artigianale (Fattorie Cilentane)
 
 Disponibile anche la Sangria estiva ed ordinazioni singole fuori menù.
 
@@ -37,7 +41,12 @@ Ingresso completamente libero senza prenotazione obbligatoria dei tavoli.`,
     galleria_immagini: [
       '/images/eventi/bar-gamea/locandina.jpg'
     ],
-    stats: [],
+    stats: [
+      { val: 'Location', lbl: 'Bar Gamea' },
+      { val: 'Pinsa', lbl: 'Pinsa del Fortore' },
+      { val: 'Gin & Spirits', lbl: 'Fattorie Cilentane' },
+      { val: 'Partner', lbl: 'La Vita in un Morso' }
+    ],
     video_url: '',
     promozione_titolo: 'Formula Menù Completo 15€',
     promozione_desc: '1 Pinsa Romana + 1 Cocktail Gin Tonic + 1 Shottino di Limoncello Artigianale. Disponibile anche Sangria e consumazione libera.',
