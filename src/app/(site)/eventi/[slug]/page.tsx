@@ -45,7 +45,8 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   };
 }
 
-export const revalidate = 10;
+export const revalidate = 0;
+export const dynamic = 'force-dynamic';
 
 export default async function EventoDetailPage({ params }: PageProps) {
   const { slug } = await params;
@@ -60,7 +61,11 @@ export default async function EventoDetailPage({ params }: PageProps) {
         .single();
       
       if (!error && data) {
-        evento = data;
+        const fallback = FALLBACK_EVENTI.find((e) => e.slug === slug);
+        evento = { ...fallback, ...data };
+        if (!data.stats && fallback?.stats) {
+          evento.stats = fallback.stats;
+        }
       }
     }
   } catch (e) {

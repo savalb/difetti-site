@@ -42,10 +42,10 @@ Ingresso completamente libero senza prenotazione obbligatoria dei tavoli.`,
       '/images/eventi/bar-gamea/locandina.jpg'
     ],
     stats: [
-      { val: 'Location', lbl: 'Bar Gamea' },
+      { val: '20:00', lbl: 'Start Party Bar Gamea' },
       { val: 'Pinsa', lbl: 'Pinsa del Fortore' },
-      { val: 'Gin & Spirits', lbl: 'Fattorie Cilentane' },
-      { val: 'Partner', lbl: 'La Vita in un Morso' }
+      { val: 'Gin', lbl: 'Fattorie Cilentane' },
+      { val: 'DJ Set', lbl: 'Maurizio Pacilio & Luca' }
     ],
     video_url: '',
     promozione_titolo: 'Formula Menù Completo 15€',
