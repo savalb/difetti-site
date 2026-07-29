@@ -234,7 +234,7 @@ export default async function EventoDetailPage({ params }: PageProps) {
               {galleria.length > 0 && (
                 <div className={styles.gallerySection}>
                   <h3 className={styles.galleryTitle}>
-                    {evento.stato === 'futuro' ? 'Foto & Atmospere della Serata' : 'Album Fotografico'}
+                    {evento.stato === 'futuro' ? 'Foto & Atmosfere della Serata' : 'Album Fotografico'}
                   </h3>
                   <PolaroidGallery immagini={galleria} titolo={evento.titolo} />
                 </div>

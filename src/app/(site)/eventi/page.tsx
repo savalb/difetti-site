@@ -35,11 +35,11 @@ Menù della Serata (Formula Completa 15€):
 
 Disponibile anche la Sangria estiva ed ordinazioni singole fuori menù.
 
-DJ Set Live con Maurizio Pacilio & Luca Preziosi (HDM - I Fratelli del Mix).
+DJ Set Live con Maurizio Pacilio & Luca Preziosi.
 Ingresso completamente libero senza prenotazione obbligatoria dei tavoli.`,
-    immagine_copertina: '/images/eventi/bar-gamea/locandina.png',
+    immagine_copertina: '/images/eventi/bar-gamea/locandina.webp',
     galleria_immagini: [
-      '/images/eventi/bar-gamea/locandina.png'
+      '/images/eventi/bar-gamea/locandina.webp'
     ],
     stats: [
       { val: '20:00', lbl: 'Start Party Bar Gamea' },
