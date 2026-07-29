@@ -37,9 +37,9 @@ Disponibile anche la Sangria estiva ed ordinazioni singole fuori menù.
 
 DJ Set Live con Maurizio Pacilio & Luca Preziosi (HDM - I Fratelli del Mix).
 Ingresso completamente libero senza prenotazione obbligatoria dei tavoli.`,
-    immagine_copertina: '/images/eventi/bar-gamea/locandina.jpg',
+    immagine_copertina: '/images/eventi/bar-gamea/locandina.png',
     galleria_immagini: [
-      '/images/eventi/bar-gamea/locandina.jpg'
+      '/images/eventi/bar-gamea/locandina.png'
     ],
     stats: [
       { val: '20:00', lbl: 'Start Party Bar Gamea' },
