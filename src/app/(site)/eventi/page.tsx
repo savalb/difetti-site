@@ -11,6 +11,41 @@ export const revalidate = 10; // Ricarica ogni 10 secondi per aggiornamenti rapi
 
 export const FALLBACK_EVENTI = [
   {
+    id: 'summer-party-bar-gamea',
+    slug: 'summer-party-bar-gamea',
+    titolo: 'Summer Party – Bar Gamea',
+    sotto_occhiello: 'Pinsas, Gin Tonic & DJ Set',
+    data: '6 Agosto 2026',
+    ora: '20:00',
+    luogo: 'Avellino (AV)',
+    indirizzo: 'Bar Gamea, Piazza de Marsico 14',
+    descrizione: 'Un apericena estivo al centro di Avellino con DJ Set di Maurizio Pacilio & Luca Preziosi e Food Partner DIFETTI. Menù Pinsa + Gin + Limoncello a 15€.',
+    descrizione_estesa: `Giovedì 6 Agosto 2026 dalle ore 20:00, il Bar Gamea a Piazza de Marsico (Avellino) ospita il Summer Party speciale con DIFETTI Eccellenze Campane come Food Partner ufficiale.
+
+Una serata di festa all'aperto all'insegna della buona musica, del gusto e dei cocktail d'autore.
+
+Menù della Serata (Formula Completa 15€):
+- 1 Pinsa Romana a scelta tra 5 varianti gourmet
+- 1 Cocktail a base Gin a scelta tra 5 abbinamenti speciali
+- 1 Shottino di Limoncello Artigianale
+
+Disponibile anche la Sangria estiva ed ordinazioni singole fuori menù.
+
+DJ Set Live con Maurizio Pacilio & Luca Preziosi (HDM - I Fratelli del Mix).
+Ingresso completamente libero senza prenotazione obbligatoria dei tavoli.`,
+    immagine_copertina: '/images/eventi/bar-gamea/locandina.jpg',
+    galleria_immagini: [
+      '/images/eventi/bar-gamea/locandina.jpg'
+    ],
+    stats: [],
+    video_url: '',
+    promozione_titolo: 'Formula Menù Completo 15€',
+    promozione_desc: '1 Pinsa Romana + 1 Cocktail Gin Tonic + 1 Shottino di Limoncello Artigianale. Disponibile anche Sangria e consumazione libera.',
+    promozione_link: '',
+    stato: 'futuro',
+    whatsapp_custom_text: 'Ciao Antonio, vorrei informazioni sul Summer Party del 6 Agosto al Bar Gamea.'
+  },
+  {
     id: 'serata-vigna-piscina',
     slug: 'serata-in-vigna-piscina',
     titolo: 'Mini-Sagra in Vigna & Piscina',
