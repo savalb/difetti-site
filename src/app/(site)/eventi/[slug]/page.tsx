@@ -166,7 +166,9 @@ export default async function EventoDetailPage({ params }: PageProps) {
                     />
                   </div>
                 </div>
-                   {/* Sezione Statistiche Consumo (per eventi passati) OPPURE Programma & Highlights (per eventi futuri) */}
+              )}
+
+              {/* Sezione Statistiche Consumo (per eventi passati) OPPURE Programma & Highlights (per eventi futuri) */}
               {evento.stato === 'passato' ? (
                 <div style={{ marginBottom: '2.5rem' }}>
                   <h3 style={{ fontFamily: 'var(--font-title)', fontSize: '1.75rem', color: 'var(--earth)', marginBottom: '8px' }}>
@@ -283,7 +285,7 @@ export default async function EventoDetailPage({ params }: PageProps) {
                     {evento.stato === 'futuro'
                       ? 'L\'ingresso è libero senza prenotazione obbligatoria. Per informazioni o dettagli sul menù, puoi scriverci su WhatsApp.'
                       : 'Vuoi portare la trasparenza del vero km zero nel tuo locale, generare passaparola ed aumentare gli scontrini con una serata a tema?'}
-                  </p>             </p>
+                  </p>
                   <a
                     href={waLink}
                     target="_blank"
